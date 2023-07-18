@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:53:58 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/07/18 01:38:00 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/07/18 09:22:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int		is_valid_port(const char *p)
 
 void	validate_args(char **args)
 {
-	if (!is_valid_password(args[0]))
+	if (!is_valid_password(args[1]))
 		panic("Password must at least have 8 charachters.");
-	else if (is_valid_port(args[1]) == -1)
+	else if (is_valid_port(args[0]) == -1)
 		panic("Invalid port.");
-	else if (is_valid_port(args[1]) == -2)
+	else if (is_valid_port(args[0]) == -2)
 		panic("Port must contain only charachters.");
-	else if (is_valid_port(args[1]) == -3)
+	else if (is_valid_port(args[0]) == -3)
 		panic("Port must be a number betweeen 1024 and 65535.");
 }
