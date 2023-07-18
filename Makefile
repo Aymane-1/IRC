@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/07/15 04:21:21 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/07/18 01:35:54 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,21 +30,49 @@ C98 := -std=c++98
 SRC_DIR := src
 BUILD_DIR := build
 
+# Subdirectories
+MODULES_DIR := $(SRC_DIR)/modules
+HELPERS_DIR := $(SRC_DIR)/helpers
+
 # Base variables
 NAME := ircserv
 MAIN := $(SRC_DIR)/main.cpp
 REMOVE := rm -rf
 
+MODULES := irc macros Channel Client Command Server
+MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 
-MAIN := $(SRC_DIR)/main.cpp
+HELPERS := arguments
+HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .cpp, $(HELPERS)))
+
+SRC := $(HELPERS)
+
+BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
+
 
 all: $(NAME) signature
 
-$(NAME): $(MAIN)
+$(NAME): $(MAIN) $(MODULES) $(BUILD)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(NAME) $(CYAN)executable file...$(WHITE)"
-	@$(CPP) $(CFLAGS) $(C98) $(MAIN) -o $(NAME)
+	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES)
+	@echo "\t$(YELLOW)Compiling $(GREEN)$< $(CYAN)object file...$(WHITE)"
+	@mkdir -p $(BUILD_DIR)
+	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
+
+clean:
+	@echo "\t$(RED)Removing $(CYAN)object files...$(WHITE)"
+	@$(REMOVE) $(BUILD_DIR)
+
+fclean: clean
+	@echo "\t$(RED)Removing $(CYAN)executable file $(GREEN)$(NAME)...$(WHITE)"
+	@$(REMOVE) $(NAME)
+
+re: fclean all
 
 signature:
+	@echo
 	@echo
 	@echo "\t\t$(CYAN)██╗██████╗░░█████╗░  ░██████╗███████╗██████╗░██╗░░░██╗███████╗██████╗░$(WHITE)"
 	@echo "\t\t$(CYAN)██║██╔══██╗██╔══██╗  ██╔════╝██╔════╝██╔══██╗██║░░░██║██╔════╝██╔══██╗$(WHITE)"
