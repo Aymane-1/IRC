@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/07/18 01:35:54 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/07/18 06:02:33 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ BUILD_DIR := build
 # Subdirectories
 MODULES_DIR := $(SRC_DIR)/modules
 HELPERS_DIR := $(SRC_DIR)/helpers
+CONTROLLERS_DIR := $(SRC_DIR)/controllers
 
 # Base variables
 NAME := ircserv
@@ -45,7 +46,10 @@ MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 HELPERS := arguments
 HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .cpp, $(HELPERS)))
 
-SRC := $(HELPERS)
+CONTROLLERS := Client Server
+CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
+
+SRC := $(HELPERS) $(CONTROLLERS)
 
 BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
 
@@ -57,7 +61,7 @@ $(NAME): $(MAIN) $(MODULES) $(BUILD)
 	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES)
-	@echo "\t$(YELLOW)Compiling $(GREEN)$< $(CYAN)object file...$(WHITE)"
+	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
 
