@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/01 23:56:13 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/03 00:08:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ private:
 	int		port;
 	str_t	password;
 	str_t	request;
-	int		socketFd;
+	int		socketMaster;
 	// struct pollfd		fds;
 public:
 	Server(void);
@@ -38,10 +38,10 @@ public:
 	Server			&operator=(const Server &other);
 	const int		&getPort(void) const;
 	const str_t		&getPassword(void) const;
-	const int		&getSocketFd(void) const;
+	const int		&getSocketMaster(void) const;
 	const str_t		&getRequest(void) const;
 	void			setRequest(const str_t &req);
-	void			setSocketFd(const int fd);
+	void			setSocketMaster(const int fd);
 };
 
 #endif

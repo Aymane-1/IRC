@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/02 00:01:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/03 01:55:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Server			&Server::operator=(const Server &other)
 	this->port = other.port;
 	this->password = other.password;
 	this->request = other.request;
-	this->socketFd = other.socketFd;
+	this->socketMaster = other.socketMaster;
 	return (*this);
 }
 
@@ -39,9 +39,9 @@ const str_t	&Server::getPassword(void) const
 	return (this->password);
 }
 
-const int		&Server::getSocketFd(void) const
+const int		&Server::getSocketMaster(void) const
 {
-	return (this->socketFd);
+	return (this->socketMaster);
 }
 
 const str_t	&Server::getRequest(void) const
@@ -49,9 +49,9 @@ const str_t	&Server::getRequest(void) const
 	return (this->request);
 }
 
-void	Server::setSocketFd(const int fd)
+void	Server::setSocketMaster(const int fd)
 {
-	this->socketFd = fd;
+	this->socketMaster = fd;
 }
 
 void		Server::setRequest(const str_t &req)
