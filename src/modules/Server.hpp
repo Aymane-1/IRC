@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/03 00:08:24 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:41:07 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@
 # include <netinet/in.h>
 # include <unistd.h>
 # include <poll.h>
+# include <vector>
 # include "macros.hpp"
 # include "Client.hpp"
 
 class Server
 {
 private:
-	int		port;
-	str_t	password;
-	str_t	request;
-	int		socketMaster;
-	// struct pollfd		fds;
+	int							port;
+	str_t						password;
+	str_t						request;
+	int							socketMaster;
+	struct sockaddr_in			addr;
+	std::vector<struct pollfd>	fds;
 public:
 	Server(void);
 	Server(int port, str_t password);
@@ -42,6 +44,14 @@ public:
 	const str_t		&getRequest(void) const;
 	void			setRequest(const str_t &req);
 	void			setSocketMaster(const int fd);
+	// Class functionallities
+	void			initSocket(void);
+	//TODO: Implement setSocketOptions: setsockopt()
+	//TODO: Set FD to non-blocking: fcntrl()
+	void			bindSocket(void);
+	void			listenForConnections(void);
+	int				acceptConnection(void);
+	
 };
 
 #endif
