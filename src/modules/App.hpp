@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:04:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/01 22:37:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:39:28 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 # define __APP_HPP__
 
 # include <map>
+# include <vector>
 # include "Server.hpp"
 # include "Client.hpp"
+# include "macros.hpp"
 
 typedef std::string	str_t;
-typedef std::map<const str_t, Client> client_m;
+typedef std::map<const int, Client> client_m;
 
 class App
 {

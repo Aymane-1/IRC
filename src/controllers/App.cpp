@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/03 00:01:59 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/14 00:41:38 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,39 @@ void		App::setPassword(const char *pass)
 		throw std::runtime_error("Password must at least have 8 charachters.");
 	this->password = pass;
 }
+#include <stdio.h>
 
 void	App::init(void)
 {
-	
+	int	newFd;
+
+	try
+	{
+		this->server.initSocket();
+		this->server.bindSocket();
+		this->server.listenForConnections();
+		newFd = this->server.acceptConnection();
+		if (newFd < 0)
+			throw std::runtime_error("Accept connection failed");
+		this->clients.insert(std::make_pair(newFd, Client(newFd)));
+		char	buffer[1024];
+		int res = read(newFd, buffer, sizeof(buffer));
+		if (res > 0)
+			std::cout << buffer << std::endl;
+		else
+			std::cout << "Nothing to read!" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		perror(e.what());
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	App::run(void)
 {
-	
+	while (true)
+	{
+		
+	}
 }
