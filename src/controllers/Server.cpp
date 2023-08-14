@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/13 20:06:24 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:07:54 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ void			Server::initSocket(void)
 
 	this->socketMaster = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (this->socketMaster < 0)
-		throw std::runtime_error("Couldn't create socket.");
+		throw std::runtime_error("Couldn't create socket");
 	if (setsockopt(this->socketMaster, SOL_SOCKET, SO_REUSEADDR,  (char *) &optval, sizeof(optval)) < 0)
-		throw std::runtime_error("Error while setting socket options.");
+		throw std::runtime_error("Error while setting socket options");
+	if (fcntl(this->socketMaster, F_SETFL, fcntl(this->socketMaster, F_GETFL, 0) | O_NONBLOCK) < 0)
+		throw std::runtime_error("Error while setting server's file socket to non-blocking");
 }
 
 void			Server::bindSocket(void)
@@ -80,7 +82,7 @@ void			Server::bindSocket(void)
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	res = bind(this->socketMaster, (struct sockaddr *) &this->addr, sizeof(struct sockaddr));
 	if (res < 0)
-		throw std::runtime_error("Couldn't bind socket.");
+		throw std::runtime_error("Couldn't bind socket");
 }
 
 void			Server::listenForConnections(void)
@@ -90,7 +92,7 @@ void			Server::listenForConnections(void)
 	res = -1;
 	res = listen(this->socketMaster, 5);
 	if (res < 0)
-		throw std::runtime_error("Error while listenning to connections.");
+		throw std::runtime_error("Error while listenning to connections");
 }
 
 int			Server::acceptConnection(void)

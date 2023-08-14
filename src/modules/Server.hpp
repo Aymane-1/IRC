@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/13 18:41:07 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/13 22:01:52 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <unistd.h>
+# include <fcntl.h>
 # include <poll.h>
 # include <vector>
 # include "macros.hpp"
@@ -46,7 +47,6 @@ public:
 	void			setSocketMaster(const int fd);
 	// Class functionallities
 	void			initSocket(void);
-	//TODO: Implement setSocketOptions: setsockopt()
 	//TODO: Set FD to non-blocking: fcntrl()
 	void			bindSocket(void);
 	void			listenForConnections(void);
