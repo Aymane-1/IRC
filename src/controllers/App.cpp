@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/14 00:41:38 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/16 01:36:34 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,24 @@ void	App::init(void)
 
 void	App::run(void)
 {
-	while (true)
+	bool	keep_running = true;
+	poll_v	pfds = this->server.getFds();
+	int		res;
+	int		i;
+
+	res = -1;
+	this->server.initPoll();
+	while (keep_running)
 	{
-		
+		res = poll(&pfds[0], pfds.size(), -1);
+		if (res < 0)
+		{
+			perror("poll error");
+			break ;
+		}
+		for (i = 1; i < pfds.size(); ++i)
+		{
+			 
+		}
 	}
 }

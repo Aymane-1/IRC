@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/13 22:01:52 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:46:26 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include "macros.hpp"
 # include "Client.hpp"
 
+typedef std::vector<struct pollfd>	poll_v;
 class Server
 {
 private:
@@ -32,7 +33,7 @@ private:
 	str_t						request;
 	int							socketMaster;
 	struct sockaddr_in			addr;
-	std::vector<struct pollfd>	fds;
+	poll_v						fds;
 public:
 	Server(void);
 	Server(int port, str_t password);
@@ -43,13 +44,16 @@ public:
 	const str_t		&getPassword(void) const;
 	const int		&getSocketMaster(void) const;
 	const str_t		&getRequest(void) const;
+	const poll_v	&getFds(void) const;
 	void			setRequest(const str_t &req);
 	void			setSocketMaster(const int fd);
+	void			setFds(const poll_v &fds);
+	void			setFd(const struct pollfd &fd);
 	// Class functionallities
 	void			initSocket(void);
-	//TODO: Set FD to non-blocking: fcntrl()
 	void			bindSocket(void);
 	void			listenForConnections(void);
+	void			initPoll(void);
 	int				acceptConnection(void);
 	
 };

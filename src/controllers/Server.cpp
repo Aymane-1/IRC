@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/13 22:07:54 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/14 22:47:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ const str_t	&Server::getRequest(void) const
 	return (this->request);
 }
 
+const poll_v	&Server::getFds(void) const
+{
+	return (this->fds);
+}
+
 void	Server::setSocketMaster(const int fd)
 {
 	this->socketMaster = fd;
@@ -57,6 +62,16 @@ void	Server::setSocketMaster(const int fd)
 void		Server::setRequest(const str_t &req)
 {
 	this->request = req;
+}
+
+void			Server::setFds(const poll_v &fds)
+{
+	this->fds = fds;
+}
+
+void			Server::setFd(const struct pollfd &fd)
+{
+	this->fds.push_back(fd);
 }
 
 // Class functionallities
@@ -101,4 +116,14 @@ int			Server::acceptConnection(void)
 
 	size = sizeof(struct sockaddr);
 	return accept(this->socketMaster, (struct sockaddr *) &this->addr, &size);
+}
+
+void			Server::initPoll(void)
+{
+	struct pollfd	fd;
+
+	fd.fd = this->getSocketMaster();
+	fd.events = POLL_IN;
+	fd.revents = 0;
+	this->setFd(fd);
 }
