@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/14 22:47:25 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/17 01:49:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void			Server::initPoll(void)
 	struct pollfd	fd;
 
 	fd.fd = this->getSocketMaster();
-	fd.events = POLL_IN;
+	fd.events = POLLIN;
 	fd.revents = 0;
 	this->setFd(fd);
 }
