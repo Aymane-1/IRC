@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/17 20:56:21 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:51:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,15 @@ void	App::init(void)
 void	App::run(void)
 {
 	bool	keep_running = true;
-	poll_v	pfds;
-	struct pollfd	fd;
+	poll_v	&pfds = this->server.getFds();
 	int				res;
-	int				newFd;
 	unsigned int	i;
 
 	res = -1;
 	this->server.initPoll();
-	pfds = this->server.getFds();
-	newFd = -1;
 	while (keep_running)
 	{
-		res = poll(&pfds[0], pfds.size(), 5000000);
+		res = poll(&pfds[0], pfds.size(), 0);
 		if (res < 0)
 		{
 			perror("poll error");
@@ -102,32 +98,24 @@ void	App::run(void)
 		}
 		if (pfds[0].revents == POLLIN)
 		{
-			newFd = this->server.acceptConnection();
-			if (newFd < 0)
-			{
-				perror("accept errot");
+			res = this->server.acceptConnection();
+			if (res < 0)
 				continue ;
-			}
-			fd.fd = newFd;
-			fd.events = POLLIN;
-			fd.revents = 0;
-			this->server.setFd(fd);
-			pfds = this->server.getFds();
 		}
 		for (i = 1; i < pfds.size(); i++)
 		{
-			std::cout << "revent: " << pfds[i].revents << " | " << POLLIN << " FD[" << i << "] " << std::endl;
 			if (pfds[i].revents == POLLIN)
 			{
 				char tempbuf[1024] = {0};
 				res = read(pfds[i].fd, tempbuf, sizeof(tempbuf) - 1);
 				if (res < 0)
 				{
-
 				}
 				else if (!res)
 				{
-
+					close(pfds[i].fd);
+					pfds[i].fd = 0;
+					pfds[i].revents = 0;
 				}
 				else
 				{
