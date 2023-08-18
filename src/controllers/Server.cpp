@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 04:58:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 20:16:12 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int				Server::polling(void)
 
 int				Server::readRequest(struct pollfd &fd)
 {
-	char	tempbuf[1024] = {0};
+	char	tempbuf[513] = {0};
 	int		res = -1;
 
 	res = read(fd.fd, tempbuf, sizeof(tempbuf) - 1);
@@ -169,4 +169,5 @@ int				Server::readRequest(struct pollfd &fd)
 	{
 		std::cout << tempbuf;
 	}
+	return (res);
 }
