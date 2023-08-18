@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/17 01:49:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:52:22 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ const str_t	&Server::getRequest(void) const
 	return (this->request);
 }
 
-const poll_v	&Server::getFds(void) const
+poll_v	&Server::getFds(void)
 {
 	return (this->fds);
 }
@@ -112,10 +112,19 @@ void			Server::listenForConnections(void)
 
 int			Server::acceptConnection(void)
 {
-	socklen_t	size;
+	socklen_t		size;
+	int				newFd;
+	struct pollfd	fd;
 
-	size = sizeof(struct sockaddr);
-	return accept(this->socketMaster, (struct sockaddr *) &this->addr, &size);
+	size = sizeof(this->addr);
+	newFd = accept(this->socketMaster, (struct sockaddr *) &this->addr, &size);
+	if (newFd < 0)
+		return (perror("accept errot"), -1);
+	fd.fd = newFd;
+	fd.events = POLLIN;
+	fd.revents = 0;
+	this->setFd(fd);
+	return (newFd);
 }
 
 void			Server::initPoll(void)
