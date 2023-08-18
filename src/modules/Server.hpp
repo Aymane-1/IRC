@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/14 22:46:26 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 04:46:31 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ public:
 	const str_t		&getPassword(void) const;
 	const int		&getSocketMaster(void) const;
 	const str_t		&getRequest(void) const;
-	const poll_v	&getFds(void) const;
+	poll_v			&getFds(void);
 	void			setRequest(const str_t &req);
 	void			setSocketMaster(const int fd);
 	void			setFds(const poll_v &fds);
