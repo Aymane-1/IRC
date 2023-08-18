@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 04:46:31 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 04:57:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ public:
 	void			listenForConnections(void);
 	void			initPoll(void);
 	int				acceptConnection(void);
+	int				polling(void);
+	int				readRequest(struct pollfd &fd);
 	
 };
 

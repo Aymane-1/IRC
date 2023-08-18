@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 02:51:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 05:01:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,8 @@ void	App::run(void)
 	this->server.initPoll();
 	while (keep_running)
 	{
-		res = poll(&pfds[0], pfds.size(), 0);
-		if (res < 0)
-		{
-			perror("poll error");
+		if (this->server.polling() < 0)
 			break ;
-		}
 		if (pfds[0].revents == POLLIN)
 		{
 			res = this->server.acceptConnection();
@@ -105,23 +101,7 @@ void	App::run(void)
 		for (i = 1; i < pfds.size(); i++)
 		{
 			if (pfds[i].revents == POLLIN)
-			{
-				char tempbuf[1024] = {0};
-				res = read(pfds[i].fd, tempbuf, sizeof(tempbuf) - 1);
-				if (res < 0)
-				{
-				}
-				else if (!res)
-				{
-					close(pfds[i].fd);
-					pfds[i].fd = 0;
-					pfds[i].revents = 0;
-				}
-				else
-				{
-					std::cout << tempbuf;
-				}
-			}
+				this->server.readRequest(pfds[i]);
 		}
 	}
 }

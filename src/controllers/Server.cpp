@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 02:52:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/18 04:58:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,4 +135,38 @@ void			Server::initPoll(void)
 	fd.events = POLLIN;
 	fd.revents = 0;
 	this->setFd(fd);
+}
+
+int				Server::polling(void)
+{
+	int	res;
+
+	res = -1;
+	res = poll(&this->fds[0], fds.size(), 0);
+	if (res < 0)
+		perror("poll error");
+	return (res);
+}
+
+int				Server::readRequest(struct pollfd &fd)
+{
+	char	tempbuf[1024] = {0};
+	int		res = -1;
+
+	res = read(fd.fd, tempbuf, sizeof(tempbuf) - 1);
+	tempbuf[res] = 0;
+	if (res < 0)
+	{
+		
+	}
+	else if (!res)
+	{
+		close(fd.fd);
+		fd.fd = 0;
+		fd.revents = 0;
+	}
+	else
+	{
+		std::cout << tempbuf;
+	}
 }
