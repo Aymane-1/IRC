@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/19 00:21:16 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/19 01:49:03 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,27 +42,25 @@ REMOVE := rm -rf
 
 MODULES := App macros Channel Client Command Server
 MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
-HELPERS_H := Helpers
-HELPERS_H := $(addprefix $(HELPERS_DIR)/, $(addsuffix .hpp, $(HELPERS_H)))
 
 HELPERS := Helpers
-HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .cpp, $(HELPERS)))
+HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .hpp, $(HELPERS_H)))
 
 CONTROLLERS := App Client Server Command
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
-SRC := $(HELPERS) $(CONTROLLERS)
+SRC := $(CONTROLLERS)
 
 BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
 
 
 all: $(NAME) signature
 
-$(NAME): $(MAIN) $(MODULES) $(BUILD) $(HELPERS_H)
+$(NAME): $(MAIN) $(MODULES) $(BUILD) $(HELPERS)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(NAME) $(CYAN)executable file...$(WHITE)"
 	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES) $(HELPERS_H)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES) $(HELPERS)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
