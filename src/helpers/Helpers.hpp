@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:59:42 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/19 01:47:30 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/22 04:04:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ namespace Helpers
 
 		res = str.find_last_not_of(c);
 		if (res != str_t::npos)
-			return (str.substr(0, res - 1));
+			return (str.substr(0, res + 1));
 		return (str);
 	}
 

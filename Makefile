@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/19 01:49:03 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/22 04:04:14 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ MODULES := App macros Channel Client Command Server
 MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 
 HELPERS := Helpers
-HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .hpp, $(HELPERS_H)))
+HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .hpp, $(HELPERS)))
 
 CONTROLLERS := App Client Server Command
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
