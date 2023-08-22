@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 20:16:12 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:22:29 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ int				Server::readRequest(struct pollfd &fd)
 	}
 	else
 	{
-		std::cout << tempbuf;
+		Command cmd = Command(tempbuf);
+		cmd.tokenizeCommand();
 	}
 	return (res);
 }

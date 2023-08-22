@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 04:57:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/21 02:33:01 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <vector>
 # include "macros.hpp"
 # include "Client.hpp"
+# include "Command.hpp"
 
 typedef std::vector<struct pollfd>	poll_v;
 class Server
