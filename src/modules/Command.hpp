@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Command.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 22:59:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 03:37:57 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:05:05 by mgs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <map>
 
 typedef std::vector<str_t> str_v;
-typedef void (Command::*execmd)(Client &, str_t &);
+// typedef void (Command::*execmd)(Client &, str_t &);
 
 
 class Command
@@ -30,7 +30,7 @@ private:
 	str_t	message;
 	str_t	command;
 	str_v	parameters;
-	static std::map<const str_t, execmd> allCommands;
+	// static std::map<const str_t, execmd> allCommands;
 public:
 	/* Constructors & Distructors */
 	Command(str_t &messgae);
@@ -41,7 +41,6 @@ public:
 	const str_t	&getCommand(void) const;
 	const str_v	&getParameters(void) const;
 	/* Class funcionallities */
-	static void	insertCommands(void);
 	void	tokenizeCommand(void);
 	size_t	extractCommand(void);
 	void	extractParams(const size_t &start);

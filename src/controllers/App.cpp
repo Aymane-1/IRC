@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 03:37:37 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:05:00 by mgs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	App::run(void)
 	unsigned int	i;
 
 	res = -1;
-	Command::insertCommands();
 	this->server.initPoll();
 	while (keep_running)
 	{

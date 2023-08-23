@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:50:07 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/21 02:15:26 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:11:24 by mgs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define __MACROS_HPP__
 
 # include <iostream>
+# include <stdio.h>
 
 # define COLOR_RED "\033[0;31m"
 # define COLOR_DEFAULT "\033[0;37m"

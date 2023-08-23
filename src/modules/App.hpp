@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:04:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 03:37:09 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 23:10:48 by mgs              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 # include <map>
 # include <vector>
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Command.hpp"
