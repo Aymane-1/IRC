@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 05:01:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:37:37 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	App::run(void)
 	unsigned int	i;
 
 	res = -1;
+	Command::insertCommands();
 	this->server.initPoll();
 	while (keep_running)
 	{

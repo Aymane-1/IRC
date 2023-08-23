@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 01:16:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/22 20:21:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:01:30 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,23 @@ const str_v	&Command::getParameters(void) const
 }
 
 /* Class funcionallities */
+void	Command::insertCommands(void)
+{
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("PASS", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("NICK", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("USER", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("MODE", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("LIST", passCmd)); //TODO: NOT MENTIONED IN THE SUBJECT
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("PART", passCmd)); //TODO: NOT MENTIONED IN THE SUBJECT
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("INVITE", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("JOIN", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("PRVMSG", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("MSG", passCmd)); //TODO: SAME AS PRVMSG
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("TOPIC", passCmd));
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("QUIT", passCmd)); //TODO: NOT MENTIONED IN THE SUBJECT
+	Command::allCommands.insert(std::make_pair<const str_t, execmd>("PONG", passCmd)); //TODO: NOT MENTIONED IN THE SUBJECT
+}
+
 void	Command::tokenizeCommand(void)
 {
 	size_t	i;
@@ -83,3 +100,14 @@ void	Command::extractParams(const size_t &start)
 		newMessage = newMessage.c_str() + i;
 	}
 }
+
+// execmd	Command::commandRouting (void)
+// {
+// 	typedef void (Command::*execmd)(Client &, str_t &);
+// 	execmd commands;
+
+
+// 	if (commands.find(this->command) != commands.end())
+// 		return commands[this->command];
+// 	return (NULL);
+// }
