@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Command.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 22:59:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 23:05:05 by mgs              ###   ########.fr       */
+/*   Updated: 2023/08/24 23:37:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <map>
 
 typedef std::vector<str_t> str_v;
-// typedef void (Command::*execmd)(Client &, str_t &);
+
+class Command;
+
 
 
 class Command
@@ -30,7 +32,6 @@ private:
 	str_t	message;
 	str_t	command;
 	str_v	parameters;
-	// static std::map<const str_t, execmd> allCommands;
 public:
 	/* Constructors & Distructors */
 	Command(str_t &messgae);
@@ -41,11 +42,13 @@ public:
 	const str_t	&getCommand(void) const;
 	const str_v	&getParameters(void) const;
 	/* Class funcionallities */
+	typedef void (Command::*execmd)(Client &);
+	static std::map<const str_t, Command::execmd> allCommands;
 	void	tokenizeCommand(void);
 	size_t	extractCommand(void);
 	void	extractParams(const size_t &start);
-	// execmd	commandRouting(void);
-	void	passCmd(Client &client, str_t &pass);
+	void	(Command::*commandRouting(void))(Client &);
+	void	passCmd(Client &client);
 };
 
 #endif

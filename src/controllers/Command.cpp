@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Command.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 01:16:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 23:04:52 by mgs              ###   ########.fr       */
+/*   Updated: 2023/08/24 23:37:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../modules/Command.hpp"
 
 /* Constructors & Distructors */
+
 Command::Command(str_t &messgae) : message(messgae) { }
 
 Command::Command(const char *messgae)
@@ -39,6 +40,8 @@ const str_v	&Command::getParameters(void) const
 }
 
 /* Class funcionallities */
+std::map<const str_t, Command::execmd> Command::allCommands = std::map<const str_t, Command::execmd>();
+
 void	Command::tokenizeCommand(void)
 {
 	size_t	i;
@@ -84,13 +87,20 @@ void	Command::extractParams(const size_t &start)
 	}
 }
 
-// execmd	Command::commandRouting (void)
-// {
-// 	typedef void (Command::*execmd)(Client &, str_t &);
-// 	execmd commands;
+void	(Command::*Command::commandRouting(void)) (Client &)
+{
+	void	(Command::*functionallity) (Client &);
+	std::map<const str_t, execmd>::iterator	it;
 
+	functionallity = NULL;
+	it = Command::allCommands.find(this->command);
+	if (it != Command::allCommands.end())
+		functionallity = it->second;
+	return (functionallity);
+}
 
-// 	if (commands.find(this->command) != commands.end())
-// 		return commands[this->command];
-// 	return (NULL);
-// }
+void	Command::passCmd(Client &client)
+{
+	client.getClientFd();
+	this->getCommand();
+}
