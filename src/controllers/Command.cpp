@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 01:16:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/24 23:37:46 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/25 02:27:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,10 @@ const str_v	&Command::getParameters(void) const
 /* Class funcionallities */
 std::map<const str_t, Command::execmd> Command::allCommands = std::map<const str_t, Command::execmd>();
 
-void	Command::tokenizeCommand(void)
+void	Command::storeCommands(void)
 {
-	size_t	i;
-
-	this->message = Helpers::trim(this->message, WHITESPACES);
-	i = this->extractCommand();
-	if (i != str_t::npos)
-		this->extractParams(i);
+	Command::allCommands.insert(std::make_pair<const str_t, Command::execmd>("PASS", &Command::pass));
+	Command::allCommands.insert(std::make_pair<const str_t, Command::execmd>("NICK", &Command::nick));
 }
 
 size_t	Command::extractCommand(void)
@@ -58,7 +54,8 @@ size_t	Command::extractCommand(void)
 	str_t	cmd;
 
 	i = -1;
-	i = this->message.find(' ');
+	this->message = Helpers::rtrim(this->message, WHITESPACES);
+	i = this->message.find_first_of(" ");
 	if (i != str_t::npos)
 	{
 		this->command = this->message.substr(0, i);
@@ -66,25 +63,6 @@ size_t	Command::extractCommand(void)
 	}
 	this->command = this->message;
 	return (str_t::npos);
-}
-
-void	Command::extractParams(const size_t &start)
-{
-	size_t		i = 0;
-	str_t	newMessage(this->message.c_str() + start);
-
-	while (i != str_t::npos)
-	{
-		newMessage = Helpers::trim(newMessage, " ");
-		i = newMessage.find_first_of(" ");
-		if (i == str_t::npos)
-		{
-			this->parameters.push_back(newMessage);
-			break ;
-		}
-		this->parameters.push_back(newMessage.substr(0, i));
-		newMessage = newMessage.c_str() + i;
-	}
 }
 
 void	(Command::*Command::commandRouting(void)) (Client &)
@@ -99,7 +77,22 @@ void	(Command::*Command::commandRouting(void)) (Client &)
 	return (functionallity);
 }
 
-void	Command::passCmd(Client &client)
+void	Command::executeCommand(Client &client)
+{
+	void	(Command::*functionallity) (Client &);
+
+	functionallity = this->commandRouting();
+	if (!functionallity)
+		return ;
+	(this->*functionallity)(client);
+}
+
+void	Command::pass(Client &client)
+{
+	client.getClientFd();
+	this->getCommand();
+}
+void	Command::nick(Client &client)
 {
 	client.getClientFd();
 	this->getCommand();
