@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   macros.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:50:07 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 23:11:24 by mgs              ###   ########.fr       */
+/*   Updated: 2023/08/25 20:35:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,18 @@
 
 /* Message Macros */
 # define WHITESPACES "\n\b\t "
+
+/* NUMERIC REPLIES */
+// PASS
+# define ERR_NEEDMOREPARAMS "461"
+# define ERR_ALREADYREGISTERED "462"
+# define ERR_PASSWDMISMATCH "464"
+
+enum	Level {
+	GUEST,
+	CLIENT
+};
+
 
 typedef std::string	str_t;
 
