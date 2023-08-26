@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 00:50:07 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/25 20:35:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:23:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 /* Message Macros */
 # define WHITESPACES "\n\b\t "
+# define CORRECT_PASSWORD 3
 
 /* NUMERIC REPLIES */
 // PASS
@@ -30,8 +31,8 @@
 # define ERR_PASSWDMISMATCH "464"
 
 enum	Level {
-	GUEST,
-	CLIENT
+	CLIENT,
+	OPERATOR
 };
 
 
