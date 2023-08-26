@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 02:41:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 20:15:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/25 22:39:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,15 @@ const str_t	Client::forbiddenToStartWith = "#&$:";
  
 /* Constructors & Distructors */
 Client::Client(void) { }
+
+Client::Client(const int &fd)
+{
+	this->clientFd = fd;
+	this->nickname = "";
+	this->username = "";
+	this->level = CLIENT;
+	this->vAuth = 0;
+}
 
 Client::~Client(void) { }
 
@@ -36,14 +45,14 @@ const str_t			&Client::getUsername(void) const
 return (this->username);
 }
 
-const bool	&Client::getIsAuthentecated(void) const
-{
-	return (this->isAuthentecated);
-}
-
 const bool	&Client::getIsMod(void) const
 {
 	return (this->isMod);
+}
+
+const unsigned char &Client::getVAuth(void) const
+{
+	return (this->vAuth);
 }
 
 void	Client::setClientFd(const int &fd)
@@ -67,11 +76,6 @@ void	Client::setNickname(const str_t &nickname)
 void	Client::setUsername(const str_t &username)
 {
 	this->username = username;
-}
-
-void	Client::setIsAuthentecated(const bool &isAuth)
-{
-	this->isAuthentecated = isAuth;
 }
 
 void	Client::setIsMod(const bool &isMod)

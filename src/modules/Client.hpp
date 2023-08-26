@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:04:05 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/18 20:15:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/25 22:39:20 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ private:
 	int		clientFd;
 	str_t	nickname;
 	str_t	username;
-	bool	isAuthentecated;
+	int		level;
+	unsigned char vAuth;
 	bool	isMod;
 public:
 	/* Constructors & Distructors */
 	Client(void);
+	Client(const int &fd);
 	~Client(void);
 	/* Class data */
 	static const str_t forbiddenChars;
@@ -35,14 +37,14 @@ public:
 	const int	&getClientFd(void) const;
 	const str_t	&getNickname(void) const;
 	const str_t	&getUsername(void) const;
-	const bool	&getIsAuthentecated(void) const;
 	const bool	&getIsMod(void) const;
+	const unsigned char &getVAuth(void) const;
 	
 	void	setClientFd(const int &fd);
 	void	setNickname(const str_t &nickname);
 	void	setUsername(const str_t &username);
-	void	setIsAuthentecated(const bool &isAuth);
 	void	setIsMod(const bool &isMod);
+	void	setVAuth(const unsigned char &vAuth);
 };
 
 #endif
