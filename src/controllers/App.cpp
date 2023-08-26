@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/24 23:52:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:14:39 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ App::App(const char *port, const char *pass)
 		std::cerr << e.what() << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	this->server = Server(this->port, this->password);
+	this->server = Server();
 }
 
 App::~App(void) { }
@@ -68,6 +68,8 @@ void	App::init(void)
 {
 	try
 	{
+		Server::password = this->password;
+		Server::port = this->port;
 		this->server.initSocket();
 		this->server.bindSocket();
 		this->server.listenForConnections();
@@ -86,6 +88,7 @@ void	App::run(void)
 	poll_v	&pfds = this->server.getFds();
 	int				res;
 	unsigned int	i;
+	Client	client;
 
 	res = -1;
 	this->server.initPoll();
@@ -98,11 +101,14 @@ void	App::run(void)
 			res = this->server.acceptConnection();
 			if (res < 0)
 				continue ;
+			client = Client(res);
 		}
 		for (i = 1; i < pfds.size(); i++)
 		{
 			if (pfds[i].revents == POLLIN)
-				this->server.readRequest(pfds[i]);
+			{
+				this->server.readRequest(pfds[i], client);
+			}
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgs <mgs@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:04:25 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/23 23:10:48 by mgs              ###   ########.fr       */
+/*   Updated: 2023/08/25 22:34:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "macros.hpp"
 
 typedef std::string	str_t;
-typedef std::map<const int, Client> client_m;
 
 class App
 {
@@ -33,7 +32,6 @@ private:
 	int			port;
 	str_t		password;
 	Server		server;
-	client_m	clients;
 
 	// Internal App functions!
 	const int	&getPort(void);
