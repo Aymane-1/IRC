@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 22:59:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/25 02:27:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:10:47 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include "macros.hpp"
 # include "Client.hpp"
+# include "Server.hpp"
 # include "../helpers/Helpers.hpp"
 # include <vector>
 # include <map>

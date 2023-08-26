@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 01:16:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/25 02:27:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:25:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ size_t	Command::extractCommand(void)
 	str_t	cmd;
 
 	i = -1;
-	this->message = Helpers::rtrim(this->message, WHITESPACES);
+	this->message = Helpers::ltrim(this->message, WHITESPACES);
 	i = this->message.find_first_of(" ");
 	if (i != str_t::npos)
 	{
@@ -70,6 +70,7 @@ void	(Command::*Command::commandRouting(void)) (Client &)
 	void	(Command::*functionallity) (Client &);
 	std::map<const str_t, execmd>::iterator	it;
 
+	this->extractCommand();
 	functionallity = NULL;
 	it = Command::allCommands.find(this->command);
 	if (it != Command::allCommands.end())
@@ -89,8 +90,28 @@ void	Command::executeCommand(Client &client)
 
 void	Command::pass(Client &client)
 {
-	client.getClientFd();
-	this->getCommand();
+	unsigned char	vAuth;
+	str_t		password;
+	size_t	index;
+
+	vAuth = client.getVAuth();
+	if (vAuth & CORRECT_PASSWORD)
+	{
+		std::cerr << "Already authenticated" << std::endl;
+		return ; // TODO: Handle password command if authenticated
+	}
+	index = this->message.find_first_of(" ");
+	if (index == str_t::npos)
+		return ; //TODO: Handle Invalid PASS command
+	password = this->message.substr(index, this->message.size() -1);
+	password = Helpers::trim(password, "\n \r");
+	if (password + "\r\n" == Server::password|| password == Server::password)
+	{
+		vAuth |= CORRECT_PASSWORD;
+		client.setVAuth(vAuth);
+	}
+	else
+		return ; //TODO: Handle Invalid PASS command
 }
 void	Command::nick(Client &client)
 {
