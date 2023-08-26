@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 21:10:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/26 01:14:39 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/27 00:35:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,58 @@ void	App::init(void)
 
 void	App::run(void)
 {
-	bool	keep_running = true;
-	poll_v	&pfds = this->server.getFds();
+	bool		keep_running = true;
+	const int	socketMaster = this->server.getSocketMaster();;
+	client_m	clients = client_m();
 	int				res;
 	unsigned int	i;
-	Client	client;
+	struct pollfd	fd;
 
 	res = -1;
-	this->server.initPoll();
+	clients.insert(std::make_pair<const int, Client>(socketMaster, Client(socketMaster)));
+	// this->server.initPoll(); // Replace this with the next lines
+	fd.fd = socketMaster;
+	fd.events = POLLIN;
+	fd.revents = 0;
+	clients[socketMaster].setPollFd(fd);
 	while (keep_running)
 	{
-		if (this->server.polling() < 0)
-			break ;
-		if (pfds[0].revents == POLLIN)
+		// if (this->server.polling() < 0)
+		// 	break ;
+
+		res = -1;
+		res = poll(&this->clients[socketMaster].getFd(), this->clients.size(), 0);
+		if (res < 0)
+		perror("poll error");
+		if (clients[0].fd.revents == POLLIN)
 		{
+			struct pollfd	fd;
 			res = this->server.acceptConnection();
 			if (res < 0)
 				continue ;
+			fd.fd = res;
+			fd.events = POLLIN;
+			fd.revents = 0;
+			this->setFd(fd);
 			client = Client(res);
 		}
 		for (i = 1; i < pfds.size(); i++)
 		{
 			if (pfds[i].revents == POLLIN)
 			{
-				this->server.readRequest(pfds[i], client);
+				char	tempbuf[513] = {0};
+
+				res = this->server.readRequest(pfds[i]);
+				if (!res)
+					continue ;
 			}
 		}
 	}
+}
+
+void	App::exec(const char *command, Client &client)
+{
+	Command	cmd = Command(command);
+	
+	cmd.executeCommand(client);
 }

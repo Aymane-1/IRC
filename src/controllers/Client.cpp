@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 02:41:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/25 22:39:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/27 00:31:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ const unsigned char &Client::getVAuth(void) const
 	return (this->vAuth);
 }
 
+const pollfd_t	&Client::getFd(void) const
+{
+	return (this->fd);
+}
+
 void	Client::setClientFd(const int &fd)
 {
 	this->clientFd = fd;
@@ -81,4 +86,16 @@ void	Client::setUsername(const str_t &username)
 void	Client::setIsMod(const bool &isMod)
 {
 	this->isMod = isMod;
+}
+
+void	Client::setVAuth(const unsigned char &vAuth)
+{
+	this->vAuth = vAuth;
+}
+
+void	Client::setPollFd(const pollfd_t &fd)
+{
+	this->fd.fd = fd.fd;
+	this->fd.events = fd.events;
+	this->fd.revents = fd.revents;
 }

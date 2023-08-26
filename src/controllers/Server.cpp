@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/26 01:16:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/27 00:31:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ const str_t	&Server::getRequest(void) const
 	return (this->request);
 }
 
-poll_v	&Server::getFds(void)
-{
-	return (this->fds);
-}
-
 void	Server::setSocketMaster(const int fd)
 {
 	this->socketMaster = fd;
@@ -51,16 +46,6 @@ void	Server::setSocketMaster(const int fd)
 void		Server::setRequest(const str_t &req)
 {
 	this->request = req;
-}
-
-void			Server::setFds(const poll_v &fds)
-{
-	this->fds = fds;
-}
-
-void			Server::setFd(const struct pollfd &fd)
-{
-	this->fds.push_back(fd);
 }
 
 // Class functionallities
@@ -103,28 +88,23 @@ int			Server::acceptConnection(void)
 {
 	socklen_t		size;
 	int				newFd;
-	struct pollfd	fd;
 
 	size = sizeof(this->addr);
 	newFd = accept(this->socketMaster, (struct sockaddr *) &this->addr, &size);
 	if (newFd < 0)
 		return (perror("accept errot"), -1);
-	fd.fd = newFd;
-	fd.events = POLLIN;
-	fd.revents = 0;
-	this->setFd(fd);
 	return (newFd);
 }
 
-void			Server::initPoll(void)
-{
-	struct pollfd	fd;
+// void			Server::initPoll(void)
+// {
+// 	struct pollfd	fd;
 
-	fd.fd = this->getSocketMaster();
-	fd.events = POLLIN;
-	fd.revents = 0;
-	this->setFd(fd);
-}
+// 	fd.fd = this->getSocketMaster();
+// 	fd.events = POLLIN;
+// 	fd.revents = 0;
+// 	this->setFd(fd);
+// }
 
 int				Server::polling(void)
 {
@@ -137,7 +117,7 @@ int				Server::polling(void)
 	return (res);
 }
 
-int				Server::readRequest(struct pollfd &fd, Client &client)
+char			*Server::readRequest(struct pollfd &fd)
 {
 	char	tempbuf[513] = {0};
 	int		res = -1;
@@ -146,18 +126,18 @@ int				Server::readRequest(struct pollfd &fd, Client &client)
 	tempbuf[res] = 0;
 	if (res < 0)
 	{
-		
+		//TODO: Handle error case of read
+		return (NULL);
 	}
 	else if (!res)
 	{
 		close(fd.fd);
 		fd.fd = 0;
 		fd.revents = 0;
+		return (NULL);
 	}
 	else
 	{
-		Command cmd = Command(tempbuf);
-		cmd.executeCommand(client);
+		return (tempbuf);
 	}
-	return (res);
 }
