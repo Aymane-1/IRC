@@ -6,39 +6,28 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 06:02:02 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/25 20:28:10 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:16:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../modules/Server.hpp"
 
 // Constructors & Distructors
-Server::Server(void) : port(-1), password("") { }
+int	Server::port = -1;
+str_t	Server::password = "";
 
-Server::Server(int port, str_t password) : port(port), password(password) { }
+Server::Server(void) { }
 
 Server::~Server(void) { }
 
 Server			&Server::operator=(const Server &other)
 {
-	this->port = other.port;
-	this->password = other.password;
 	this->request = other.request;
 	this->socketMaster = other.socketMaster;
 	return (*this);
 }
 
 // Geters & Setters
-const int	&Server::getPort(void) const
-{
-	return (this->port);
-}
-
-const str_t	&Server::getPassword(void) const
-{
-	return (this->password);
-}
-
 const int		&Server::getSocketMaster(void) const
 {
 	return (this->socketMaster);
@@ -148,7 +137,7 @@ int				Server::polling(void)
 	return (res);
 }
 
-int				Server::readRequest(struct pollfd &fd)
+int				Server::readRequest(struct pollfd &fd, Client &client)
 {
 	char	tempbuf[513] = {0};
 	int		res = -1;
@@ -168,7 +157,6 @@ int				Server::readRequest(struct pollfd &fd)
 	else
 	{
 		Command cmd = Command(tempbuf);
-		Client	client = Client();
 		cmd.executeCommand(client);
 	}
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 04:01:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/21 02:33:01 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/26 01:15:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,29 @@
 # include <fcntl.h>
 # include <poll.h>
 # include <vector>
+# include <map>
 # include "macros.hpp"
 # include "Client.hpp"
 # include "Command.hpp"
 
 typedef std::vector<struct pollfd>	poll_v;
+typedef std::map<const int, Client> client_m;
 class Server
 {
 private:
-	int							port;
-	str_t						password;
 	str_t						request;
 	int							socketMaster;
 	struct sockaddr_in			addr;
 	poll_v						fds;
+	client_m					clients;
+
 public:
 	Server(void);
-	Server(int port, str_t password);
 	~Server(void);
+	static str_t password;
+	static int port;
 	// Getters and Setters
 	Server			&operator=(const Server &other);
-	const int		&getPort(void) const;
-	const str_t		&getPassword(void) const;
 	const int		&getSocketMaster(void) const;
 	const str_t		&getRequest(void) const;
 	poll_v			&getFds(void);
@@ -57,7 +58,7 @@ public:
 	void			initPoll(void);
 	int				acceptConnection(void);
 	int				polling(void);
-	int				readRequest(struct pollfd &fd);
+	int				readRequest(struct pollfd &fd, Client &client);
 	
 };
 
