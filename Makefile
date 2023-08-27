@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/22 04:04:14 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/27 02:20:20 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,10 @@ NAME := ircserv
 MAIN := $(SRC_DIR)/main.cpp
 REMOVE := rm -rf
 
-MODULES := App macros Channel Client Command Server
+MODULES := App Globals Client Server
 MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 
-HELPERS := Helpers
-HELPERS := $(addprefix $(HELPERS_DIR)/, $(addsuffix .hpp, $(HELPERS)))
-
-CONTROLLERS := App Client Server Command
+CONTROLLERS := App Client Server
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
 SRC := $(CONTROLLERS)
@@ -56,11 +53,11 @@ BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
 
 all: $(NAME) signature
 
-$(NAME): $(MAIN) $(MODULES) $(BUILD) $(HELPERS)
+$(NAME): $(MAIN) $(MODULES) $(BUILD)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(NAME) $(CYAN)executable file...$(WHITE)"
 	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES) $(HELPERS)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
