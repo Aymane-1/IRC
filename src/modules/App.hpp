@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 04:47:19 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 00:24:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 # include <vector>
 # include <map>
-# include <unistd.h>
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Globals.hpp"
@@ -38,6 +37,8 @@ private:
 	void		setPort(const char *port);
 	void		setPassword(const char *password);
 	pollfd_t	initPollFd(int fd, short event, short revent);
+	void		integrateNewConnect(const int &res);
+	void		clean(const int &index);
 public:
 	/* Constructors & Destructors */
 	App(const char *port, const char *password);

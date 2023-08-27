@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 04:42:31 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 00:27:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ pollfd_t	App::initPollFd(int fd, short event, short revent)
 	return (pfd);
 }
 
+void		App::integrateNewConnect(const int &res)
+{
+	pollfd_t	pfd;
+
+	memset(&pfd, 0, sizeof(pfds));
+	pfd = this->initPollFd(res, POLLIN, 0);
+	this->pfds.push_back(pfd);
+	this->clients.insert(std::pair<const int, Client>(res, Client(res)));
+}
+
+void		App::clean(const int &index)
+{
+	close(this->pfds[index].fd);
+	this->clients.erase(this->pfds[index].fd);
+	this->pfds.erase(pfds.begin() + index);
+}
+
 /* External Class functionalities */
 void	App::init(void)
 {
@@ -84,12 +101,9 @@ void	App::run(void)
 {
 	int			res;
 	bool		keepAlive;
-	pollfd_t	pfd;
 
 	keepAlive = true;
-	memset(&pfd, 0, sizeof(pollfd_t));
-	pfd = this->initPollFd(this->server.getMasterSocketFd(), POLLIN, 0);
-	this->pfds.push_back(pfd);
+	this->pfds.push_back(this->initPollFd(this->server.getMasterSocketFd(), POLLIN, 0));
 	while (keepAlive)
 	{
 		res = -1;
@@ -98,22 +112,18 @@ void	App::run(void)
 			throw std::runtime_error("poll() failed");
 		if (pfds[0].revents & POLLIN)
 		{
-			memset(&pfd, 0, sizeof(pollfd_t));
 			res = this->server.acceptConnections();
 			if (res < 0)
 				continue ;
-			pfd = this->initPollFd(res, POLLIN, 0);
-			pfds.push_back(pfd);
-			clients.insert(std::pair<const int, Client>(res, Client(res)));
+			this->integrateNewConnect(res);
 		}
 		for (size_t i = 1; i < pfds.size(); i++)
 		{
 			if (pfds[i].revents & POLLIN)
 			{
-				char buf[513] = { 0 };
-
-				res = read(pfds[i].fd, buf, sizeof(buf));
-				std::cout << buf;
+				res = this->server.readRequest(clients.at(pfds[i].fd));
+				if (!res)
+					this->clean(i);
 			}
 		}
 	}
