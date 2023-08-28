@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:49 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 02:13:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 02:47:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,29 @@ void	Command::extractCommand(void)
 		this->command = this->request;
 }
 
-str_t	Command::pass(void)
+str_t	(Command::*Command::routing(void)) (Client &client) // TODO: Update the function arguments later so it matches the type
 {
-	return ("");
+	str_t	(Command::*fulfill) (Client &client);  // TODO: Update the function arguments later so it matches the type
+	std::map<const str_t, functionallity>::iterator	it;
+
+	it = Command::allCommands.find(this->command);
+	fulfill = NULL;
+	if (it != Command::allCommands.end())
+		fulfill = it->second;
+	return (fulfill);
+}
+
+void	Command::execute(Client &client)
+{
+	str_t	(Command::*fulfill) (Client &client);
+
+	fulfill = this->routing();
+	if (!fulfill)
+		return ; // TODO: update the return type to match the error massges to client
+	(this->*fulfill)(client);
+}
+
+str_t	Command::pass(Client &client)
+{
+	return (client.getNickname());
 }
