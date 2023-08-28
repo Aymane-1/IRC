@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 04:51:51 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:56:58 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ private:
 	str_t	request;
 	str_t	command;
 	str_t	response;
-	Server	server;
+	Server	*server;
 public:
 	/* Constructors & Destructors */
-	Command(void);
+	Command(Server &server);
 	~Command(void);
 
 	/* Getters & Setters */

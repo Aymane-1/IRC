@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:49 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 04:51:45 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:58:09 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	Command::storeCommands(void)
 }
 
 /* Constructors & Destructors */
-Command::Command(void) { }
+Command::Command(Server &server)
+{
+	this->server = &server;
+}
 
 Command::~Command(void) { }
 
@@ -105,7 +108,7 @@ str_t	Command::pass(Client &client)
 		return ("Not enought args");
 	password = this->request.substr(index, this->request.size() - 1);
 	password = Helpers::trim(password, "\n \r");
-	if (password != this->server.getPassword())
+	if (password != this->server->getPassword())
 		return ("Invalid password");
 	vAuth = client.getVAuth() | PASS_AUTH;
 	client.setVAuth(vAuth);
