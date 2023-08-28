@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/27 02:20:20 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/28 00:55:49 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,10 @@ NAME := ircserv
 MAIN := $(SRC_DIR)/main.cpp
 REMOVE := rm -rf
 
-MODULES := App Globals Client Server
+MODULES := App Globals Client Server Command
 MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 
-CONTROLLERS := App Client Server
+CONTROLLERS := App Client Server Command
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
 SRC := $(CONTROLLERS)
