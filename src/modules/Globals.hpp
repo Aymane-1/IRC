@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 01:49:04 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 02:11:53 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include <iostream>
 # include <string>
+
+# define WHITESPACES " \t\r\n\b"
 
 typedef std::string	str_t;
 
