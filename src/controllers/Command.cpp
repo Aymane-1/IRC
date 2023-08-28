@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:49 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 02:47:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:51:45 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,21 @@ void	Command::execute(Client &client)
 
 str_t	Command::pass(Client &client)
 {
-	return (client.getNickname());
+	short	vAuth;
+	str_t	password;
+	size_t	index;
+
+	vAuth = client.getVAuth();
+	if ((vAuth == FULL_AUTH) || (vAuth == PASS_AUTH))
+		return ("Already authenticated");
+	index = this->request.find_first_of(" ");
+	if (index == str_t::npos)
+		return ("Not enought args");
+	password = this->request.substr(index, this->request.size() - 1);
+	password = Helpers::trim(password, "\n \r");
+	if (password != this->server.getPassword())
+		return ("Invalid password");
+	vAuth = client.getVAuth() | PASS_AUTH;
+	client.setVAuth(vAuth);
+	return ("Passed");
 }

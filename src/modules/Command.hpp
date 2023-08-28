@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 02:46:46 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 04:51:51 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <map>
 # include "Globals.hpp"
 # include "Client.hpp"
+# include "Server.hpp"
 
 class Command
 {
@@ -25,6 +26,7 @@ private:
 	str_t	request;
 	str_t	command;
 	str_t	response;
+	Server	server;
 public:
 	/* Constructors & Destructors */
 	Command(void);
