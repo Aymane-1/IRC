@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 03:33:08 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 00:44:00 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,28 @@ int			Server::acceptConnections(void)
 	if (newFd < 0)
 		return (perror("accept errot"), -1);
 	return (newFd);
+}
+
+int			Server::readRequest(Client &client)
+{
+	char	tmpbuff[1024];
+	int	res;
+
+	memset(tmpbuff, 0, sizeof(tmpbuff));
+	res = recv(client.getSocketFd(), tmpbuff, sizeof(tmpbuff), 0);
+	if (res < 0)
+	{
+		//TODO: Handle error case of read
+	}
+	else if (!res)
+	{
+		// TODO: Handle the case of 0 bites read
+	}
+	else
+	{
+		
+	}
+	tmpbuff[res] = 0;
+	std::cout << tmpbuff;
+	return (res);
 }
