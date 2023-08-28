@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 00:37:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 02:08:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	App::init(void)
 		this->server.initSocketMaster();
 		this->server.bindSocketMaster();
 		this->server.listenForConnections();
+		Command::storeCommands();
 	}
 	catch(const std::exception& e)
 	{

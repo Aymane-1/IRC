@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 00:24:18 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/28 02:07:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <map>
 # include "Server.hpp"
 # include "Client.hpp"
+# include "Command.hpp"
 # include "Globals.hpp"
 
 typedef struct pollfd					pollfd_t;
