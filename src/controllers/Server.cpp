@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 19:27:37 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:17:21 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,33 @@ int			Server::acceptConnections(Client &client)
 	client.setHost(inet_ntoa(this->addr.sin_addr));
 	client.setPort(ntohs(this->addr.sin_port));
 	return (newFd);
+}
+
+pollfd_t	Server::initPollFd(int fd, short event, short revent)
+{
+	pollfd_t	pfd;
+
+	pfd.fd = fd;
+	pfd.events = event;
+	pfd.revents = revent;
+	return (pfd);
+}
+
+void		Server::integrateNewConnect(Client &client)
+{
+	pollfd_t	pfd;
+
+	memset(&pfd, 0, sizeof(pfd));
+	pfd = this->initPollFd(client.getSocketFd(), POLLIN, 0);
+	this->pfds.push_back(pfd);
+	this->clients.insert(std::pair<const int, Client>(client.getSocketFd(), client));
+}
+
+void		Server::clean(const int &index)
+{
+	close(this->pfds[index].fd);
+	this->clients.erase(this->pfds[index].fd);
+	this->pfds.erase(pfds.begin() + index);
 }
 
 int			Server::readRequest(Client &client)

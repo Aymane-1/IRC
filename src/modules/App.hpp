@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 01:49:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:20:08 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,10 @@
 #ifndef __APP_HPP__
 # define __APP_HPP__
 
-# include <vector>
-# include <map>
 # include "Server.hpp"
 # include "Client.hpp"
 # include "Command.hpp"
 # include "Globals.hpp"
-
-typedef struct pollfd					pollfd_t;
-typedef std::vector<pollfd_t>			pollfd_v;
-typedef std::map<const int, Client>		client_m;
 
 class App
 {
@@ -32,14 +26,9 @@ private:
 	int			port;
 	str_t		password;
 	Server		server;
-	pollfd_v	pfds;
-	client_m	clients;
 	/* Internal class functionallities */
 	void		setPort(const char *port);
 	void		setPassword(const char *password);
-	pollfd_t	initPollFd(int fd, short event, short revent);
-	void		integrateNewConnect(Client &client);
-	void		clean(const int &index);
 public:
 	/* Constructors & Destructors */
 	App(const char *port, const char *password);

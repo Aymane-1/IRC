@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 01:50:13 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 21:20:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,33 +54,6 @@ void		App::setPassword(const char *password)
 	this->password = str_t(password);
 }
 
-pollfd_t	App::initPollFd(int fd, short event, short revent)
-{
-	pollfd_t	pfd;
-
-	pfd.fd = fd;
-	pfd.events = event;
-	pfd.revents = revent;
-	return (pfd);
-}
-
-void		App::integrateNewConnect(Client &client)
-{
-	pollfd_t	pfd;
-
-	memset(&pfd, 0, sizeof(pfd));
-	pfd = this->initPollFd(client.getSocketFd(), POLLIN, 0);
-	this->pfds.push_back(pfd);
-	this->clients.insert(std::pair<const int, Client>(client.getSocketFd(), client));
-}
-
-void		App::clean(const int &index)
-{
-	close(this->pfds[index].fd);
-	this->clients.erase(this->pfds[index].fd);
-	this->pfds.erase(pfds.begin() + index);
-}
-
 /* External Class functionalities */
 void	App::init(void)
 {
@@ -89,7 +62,7 @@ void	App::init(void)
 		this->server.initSocketMaster();
 		this->server.bindSocketMaster();
 		this->server.listenForConnections();
-		this->server.getServerHost();
+		// this->server.getServerHost();
 		Command::storeCommands();
 	}
 	catch(const std::exception& e)
@@ -105,29 +78,29 @@ void	App::run(void)
 	bool		keepAlive;
 
 	keepAlive = true;
-	this->pfds.push_back(this->initPollFd(this->server.getMasterSocketFd(), POLLIN, 0));
+	this->server.pfds.push_back(this->server.initPollFd(this->server.getMasterSocketFd(), POLLIN, 0));
 	while (keepAlive)
 	{
 		res = -1;
-		res = poll(&pfds[0], pfds.size(), 0);
+		res = poll(&this->server.pfds[0], this->server.pfds.size(), 0);
 		if (res < 0)
 			throw std::runtime_error("poll() failed");
-		if (pfds[0].revents & POLLIN)
+		if (this->server.pfds[0].revents & POLLIN)
 		{
 			Client	newClient = Client(-1);
 	
 			res = this->server.acceptConnections(newClient);
 			if (res < 0)
 				continue ;
-			this->integrateNewConnect(newClient);
+			this->server.integrateNewConnect(newClient);
 		}
-		for (size_t i = 1; i < pfds.size(); i++)
+		for (size_t i = 1; i < this->server.pfds.size(); i++)
 		{
-			if (pfds[i].revents & POLLIN)
+			if (this->server.pfds[i].revents & POLLIN)
 			{
-				res = this->server.readRequest(clients.at(pfds[i].fd));
+				res = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
 				if (!res)
-					this->clean(i);
+					this->server.clean(i);
 			}
 		}
 	}
