@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 02:07:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:49:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ private:
 	void		setPort(const char *port);
 	void		setPassword(const char *password);
 	pollfd_t	initPollFd(int fd, short event, short revent);
-	void		integrateNewConnect(const int &res);
+	void		integrateNewConnect(Client &client);
 	void		clean(const int &index);
 public:
 	/* Constructors & Destructors */

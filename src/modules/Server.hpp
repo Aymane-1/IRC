@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 19:21:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:41:56 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 # include <sys/socket.h>
 # include <netinet/in.h>
+# include <arpa/inet.h>
+# include <netdb.h>
 # include <fcntl.h>
 # include <poll.h>
 # include <unistd.h>
@@ -32,6 +34,7 @@ private:
 	int				port;
 	str_t			password;
 	sockaddr_in_t	addr;
+	str_t			host;
 public:
 	/* Constructors & Destructors */
 	Server(const int &port, const str_t &password);
@@ -49,8 +52,9 @@ public:
 	void		initSocketMaster(void);
 	void		bindSocketMaster(void);
 	void		listenForConnections(void);
-	int			acceptConnections(void);
+	int			acceptConnections(Client &client);
 	int			readRequest(Client &client);
+	void		getServerHost(void);
 };
 
 #endif
