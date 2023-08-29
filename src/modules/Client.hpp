@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:32:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 04:30:19 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:46:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ private:
 	int		socketFd;
 	str_t	nickname;
 	str_t	username;
+	str_t	host;
+	int		port;
 	short	vAuth;
 public:
 	/* Constructors & Destructors */
@@ -38,6 +40,10 @@ public:
 	void		setUsername(const str_t &username);
 	const short	&getVAuth(void) const;
 	void		setVAuth(const short &vAuth);
+	const str_t	&getHost(void) const;
+	void		setHost(const str_t &host);
+	const int	&getPort(void) const;
+	void		setPort(const int &port);
 
 	/* Class functionnallities */
 };

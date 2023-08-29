@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:36:00 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/27 04:30:28 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 01:55:26 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,22 @@ void		Client::setVAuth(const short &vAuth)
 	this->vAuth = vAuth;
 }
 
+const str_t	&Client::getHost(void) const
+{
+	return (this->host);
+}
 
+void		Client::setHost(const str_t &host)
+{
+	this->host = host;
+}
+
+const int	&Client::getPort(void) const
+{
+	return (this->port);
+}
+
+void		Client::setPort(const int &port)
+{
+	this->port = port;
+}
