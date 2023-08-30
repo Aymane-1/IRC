@@ -6,14 +6,14 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 21:20:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:44:13 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../modules/App.hpp"
 
 /* Constructors & Destructors */
-App::App(const char *port, const char *password) : server(Server(this->port, this->password))
+App::App(const char *port, const char *password)
 {
 	try
 	{
@@ -63,7 +63,7 @@ void	App::init(void)
 		this->server.bindSocketMaster();
 		this->server.listenForConnections();
 		// this->server.getServerHost();
-		Command::storeCommands();
+		CommandWorker::storeCommands();
 	}
 	catch(const std::exception& e)
 	{
