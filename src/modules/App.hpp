@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 21:20:08 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:44:20 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "Server.hpp"
 # include "Client.hpp"
-# include "Command.hpp"
+# include "CommandWorker.hpp"
 # include "Globals.hpp"
 
 class App
