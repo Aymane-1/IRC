@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:28:22 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 22:44:20 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:20:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define __APP_HPP__
 
 # include "Server.hpp"
-# include "Client.hpp"
 # include "CommandWorker.hpp"
 # include "Globals.hpp"
 
