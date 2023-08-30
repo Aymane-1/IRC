@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:49 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 04:58:09 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 00:27:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ str_t	Command::pass(Client &client)
 
 	vAuth = client.getVAuth();
 	if ((vAuth == FULL_AUTH) || (vAuth == PASS_AUTH))
-		return ("Already authenticated");
+		return (this->server->getHost() + ": " + ERR_NEEDMOREPARAMS + " " +client.getNickname() + ": Invalid password");
 	index = this->request.find_first_of(" ");
 	if (index == str_t::npos)
 		return ("Not enought args");
@@ -112,5 +112,5 @@ str_t	Command::pass(Client &client)
 		return ("Invalid password");
 	vAuth = client.getVAuth() | PASS_AUTH;
 	client.setVAuth(vAuth);
-	return ("Passed");
+	return (this->server->welcomeMessage(client));
 }
