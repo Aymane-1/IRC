@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 04:56:58 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 22:42:53 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 # include <map>
 # include "Globals.hpp"
-# include "Client.hpp"
-# include "Server.hpp"
 
 class Command
 {
@@ -26,10 +24,9 @@ private:
 	str_t	request;
 	str_t	command;
 	str_t	response;
-	Server	*server;
 public:
 	/* Constructors & Destructors */
-	Command(Server &server);
+	Command(void);
 	~Command(void);
 
 	/* Getters & Setters */
@@ -39,17 +36,9 @@ public:
 	void		setCommand(const str_t &command);
 	const str_t	&getResponse(void) const;
 	void		setResponse(const str_t &response);
-
-	/* Static Class Elements */
-	typedef str_t (Command::*functionallity)(Client &client);
-	static std::map<const str_t, Command::functionallity> allCommands;
-	static void	storeCommands(void);
 	
 	/* Class  functionallities */
 	void	extractCommand(void);
-	str_t	(Command::*routing(void)) (Client &client);
-	void	execute(Client &client); // TODO: update the return type to match the error massges to client
-	str_t	pass(Client &client);
 };
 
 #endif
