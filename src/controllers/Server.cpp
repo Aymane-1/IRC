@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 23:23:10 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:19:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,18 +97,20 @@ void			Server::listenForConnections(void)
 		throw std::runtime_error("Error while listenning to connections");
 }
 
-int			Server::acceptConnections(Client &client)
+int			Server::acceptConnections(void)
 {
 	socklen_t		size;
 	int				newFd;
+	Client	newClient = Client(-1);
 
 	size = sizeof(this->addr);
 	newFd = accept(this->masterSocketFd, (struct sockaddr *) &this->addr, &size);
 	if (newFd < 0)
 		return (perror("accept errot"), -1);
-	client.setSocketFd(newFd);
-	client.setHost(inet_ntoa(this->addr.sin_addr));
-	client.setPort(ntohs(this->addr.sin_port));
+	newClient.setSocketFd(newFd);
+	newClient.setHost(inet_ntoa(this->addr.sin_addr));
+	newClient.setPort(ntohs(this->addr.sin_port));
+	this->integrateNewConnect(newClient);
 	return (newFd);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 00:31:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/30 23:13:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ public:
 	void		initSocketMaster(void);
 	void		bindSocketMaster(void);
 	void		listenForConnections(void);
-	int			acceptConnections(Client &client);
+	int			acceptConnections(void);
 	const str_t	welcomeMessage(const Client &client);
 	pollfd_t	initPollFd(int fd, short event, short revent);
 	int			readRequest(Client &client);
