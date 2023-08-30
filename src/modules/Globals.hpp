@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/28 04:51:00 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 22:49:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # define FULL_AUTH (PASS_AUTH | NICK_AUTH | USER_AUTH)
 
 typedef std::string	str_t;
+
+/* NUMRIC REPLIES */
+# define ERR_NEEDMOREPARAMS "461"
 
 namespace Helpers
 {
