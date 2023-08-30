@@ -6,14 +6,16 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 21:17:21 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/29 23:23:10 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../modules/Server.hpp"
 
 /* Constructors & Destructors */
-Server::Server(const int &port, const str_t &password)
+Server::Server(void) { }
+
+Server::Server(const int &port, const str_t &password): host("irc.taza7akmal3alam.com")
 {
 	this->port = port;
 	this->password = password;
@@ -52,6 +54,11 @@ const str_t	&Server::getPassword(void) const
 void		Server::setPassword(const str_t &pass)
 {
 	this->password = pass;
+}
+
+const str_t	&Server::getHost(void) const
+{
+	return (this->host);
 }
 
 void		Server::initSocketMaster(void)
@@ -103,6 +110,13 @@ int			Server::acceptConnections(Client &client)
 	client.setHost(inet_ntoa(this->addr.sin_addr));
 	client.setPort(ntohs(this->addr.sin_port));
 	return (newFd);
+}
+
+const str_t	Server::welcomeMessage(const Client &client)
+{
+	return (
+		this->getHost() + ": " + client.getNickname() + " Welcome to 7sn IRC server"
+	);
 }
 
 pollfd_t	Server::initPollFd(int fd, short event, short revent)
