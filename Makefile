@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/30 22:41:37 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/31 02:27:08 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ BUILD_DIR := build
 MODULES_DIR := $(SRC_DIR)/modules
 HELPERS_DIR := $(SRC_DIR)/helpers
 CONTROLLERS_DIR := $(SRC_DIR)/controllers
+COMPONENTS_DIR := $(CONTROLLERS_DIR)/controllers
 
 # Base variables
 NAME := ircserv
@@ -45,6 +46,9 @@ MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 
 CONTROLLERS := App Client Server Command Channel CommandWorker
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
+
+COMPONENTS	:= pass
+COMPONENTS	:= $(addprefix $(COMPONENTS_DIR)/, $(addsuffix .cpp, $(COMPONENTS)))
 
 SRC := $(CONTROLLERS)
 
