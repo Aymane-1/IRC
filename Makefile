@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/31 02:27:08 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/08/31 02:48:03 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)
 COMPONENTS	:= pass
 COMPONENTS	:= $(addprefix $(COMPONENTS_DIR)/, $(addsuffix .cpp, $(COMPONENTS)))
 
-SRC := $(CONTROLLERS)
+SRC := $(CONTROLLERS) $(COMPONENTS)
 
 BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
 
@@ -61,7 +61,12 @@ $(NAME): $(MAIN) $(MODULES) $(BUILD)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(NAME) $(CYAN)executable file...$(WHITE)"
 	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/*/%.cpp $(MODULES)
+$(BUILD_DIR)/%.o: $(CONTROLLERS_DIR)/%.cpp $(MODULES)
+	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
+	@mkdir -p $(BUILD_DIR)
+	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
+
+$(BUILD_DIR)/%.o: $(CONTROLLERS_DIR)/*/%.cpp $(MODULES)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
