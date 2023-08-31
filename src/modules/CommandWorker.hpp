@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:29:47 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 02:52:51 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 23:19:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ public:
 	str_t	(CommandWorker::*routing(void)) (Client &client);
 	str_t	execute(Client &client); // TODO: update the return type to match the error massges to client
 	str_t	pass(Client &client);
+	str_t	nick(Client &client);
 };
 
 #endif
