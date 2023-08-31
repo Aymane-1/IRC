@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 01:46:58 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:18:52 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ void	CommandWorker::execute(Client &client)
 str_t	CommandWorker::pass(Client &client)
 {
 	return (client.getHost());
+}
+
+void testm1()
+{
+	
+}
+
+void testm2()
+{
+	
 }
