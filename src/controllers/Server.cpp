@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 01:37:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 03:14:48 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ int			Server::acceptConnections(void)
 	return (newFd);
 }
 
-const str_t	Server::welcomeMessage(const Client &client)
-{
-	return (
-		this->getHost() + ": " + client.getNickname() + " Welcome to 7sn IRC server"
-	);
-}
+// const str_t	Server::welcomeMessage(const Client &client)
+// {
+// 	return (
+// 		" Welcome to 7sn IRC server"
+// 	);
+// }
 
 pollfd_t	Server::initPollFd(int fd, short event, short revent)
 {
@@ -153,6 +153,8 @@ int			Server::readRequest(Client &client)
 	char	tmpbuff[1024];
 	CommandWorker	cw = CommandWorker(this);
 	int	res;
+	str_t	response;
+	size_t	response_len;
 
 	memset(tmpbuff, 0, sizeof(tmpbuff));
 	res = recv(client.getSocketFd(), tmpbuff, sizeof(tmpbuff), 0);
@@ -173,7 +175,9 @@ int			Server::readRequest(Client &client)
 	// cw.server = this;
 	cw.setRequest(tmpbuff);
 	cw.extractCommand();
-	cw.execute(client);
-	std::cout << tmpbuff;
+	response = cw.execute(client);
+	response_len = strlen(response.c_str());
+	res = send(client.getSocketFd(), response.c_str(), response_len, 0);
+	// std::cout << tmpbuff;
 	return (res);
 }

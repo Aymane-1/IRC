@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 02:30:38 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:53:34 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ str_t	(CommandWorker::*CommandWorker::routing(void)) (Client &client) // TODO: U
 	return (fulfill);
 }
 
-void	CommandWorker::execute(Client &client)
+str_t	CommandWorker::execute(Client &client)
 {
 	str_t	(CommandWorker::*fulfill) (Client &client);
 
 	fulfill = this->routing();
 	if (!fulfill)
-		return ; // TODO: update the return type to match the error massges to client
-	(this->*fulfill)(client);
+		return (""); // TODO: update the return type to match the error massges to client
+	return ((this->*fulfill)(client));
 }

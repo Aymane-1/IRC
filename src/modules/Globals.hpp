@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 22:49:18 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:40:49 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef std::string	str_t;
 
 /* NUMRIC REPLIES */
 # define ERR_NEEDMOREPARAMS "461"
+# define ERR_PASSWDMISMATCH "464"
 
 namespace Helpers
 {
