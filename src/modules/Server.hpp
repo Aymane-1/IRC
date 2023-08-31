@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 23:13:25 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:20:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <map>
 # include "Globals.hpp"
 # include "Client.hpp"
+# include "CommandWorker.hpp"
 
 typedef struct pollfd				pollfd_t;
 typedef std::vector<pollfd_t>		pollfd_v;

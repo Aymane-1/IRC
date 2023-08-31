@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:29:47 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 22:33:51 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:37:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@
 # include "Globals.hpp"
 # include "Client.hpp"
 # include "Command.hpp"
+# include "Server.hpp"
 
+class Server;
 
-class CommandWorker
+class CommandWorker : public Command
 {
 public:
+	Server *server;
+	CommandWorker(Server *server);
 	typedef str_t (CommandWorker::*functionallity)(Client &client);
 	static std::map<const str_t, CommandWorker::functionallity> allCommands;
 	static void	storeCommands(void);

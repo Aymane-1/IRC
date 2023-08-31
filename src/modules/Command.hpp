@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 00:51:57 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 22:42:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:31:28 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 class Command
 {
-private:
+protected:
 	/* Private class attributes */
 	str_t	request;
 	str_t	command;

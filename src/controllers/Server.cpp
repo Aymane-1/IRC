@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/30 23:19:42 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:37:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void		Server::clean(const int &index)
 int			Server::readRequest(Client &client)
 {
 	char	tmpbuff[1024];
+	CommandWorker	cw = CommandWorker(this);
 	int	res;
 
 	memset(tmpbuff, 0, sizeof(tmpbuff));
@@ -167,7 +168,12 @@ int			Server::readRequest(Client &client)
 	{
 		
 	}
+
 	tmpbuff[res] = 0;
+	// cw.server = this;
+	cw.setRequest(tmpbuff);
+	cw.extractCommand();
+	cw.execute(client);
 	std::cout << tmpbuff;
 	return (res);
 }
