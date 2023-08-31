@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 02:20:49 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:22:52 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,4 @@ void	CommandWorker::execute(Client &client)
 str_t	CommandWorker::pass(Client &client)
 {
 	return (client.getHost());
-}
-
-void tests1()
-{
-
-}
-
-void tests2()
-{
-
 }
