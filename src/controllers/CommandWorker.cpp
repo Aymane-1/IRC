@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 22:39:06 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/08/31 23:46:53 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	CommandWorker::storeCommands(void)
 {
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PASS", &CommandWorker::pass));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("KICK", &CommandWorker::pass));
+	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("NICK", &CommandWorker::nick));
 	
 }
 
