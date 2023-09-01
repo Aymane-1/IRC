@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 22:36:06 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/01 00:28:13 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@
 
 typedef std::string	str_t;
 
-/* NUMRIC REPLIES */
-# define ERR_NEEDMOREPARAMS "461"
-# define ERR_PASSWDMISMATCH "464"
-# define ERR_ALREADYREGISTERED "462"
+/* NUMERIC REPLIES */
+# define RPL_WELCOME(server, nick) ":" + server + " 001 " + nick + " :Welcome to a7sn IRC server\r\n"
+
+/* ERROR REPLIES */
+# define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " " + "461" + " " + nickname + ": Need more parameters\r\n"
+# define ERR_PASSWDMISMATCH(server, nickname) ":" + server  + " " + "464" + " " + nickname + ": Invalid password\r\n"
+# define ERR_ALREADYREGISTERED(server, nickname) ":" + server  + " " + "462" + " " + nickname + ": Already authenticated\r\n"
+# define ERR_NONICKNAMEGIVEN "431"
+# define ERR_ERRONEUSNICKNAME "432"
+# define ERR_NICKNAMEINUSE "433"
+# define ERR_NICKCOLLISION "436"
+# define ERR_NOTREGISTERED(server, nickname) ":" + server + " " + "451" + " " + nickname + ": You have not registered.\r\n"
 
 namespace Helpers
 {
