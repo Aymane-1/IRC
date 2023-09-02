@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 22:44:34 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:13:48 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ str_t	CommandWorker::nick(Client &client)
 		return (ERR_NICKNAMEINUSE(this->server->getHost(), client.getNickname()));
 	vAuth |= NICK_AUTH;
 	client.setVAuth(vAuth);
+	client.setNickname(nick);
 	return ("");
 }
 
