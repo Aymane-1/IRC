@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/01 01:41:25 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:39:59 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@
 # include "Globals.hpp"
 # include "Client.hpp"
 # include "CommandWorker.hpp"
+# include "Channel.hpp"
 
 typedef struct pollfd				pollfd_t;
 typedef std::vector<pollfd_t>		pollfd_v;
 typedef struct sockaddr_in			sockaddr_in_t;
 typedef std::map<const int, Client>	client_m;
+typedef std::map<const str_t, Channel>	channel_m;
 
 class Server
 {
