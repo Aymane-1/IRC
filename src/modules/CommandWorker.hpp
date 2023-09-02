@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:29:47 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 22:50:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:55:54 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ public:
 	str_t	pass(Client &client);
 	str_t	nick(Client &client);
 	str_t	user(Client &client);
-
+	str_t	privmsg(Client &client);
 	class CommandHelper
 	{
 	private:
