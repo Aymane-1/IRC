@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/01 00:28:13 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:25:41 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ typedef std::string	str_t;
 # define RPL_WELCOME(server, nick) ":" + server + " 001 " + nick + " :Welcome to a7sn IRC server\r\n"
 
 /* ERROR REPLIES */
-# define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " " + "461" + " " + nickname + ": Need more parameters\r\n"
-# define ERR_PASSWDMISMATCH(server, nickname) ":" + server  + " " + "464" + " " + nickname + ": Invalid password\r\n"
-# define ERR_ALREADYREGISTERED(server, nickname) ":" + server  + " " + "462" + " " + nickname + ": Already authenticated\r\n"
-# define ERR_NONICKNAMEGIVEN "431"
-# define ERR_ERRONEUSNICKNAME "432"
-# define ERR_NICKNAMEINUSE "433"
-# define ERR_NICKCOLLISION "436"
+# define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " " + "461" + " " + nickname + ": Need more parameters.\r\n"
+# define ERR_PASSWDMISMATCH(server, nickname) ":" + server  + " " + "464" + " " + nickname + ": Invalid password.\r\n"
+# define ERR_ALREADYREGISTERED(server, nickname) ":" + server  + " " + "462" + " " + nickname + ": Already authenticated.\r\n"
+# define ERR_NONICKNAMEGIVEN(server, nickname) ":" + server  + " " + "431" + " " + nickname + ": No nickname provided.\r\n"
+# define ERR_ERRONEUSNICKNAME(server, nickname) ":" + server  + " " + "432" + " " + nickname + ": Invalid nickname.\r\n"
+# define ERR_NICKNAMEINUSE(server, nickname) ":" + server  + " " + "433" + " " + nickname + ": Nickname already in use.\r\n"
 # define ERR_NOTREGISTERED(server, nickname) ":" + server + " " + "451" + " " + nickname + ": You have not registered.\r\n"
 
 namespace Helpers
