@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/01 03:18:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:52:08 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ std::map<const str_t, CommandWorker::functionallity> CommandWorker::allCommands 
 void	CommandWorker::storeCommands(void)
 {
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PASS", &CommandWorker::pass));
-	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("KICK", &CommandWorker::pass));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("NICK", &CommandWorker::nick));
+	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("USER", &CommandWorker::user));
 	
 }
 

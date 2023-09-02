@@ -6,7 +6,7 @@
 #    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/08/31 23:25:44 by sel-kham         ###   ########.fr        #
+#    Updated: 2023/09/02 22:50:23 by sel-kham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 CONTROLLERS := App Client Server Command Channel CommandWorker
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
-COMPONENTS	:= pass nick
+COMPONENTS	:= pass nick user
 COMPONENTS	:= $(addprefix $(COMPONENTS_DIR)/, $(addsuffix .cpp, $(COMPONENTS)))
 
 SRC := $(CONTROLLERS) $(COMPONENTS)
