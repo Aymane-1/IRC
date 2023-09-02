@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 21:29:27 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:44:34 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ str_t	CommandWorker::nick(Client &client)
 	const str_t	specialCharacheters = "[]{}\\|:";
 
 	vAuth = client.getVAuth();
-	if (vAuth < PASS_AUTH)
+	if (vAuth != (PASS_AUTH | USER_AUTH))
 		return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	index = this->request.find_first_of(" ");
 	if (index == str_t::npos)

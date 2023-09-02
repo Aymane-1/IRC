@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 21:25:41 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:44:00 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # define WHITESPACES " \t\r\n\b"
 # define PASS_AUTH 1
-# define NICK_AUTH 2
-# define USER_AUTH 4
+# define USER_AUTH 2
+# define NICK_AUTH 4
 # define FULL_AUTH (PASS_AUTH | NICK_AUTH | USER_AUTH)
 
 typedef std::string	str_t;
