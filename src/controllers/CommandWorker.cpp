@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 23:46:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:18:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ str_t	CommandWorker::execute(Client &client)
 	if (!fulfill)
 		return (""); // TODO: update the return type to match the error massges to client
 	return ((this->*fulfill)(client));
+}
+
+CommandWorker::CommandHelper::CommandHelper(void) { }
+
+CommandWorker::CommandHelper::~CommandHelper(void) { }
+
+client_m::iterator	CommandWorker::CommandHelper::findClientByNickName(CommandWorker *worker, const str_t &nick)
+{
+	client_m::iterator	it;
+
+	for (it = worker->server->clients.begin(); it != worker->server->clients.end(); it++)
+	{
+		if (it->second.getNickname() == nick)
+			break ;
+	}
+	return (it);
 }
