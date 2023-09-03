@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 22:44:00 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 03:42:51 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define __GLOBALS_HPP__
 
 # include <iostream>
+# include <vector>
 # include <string>
 
 # define WHITESPACES " \t\r\n\b"
@@ -67,6 +68,29 @@ namespace Helpers
 	str_t	trim(str_t str, T c)
 	{
 		return (rtrim(ltrim(str, c), c));
+	}
+
+	template<typename T>
+	std::vector<str_t>	split(const str_t &target, T del)
+	{
+		std::vector<str_t>	result;
+		str_t				current;
+
+		for (size_t i = 0; i < target.length(); i++)
+		{
+			if (target[i] == del)
+			{
+				if (current.find_first_not_of(del) == str_t::npos)
+					continue;
+				result.push_back(current);
+				current.clear();
+			}
+			else
+				current += target[i];
+		}
+		if (!current.empty())
+			result.push_back(current);
+		return result;      
 	}
 }
 
