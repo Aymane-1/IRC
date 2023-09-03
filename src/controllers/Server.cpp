@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 21:22:23 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 23:45:12 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		Server::initSocketMaster(void)
 {
 	int	optval;
 
-	optval = 0;
+	optval = 1;
 	this->masterSocketFd = socket(AF_INET, SOCK_STREAM, 0);
 	if (this->masterSocketFd < 0)
 		throw std::runtime_error("Couldn't initialize server's socket");
@@ -145,7 +145,7 @@ void		Server::clean(const int &index)
 {
 	close(this->pfds[index].fd);
 	this->clients.erase(this->pfds[index].fd);
-	this->pfds.erase(pfds.begin() + index);
+	this->pfds.erase(pfds.begin() + index, pfds.begin() + index);
 }
 
 int			Server::readRequest(Client &client)
@@ -165,6 +165,22 @@ int			Server::readRequest(Client &client)
 	cw.extractCommand();
 	response = cw.execute(client);
 	response_len = strlen(response.c_str());
+	std::cout << "ALL USERS	|";
+	for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); ++it)
+		std::cout << it->second.getNickname() + "; ";
+	std::cout << "|" << std::endl;
+	std::cout << response << std::endl;
+	// std::cout << "________________________________" << std::endl;
+	// std::cout << "request	: |" << tmpbuff << "|" << std::endl;
+	// std::cout << "response	: |" << response << "|" << std::endl;
+	// std::cout << "PASS		: |" << this->password << "|" << std::endl;
+	// std::cout << "NICK		: |" << client.getNickname() << "|" << std::endl;
+	// std::cout << "USER		: |" << client.getUsername() << "|" << std::endl;
+	// std::cout << "ALL USERS	: |";
+	// for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); ++it)
+	// 	std::cout << it->second.getNickname() + "; ";
+	// std::cout << std::endl;
+	// std::cout << "________________________________" << std::endl;
 	res = send(client.getSocketFd(), response.c_str(), response_len, 0);
 	return (res);
 }
