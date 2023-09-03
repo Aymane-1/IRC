@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 02:29:49 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/01 00:28:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:47:48 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ str_t	CommandWorker::pass(Client &client)
 		return (ERR_PASSWDMISMATCH(this->server->getHost(), client.getNickname()));
 	vAuth = client.getVAuth() | PASS_AUTH;
 	client.setVAuth(vAuth);
-	return (RPL_WELCOME(this->server->getHost(), client.getNickname()));
+	return ("");
 }
