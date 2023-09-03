@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 04:52:24 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 23:56:37 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ str_t	CommandWorker::nick(Client &client)
 	vAuth |= NICK_AUTH;
 	client.setVAuth(vAuth);
 	client.setNickname(tokenizer[1]);
-	return (":" + oldNick + " NICK :" + client.getNickname() + "\n\r");
+	return (":" + oldNick + " NICK :" + client.getNickname() + TRAILING);
 }
 
