@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 03:14:48 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 21:22:23 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,26 +158,13 @@ int			Server::readRequest(Client &client)
 
 	memset(tmpbuff, 0, sizeof(tmpbuff));
 	res = recv(client.getSocketFd(), tmpbuff, sizeof(tmpbuff), 0);
-	if (res < 0)
-	{
-		//TODO: Handle error case of read
-	}
-	else if (!res)
-	{
-		// TODO: Handle the case of 0 bites read
-	}
-	else
-	{
-		
-	}
-
+	if (res <= 0)
+		return (res);
 	tmpbuff[res] = 0;
-	// cw.server = this;
 	cw.setRequest(tmpbuff);
 	cw.extractCommand();
 	response = cw.execute(client);
 	response_len = strlen(response.c_str());
 	res = send(client.getSocketFd(), response.c_str(), response_len, 0);
-	// std::cout << tmpbuff;
 	return (res);
 }
