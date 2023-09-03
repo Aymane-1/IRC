@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 04:14:37 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 04:52:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ str_t	CommandWorker::nick(Client &client)
 	const str_t	forbiddenToStartWith = "# :";
 	const str_t	specialCharacheters = "[]{}\\|:";
 	std::vector<str_t>	tokenizer;
+	str_t		oldNick;
 
 	vAuth = client.getVAuth();
+	oldNick = client.getNickname();
 	if (vAuth < PASS_AUTH)
 		return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	tokenizer = Helpers::split(this->request, ' ');
@@ -51,6 +53,6 @@ str_t	CommandWorker::nick(Client &client)
 	vAuth |= NICK_AUTH;
 	client.setVAuth(vAuth);
 	client.setNickname(tokenizer[1]);
-	return (": NICK :" + client.getNickname() + "\n\r");
+	return (":" + oldNick + " NICK :" + client.getNickname() + "\n\r");
 }
 
