@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:36:00 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 01:55:26 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:33:37 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,34 @@ const int	&Client::getPort(void) const
 void		Client::setPort(const int &port)
 {
 	this->port = port;
+}
+
+const str_t	&Client::getHostname(void) const
+{
+	return (this->hostname);
+}
+
+void		Client::setHostname(const str_t &hostname)
+{
+	this->hostname = hostname;
+}
+
+const str_t	&Client::getServerName(void) const
+{
+	return (this->serverName);
+}
+
+void		Client::setServerName(const str_t &servername)
+{
+	this->serverName = servername;
+}
+
+const str_t	&Client::getRealName(void) const
+{
+	return (this->realName);
+}
+
+void		Client::setRealName(const str_t &realName)
+{
+	this->realName = realName;
 }

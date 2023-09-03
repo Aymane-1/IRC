@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:32:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/29 01:46:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 01:33:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ private:
 	int		socketFd;
 	str_t	nickname;
 	str_t	username;
+	str_t	hostname;
+	str_t	serverName;
+	str_t	realName;
 	str_t	host;
 	int		port;
 	short	vAuth;
@@ -44,6 +47,12 @@ public:
 	void		setHost(const str_t &host);
 	const int	&getPort(void) const;
 	void		setPort(const int &port);
+	const str_t	&getHostname(void) const;
+	void		setHostname(const str_t &hostname);
+	const str_t	&getServerName(void) const;
+	void		setServerName(const str_t &servername);
+	const str_t	&getRealName(void) const;
+	void		setRealName(const str_t &servername);
 
 	/* Class functionnallities */
 };
