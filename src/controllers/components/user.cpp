@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 22:49:44 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 03:57:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/03 04:12:25 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ str_t	CommandWorker::user(Client &client)
 	std::vector<str_t>	tokenizer;
 
 	vAuth = client.getVAuth();
-	if (vAuth < PASS_AUTH)
+	if (vAuth < (PASS_AUTH | NICK_AUTH))
 		return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	if (vAuth == FULL_AUTH || vAuth == (PASS_AUTH | USER_AUTH))
 		return (ERR_ALREADYREGISTERED(this->server->getHost(), client.getNickname()));
