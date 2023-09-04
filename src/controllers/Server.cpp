@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 01:10:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:20:40 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,6 @@ int			Server::readRequest(Client &client)
 	cw.extractCommand();
 	response = cw.execute(client);
 	response_len = strlen(response.c_str());
-	std::cout << "ALL USERS	|";
-	for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); ++it)
-		std::cout << it->second.getNickname() + "; ";
-	std::cout << "|" << std::endl;
-	std::cout << response << std::endl;
-	res = send(client.getSocketFd(), response.c_str(), response_len, 0);
+	send(client.getSocketFd(), response.c_str(), response_len, 0);
 	return (res);
 }
