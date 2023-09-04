@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 01:01:18 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:35:20 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ str_t	CommandWorker::execute(Client &client)
 
 	fulfill = this->routing();
 	if (!fulfill)
-		return (""); // TODO: update the return type to match the error massges to client
+		return (ERR_UNKNOWNCOMMAND(this->server->getHost(), this->getRequest())); // TODO: update the return type to match the error massges to client
 	return ((this->*fulfill)(client));
 }
 
