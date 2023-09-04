@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 23:45:12 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:10:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,6 @@ int			Server::acceptConnections(void)
 	return (newFd);
 }
 
-// const str_t	Server::welcomeMessage(const Client &client)
-// {
-// 	return (
-// 		" Welcome to 7sn IRC server"
-// 	);
-// }
-
 pollfd_t	Server::initPollFd(int fd, short event, short revent)
 {
 	pollfd_t	pfd;
@@ -170,17 +163,6 @@ int			Server::readRequest(Client &client)
 		std::cout << it->second.getNickname() + "; ";
 	std::cout << "|" << std::endl;
 	std::cout << response << std::endl;
-	// std::cout << "________________________________" << std::endl;
-	// std::cout << "request	: |" << tmpbuff << "|" << std::endl;
-	// std::cout << "response	: |" << response << "|" << std::endl;
-	// std::cout << "PASS		: |" << this->password << "|" << std::endl;
-	// std::cout << "NICK		: |" << client.getNickname() << "|" << std::endl;
-	// std::cout << "USER		: |" << client.getUsername() << "|" << std::endl;
-	// std::cout << "ALL USERS	: |";
-	// for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); ++it)
-	// 	std::cout << it->second.getNickname() + "; ";
-	// std::cout << std::endl;
-	// std::cout << "________________________________" << std::endl;
 	res = send(client.getSocketFd(), response.c_str(), response_len, 0);
 	return (res);
 }
