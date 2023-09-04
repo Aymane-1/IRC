@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/08/31 22:35:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/04 01:17:27 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	App::init(void)
 		this->server.initSocketMaster();
 		this->server.bindSocketMaster();
 		this->server.listenForConnections();
-		// this->server.getServerHost();
 		CommandWorker::storeCommands();
 	}
 	catch(const std::exception& e)
@@ -96,7 +95,7 @@ void	App::run(void)
 			if (this->server.pfds[i].revents & POLLIN)
 			{
 				res = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
-				if (res < 0)
+				if (res <= 0)
 					this->server.clean(i);
 			}
 		}
