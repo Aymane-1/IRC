@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:29:47 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 02:48:42 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/05 06:17:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ public:
 	str_t	user(Client &client);
 	str_t	privmsg(Client &client);
 	str_t	join(Client &client);
+	str_t	pong(Client &client);
 	class CommandHelper
 	{
 	private:

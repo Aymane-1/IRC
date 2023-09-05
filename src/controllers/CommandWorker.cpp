@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 02:44:51 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/05 06:34:05 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	CommandWorker::storeCommands(void)
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("USER", &CommandWorker::user));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PRIVMSG", &CommandWorker::privmsg));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("JOIN", &CommandWorker::join));
+	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PONG", &CommandWorker::pong));
 }
 
 
