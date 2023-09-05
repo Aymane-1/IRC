@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 02:32:19 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/05 05:50:41 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@
 typedef std::string	str_t;
 
 # define TRAILING "\r\n"
+# define MODE_K_PLUS "+k"
 
 /* NUMERIC REPLIES */
 # define RPL_WELCOME(server, nick)  ":" + server + " 001 " + nick + " :Welcome to a7sn IRCserver Network" + TRAILING
+# define RPL_JOIN(server, nick, user, clientHost, channel) ":" + nick + "!" + user + "@" + clientHost + " JOIN " + channel + TRAILING
+# define RPL_TOPIC(server, nickname, channel, topic) ":" + server + " 332 " + nickname + " " + channel + " :" + topic + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
@@ -40,6 +43,8 @@ typedef std::string	str_t;
 # define ERR_NICKNAMEINUSE(server, nickname) ":" + server  + " 433 " + nickname + ": Nickname already in use." + TRAILING
 # define ERR_NOTREGISTERED(server, nickname) ":" + server + " 451 " + nickname + ": You have not registered." + TRAILING
 # define ERR_UNKNOWNCOMMAND(server, request) ":" + server + " 421 " + request + " :Unknown command" + TRAILING
+# define ERR_NOSUCHCHANNEL(server, channel) ":" + server + " 403 " + channel + " :No such channel." + TRAILING
+# define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (" + MODE_K_PLUS + ") - Bad key" + TRAILING
 
 namespace Helpers
 {
