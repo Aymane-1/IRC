@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/02 23:39:59 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/05 00:40:06 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ public:
 	/* Public Class Attributes */
 	pollfd_v		pfds;
 	client_m		clients;
+	channel_m		channels;
 	/* Constructors & Destructors */
 	Server(void);
 	Server(const int &port, const str_t &password);
