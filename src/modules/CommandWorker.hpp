@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 22:29:47 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/05 06:17:44 by sel-kham         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/09/05 21:49:08 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #pragma once
 #ifndef __COMMAND_WORKER_HPP__
@@ -18,9 +20,11 @@
 # include "Client.hpp"
 # include "Command.hpp"
 # include "Server.hpp"
+# include "Channel.hpp"
 
 class Server;
 typedef std::map<const int, Client>	client_m;
+typedef std::map<const str_t, Channel>	channel_m;
 
 class CommandWorker : public Command
 {
@@ -36,6 +40,7 @@ public:
 	str_t	nick(Client &client);
 	str_t	user(Client &client);
 	str_t	privmsg(Client &client);
+	str_t	invite(Client &client);
 	str_t	join(Client &client);
 	str_t	pong(Client &client);
 	class CommandHelper
