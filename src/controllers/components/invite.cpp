@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:13:53 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/06 04:41:37 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/06 05:16:26 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ str_t	CommandWorker::invite(Client &client)
 		// CHECK IF USER IS OPERATOR + invite-only MODE
 		client_n mods = channelIter->second.getMods();
 		it =  mods.find(client.getNickname());
-		if (it == mods.end())
+		if (it == mods.end()) // && +i IS ENABELED
 			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname()));
 		// CHECK IF TARGET IS ALREADY ON CHANNEL
 		it = joinedClients.find(nickName);
@@ -50,6 +50,6 @@ str_t	CommandWorker::invite(Client &client)
 		return (RPL_INVITING(this->server->getHost(), client.getNickname(), client.getHost(), client.getUsername(), nickName, channel));
 	}
 	else
-		return (ERR_NOSUCHCHANNEL(this->server->getHost(), channel));
+		return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), channel));
 	return ("");
 }
