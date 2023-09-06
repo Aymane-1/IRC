@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/07 18:59:38 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:33:32 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ public:
 	str_t	join(Client &client);
 	str_t	pong(Client &client);
 	str_t	quit(Client &client);
+	str_t	mode(Client &client);
 	class CommandHelper
 	{
 	private:
