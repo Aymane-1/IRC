@@ -3,16 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/05 06:34:05 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/05 21:47:17 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-
-
 
 #include "../modules/CommandWorker.hpp"
 
@@ -30,6 +26,7 @@ void	CommandWorker::storeCommands(void)
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("NICK", &CommandWorker::nick));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("USER", &CommandWorker::user));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PRIVMSG", &CommandWorker::privmsg));
+	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("INVITE", &CommandWorker::invite));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("JOIN", &CommandWorker::join));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PONG", &CommandWorker::pong));
 }
@@ -72,3 +69,4 @@ client_m::iterator	CommandWorker::CommandHelper::findClientByNickName(CommandWor
 	}
 	return (it);
 }
+
