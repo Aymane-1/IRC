@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 01:42:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/06 04:49:53 by aechafii         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/09/06 05:42:46 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #pragma once
 #ifndef __GLOBALS_HPP__
@@ -37,6 +38,8 @@ typedef std::string	str_t;
 # define RPL_TOPIC(server, nickname, channel, topic) ":" + server + " 332 " + nickname + " " + channel + " :" + topic + TRAILING
 # define RPL_INVITING(server, nick , user, clientHost, targetClient, channel)  ":" + server + " 341 " + nick + "!" + user + "@" + clientHost + " " + targetClient + " " + channel + TRAILING
 # define RPL_SENDINVITE(clientNickname, clientUsername, server, targetUser, channel) ":" + clientNickname + "!" + clientUsername + "@" + server + " INVITE " + targetUser + ": " + channel + TRAILING
+# define RPL_INVITING(server, nick , user, clientHost, targetClient, channel)  ":" + server + " 341 " + nick + "!" + user + "@" + clientHost + " " + targetClient + " " + channel + TRAILING
+# define RPL_SENDINVITE(clientNickname, clientUsername, server, targetUser, channel) ":" + clientNickname + "!" + clientUsername + "@" + server + " INVITE " + targetUser + ": " + channel + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
@@ -50,6 +53,9 @@ typedef std::string	str_t;
 # define ERR_NOSUCHCHANNEL(server, nick, channel) ":" + server + " 403 " + nick + " " + channel + " :No such channel" + TRAILING
 # define ERR_NOSUCHNICK(server, nickname) ":" + server + " 401 " + nickname + " :No such nick/channel" + TRAILING
 # define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (" + MODE_K_PLUS + ") - Bad key" + TRAILING
+# define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
+# define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
+# define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING
 # define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
 # define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING
