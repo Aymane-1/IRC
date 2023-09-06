@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/05 06:10:08 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:56:22 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ str_t	CommandWorker::join(Client &client)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
 	params = this->request.substr(i, this->request.size() - 1);
 	params = Helpers::trim(params, " \n\r");
-	if (params.empty())
+	if (params.empty() || params.size() < 2)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
 	channelsList = joinParser(params);
 	response = "";
@@ -84,19 +84,19 @@ str_t	CommandWorker::join(Client &client)
 		name = it->getName();
 		if (name[0] != '#' && name[0] != '&')
 		{
-			response += ERR_NOSUCHCHANNEL(this->server->getHost(), name);
+			std::cout << name << std::endl;
+			response += ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), name);
 			continue ;
 		}
 		ch_it = allChannels.find(it->getName());
 		if (ch_it == allChannels.end())
 		{
-			allChannels.insert(std::pair<const str_t, Channel>(it->getName(), *it));
-			ch_it = allChannels.find(it->getName());
-			ch_it->second.addMod(client);
-			ch_it->second.addClient(client);
-			response += RPL_JOIN(this->server->getHost(), client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
-			response += ":" + this->server->getHost() + " MODE " + ch_it->second.getName() + " +nt" + TRAILING;
-			continue;
+			name = it->getName();
+			it->addMod(client);
+			it->addClient(client);
+			allChannels.insert(std::pair<const str_t, Channel>(name, *it));
+			response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), name);
+			response += RPL_MODE(client.getNickname(), name, "+nk");
 		}
 		else
 		{
@@ -104,17 +104,20 @@ str_t	CommandWorker::join(Client &client)
 			if (ch_key.empty())
 			{
 				ch_it->second.addClient(client);
-				response += RPL_JOIN(this->server->getHost(), client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
-				response += ":" + this->server->getHost() + " MODE " + ch_it->second.getName() + "+nt" + TRAILING;
+				response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
+				response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
+				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
+				ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())));
 			}
 			else
 			{
 				if (ch_key == it->getKey())
 				{
-					//TODO: Add client
 					ch_it->second.addClient(client);
-					response += RPL_JOIN(this->server->getHost(), client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
+					response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
+					response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
 					response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
+					ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())));
 				}
 				else
 				{
