@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+         #
+#    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/07/15 03:50:33 by sel-kham          #+#    #+#              #
-#    Updated: 2023/09/05 06:18:44 by sel-kham         ###   ########.fr        #
+#    Created: Invalid date        by                   #+#    #+#              #
+#    Updated: 2023/09/05 21:48:02 by aechafii         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 # Colrs
 RED := \033[0;31m
@@ -47,7 +48,7 @@ MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 CONTROLLERS := App Client Server Command Channel CommandWorker
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
-COMPONENTS	:= pass nick user privmsg join pong
+COMPONENTS	:= pass nick user privmsg join invite pong
 COMPONENTS	:= $(addprefix $(COMPONENTS_DIR)/, $(addsuffix .cpp, $(COMPONENTS)))
 
 SRC := $(CONTROLLERS) $(COMPONENTS)
