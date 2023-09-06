@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:13:53 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/05 05:42:01 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/06 04:41:37 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,31 @@ str_t	CommandWorker::invite(Client &client)
 	if (tokenizer.size() != 3)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
 	nickName = tokenizer[1];
-	if (CommandHelper::findClientByNickName(this, (nickName)) == this->server->clients.end())
+	client_m::iterator clientIter = CommandHelper::findClientByNickName(this, (nickName)); // SAVE TARGET USER
+	if (clientIter == this->server->clients.end())
 		return (ERR_NOSUCHNICK(this->server->getHost(), client.getNickname()));
-	// client_m::iterator clientIter = CommandHelper::findClientByNickName(this, (nickName)); // SAVE FOUND USER
 	channel = tokenizer[2];
 	if (channel.empty())
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
-	Channel ch1, ch2, ch3;
-	ch1.setName("#CHANNEL1");
-	ch2.setName("#CHANNEL5");
-	ch3.setName("#CHANNEL10");
-	this->server->channels.insert(std::pair<const str_t, Channel>("#CHANNEL1", ch1));
-	this->server->channels.insert(std::pair<const str_t, Channel>("#CHANNEL5", ch2));
-	this->server->channels.insert(std::pair<const str_t, Channel>("#CHANNEL10", ch3));
-	std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find(channel);
+	std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find(channel); // SAVE TARGET CHANNEL
 	if (channelIter->first == channel)
 	{
-		client_n clt = channelIter->second.getJoinedclients(); // CHECK if user is on channel
-		// client_m::iterator it = clt.find(clientIter->second.getNickname());
-		return (RPL_INVITING(nickName, channel));
+		client_n joinedClients = channelIter->second.getJoinedclients();
+		std::map<const str_t, Client >::iterator it = joinedClients.find(client.getNickname());
+		if (it == joinedClients.end()) // CHECK IF USER IS ON CHANNEL
+			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
+		// CHECK IF USER IS OPERATOR + invite-only MODE
+		client_n mods = channelIter->second.getMods();
+		it =  mods.find(client.getNickname());
+		if (it == mods.end())
+			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname()));
+		// CHECK IF TARGET IS ALREADY ON CHANNEL
+		it = joinedClients.find(nickName);
+		if (it != joinedClients.end())
+			return (ERR_USERONCHANNEL(this->server->getHost(), client.getNickname()));
+		std::string invitation = RPL_SENDINVITE(client.getNickname(), client.getUsername(), this->server->getHost(), nickName, channel);
+		send(clientIter->second.getSocketFd(), invitation.c_str(), invitation.length(), 0);
+		return (RPL_INVITING(this->server->getHost(), client.getNickname(), client.getHost(), client.getUsername(), nickName, channel));
 	}
 	else
 		return (ERR_NOSUCHCHANNEL(this->server->getHost(), channel));
