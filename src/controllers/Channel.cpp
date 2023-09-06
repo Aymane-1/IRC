@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/05 00:28:31 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:43:33 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Channel::Channel(void)
 {
 	this->name = "";
-	this->topic = "";
+	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
 	this->mods = client_n();
 	this->key = "";
@@ -25,7 +25,7 @@ Channel::Channel(void)
 Channel::Channel(const str_t &name)
 {
 	this->name = name;
-	this->topic = "";
+	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
 	this->mods = client_n();
 	this->key = "";
@@ -34,7 +34,7 @@ Channel::Channel(const str_t &name)
 Channel::Channel(const str_t &name, const str_t &key)
 {
 	this->name = name;
-	this->topic = "";
+	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
 	this->mods = client_n();
 	this->key = key;
@@ -112,4 +112,13 @@ void	Channel::addMod(const Client &client)
 void	Channel::removeMod(const str_t &nick)
 {
 	this->mods.erase(nick);
+}
+
+void	Channel::broadcast(const str_t &message)
+{
+	client_n::iterator	it;
+
+	it = this->joinedClients.begin();
+	for ( ; it != this->joinedClients.end(); it++)
+		send(it->second.getSocketFd(), message.c_str(), message.size(), 0);
 }

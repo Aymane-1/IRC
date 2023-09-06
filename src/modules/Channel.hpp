@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/05 00:28:03 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:43:54 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define __CHANNEL_HPP__
 
 # include <map>
+# include <sys/socket.h>
 # include "Globals.hpp"
 # include "Client.hpp"
 
@@ -25,10 +26,10 @@ class Channel
 private:
 	str_t		name;
 	str_t		topic;
-	client_n	joinedClients;
-	client_n	mods;
 	str_t		key;
 public:
+	client_n	joinedClients;
+	client_n	mods;
 	/* Constructors & Destructors */
 	Channel(void);
 	Channel(const str_t &name);
@@ -52,6 +53,7 @@ public:
 	void	removeClient(const str_t &nick);
 	void	addMod(const Client &client);
 	void	removeMod(const str_t &nick);
+	void	broadcast(const str_t &message);
 };
 
 #endif
