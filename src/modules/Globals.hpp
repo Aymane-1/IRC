@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/07 20:28:03 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:43:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,21 @@
 typedef std::string	str_t;
 
 # define TRAILING "\r\n"
-# define MODE_K_PLUS "+k"
+# define MODE_DEFAULT 0
+# define MODE_I 'i'
+# define MODE_T 't'
+# define MODE_K 'k'
+# define MODE_O 'o'
+# define MODE_L 'l'
+
+enum mode_e
+{
+	I_MODE,
+	T_MODE,
+	K_MODE,
+	O_MODE,
+	L_MODE
+};
 
 /* NUMERIC REPLIES */
 # define RPL_WELCOME(server, nick)  ":" + server + " 001 " + nick + " :Welcome to a7sn IRCserver Network" + TRAILING
@@ -52,7 +66,7 @@ typedef std::string	str_t;
 # define ERR_UNKNOWNCOMMAND(server, request) ":" + server + " 421 " + request + " :Unknown command" + TRAILING
 # define ERR_NOSUCHCHANNEL(server, nick, channel) ":" + server + " 403 " + nick + " " + channel + " :No such channel" + TRAILING
 # define ERR_NOSUCHNICK(server, nickname) ":" + server + " 401 " + nickname + " :No such nick/channel" + TRAILING
-# define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (" + MODE_K_PLUS + ") - Bad key" + TRAILING
+# define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (+" + MODE_K + ") - Bad key" + TRAILING
 # define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
 # define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING

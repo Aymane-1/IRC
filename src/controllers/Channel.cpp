@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 01:09:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:14:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Channel::Channel(void)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
+	memset(this->mods, 0, 6);
 }
 
 Channel::Channel(const str_t &name)
@@ -29,6 +30,7 @@ Channel::Channel(const str_t &name)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
+	memset(this->mods, 0, 6);
 }
 
 Channel::Channel(const str_t &name, const str_t &key)
@@ -38,6 +40,7 @@ Channel::Channel(const str_t &name, const str_t &key)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = key;
+	memset(this->mods, 0, 6);
 }
 
 Channel::~Channel(void) { }

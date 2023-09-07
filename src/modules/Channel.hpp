@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 01:09:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:14:26 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ private:
 	str_t		name;
 	str_t		topic;
 	str_t		key;
-	
+	char		mods[6];
 public:
 	client_n	joinedClients;
 	client_n	operators;
