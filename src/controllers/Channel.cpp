@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 01:14:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:50:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ const str_t	&Channel::getKey(void) const
 void		Channel::setKey(const str_t &key)
 {
     this->key = key;
+}
+
+void			Channel::setMode(void)
+{
+	
 }
 
 /* Class functionalities */
