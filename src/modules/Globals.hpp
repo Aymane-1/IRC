@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/07 20:25:59 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:28:03 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ typedef std::string	str_t;
 # define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
 # define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING
-# define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
-# define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
-# define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING
+
 
 namespace Helpers
 {
