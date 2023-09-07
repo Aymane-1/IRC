@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/07 20:43:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 21:57:06 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef std::string	str_t;
 
 # define TRAILING "\r\n"
-# define MODE_DEFAULT 0
+# define MODE_DEFAULT '0'
 # define MODE_I 'i'
 # define MODE_T 't'
 # define MODE_K 'k'
