@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/05 21:49:08 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/07 18:59:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ public:
 	str_t	invite(Client &client);
 	str_t	join(Client &client);
 	str_t	pong(Client &client);
+	str_t	quit(Client &client);
 	class CommandHelper
 	{
 	private:
