@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/06 03:43:33 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:09:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Channel::Channel(void)
 	this->name = "";
 	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
-	this->mods = client_n();
+	this->operators = client_n();
 	this->key = "";
 }
 
@@ -27,7 +27,7 @@ Channel::Channel(const str_t &name)
 	this->name = name;
 	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
-	this->mods = client_n();
+	this->operators = client_n();
 	this->key = "";
 }
 
@@ -36,7 +36,7 @@ Channel::Channel(const str_t &name, const str_t &key)
 	this->name = name;
 	this->topic = "Costumizable channel";
 	this->joinedClients = client_n();
-	this->mods = client_n();
+	this->operators = client_n();
 	this->key = key;
 }
 
@@ -73,14 +73,14 @@ void		Channel::setJoinedclients(const client_n &joinedClients)
     this->joinedClients = joinedClients;
 }
 
-const client_n	&Channel::getMods(void) const
+const client_n	&Channel::getoperators(void) const
 {
-    return (this->mods);
+    return (this->operators);
 }
 
-void		Channel::setMods(const client_n &mods)
+void		Channel::setoperators(const client_n &operators)
 {
-    this->mods = mods;
+    this->operators = operators;
 }
 
 const str_t	&Channel::getKey(void) const
@@ -106,12 +106,12 @@ void	Channel::removeClient(const str_t &nick)
 
 void	Channel::addMod(const Client &client)
 {
-	this->mods.insert(std::pair<const str_t, Client>(client.getNickname(), client));
+	this->operators.insert(std::pair<const str_t, Client>(client.getNickname(), client));
 }
 
 void	Channel::removeMod(const str_t &nick)
 {
-	this->mods.erase(nick);
+	this->operators.erase(nick);
 }
 
 void	Channel::broadcast(const str_t &message)

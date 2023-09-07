@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/06 03:43:54 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:09:36 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ private:
 	str_t		name;
 	str_t		topic;
 	str_t		key;
+	
 public:
 	client_n	joinedClients;
-	client_n	mods;
+	client_n	operators;
 	/* Constructors & Destructors */
 	Channel(void);
 	Channel(const str_t &name);
@@ -43,8 +44,8 @@ public:
 	void			setTopic(const str_t &topic);
 	const client_n	&getJoinedclients(void) const;
 	void			setJoinedclients(const client_n &topic);
-	const client_n	&getMods(void) const;
-	void			setMods(const client_n &mods);
+	const client_n	&getoperators(void) const;
+	void			setoperators(const client_n &operators);
 	const str_t		&getKey(void) const;
 	void			setKey(const str_t &key);
 
