@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/08 02:01:17 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:39:17 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ public:
 	str_t	nick(Client &client);
 	str_t	user(Client &client);
 	str_t	privmsg(Client &client);
-	str_t	invite(Client &client);
 	str_t	join(Client &client);
-	str_t	pong(Client &client);
+	str_t	invite(Client &client);
+	str_t	topic(Client &client);
 	str_t	quit(Client &client);
 	str_t	mode(Client &client);
 	str_t	bot(Client &client);
