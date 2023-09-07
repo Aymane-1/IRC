@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/04 02:41:35 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/05 05:31:30 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ str_t	CommandWorker::privmsg(Client &client)
         it_m = CommandHelper::findClientByNickName(this, (*it));
         send(it_m->second.getSocketFd(), message.c_str(), message.length() , 0);
     }
-    return ("");
+    str_t ret = "Message from " + client.getNickname() + " to " + it_m->second.getNickname() + "." + TRAILING;
+    return (ret);
 }
