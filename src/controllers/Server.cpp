@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 01:20:40 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 03:36:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* Constructors & Destructors */
 Server::Server(void) { }
 
-Server::Server(const int &port, const str_t &password): host("irc.taza7akmal3alam.com")
+Server::Server(const int &port, const str_t &password): host("irc.LKHEDMAOUI_SERVER.com")
 {
 	this->port = port;
 	this->password = password;
