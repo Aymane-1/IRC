@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 22:38:54 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:26:55 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ public:
 	void	removeClient(const str_t &nick);
 	void	addMod(const Client &client);
 	void	removeMod(const str_t &nick);
+	bool	isOperator(const str_t &nick);
+	bool	isJoined(const str_t &nick);
 	void	broadcast(const str_t &message);
 };
 
