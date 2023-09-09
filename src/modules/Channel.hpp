@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/09 15:26:55 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:38:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <map>
 # include <sys/socket.h>
+# include <sstream>
 # include "Globals.hpp"
 # include "Client.hpp"
 
@@ -28,6 +29,7 @@ private:
 	str_t		topic;
 	str_t		key;
 	char		mods[6];
+	size_t		limit;
 public:
 	client_n	joinedClients;
 	client_n	operators;
@@ -50,6 +52,8 @@ public:
 	void			setKey(const str_t &key);
 	const char		&getMode(const int &mode) const;
 	void			setMode(const char &mode, const int &index);
+	const size_t	&getLimit(void) const;
+	void			setLimit(const size_t &limit);
 
 	/* Class functionalities */
 	void	addClient(const Client &client);
