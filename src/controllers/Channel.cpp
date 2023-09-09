@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 22:39:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 15:27:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,22 @@ void	Channel::addMod(const Client &client)
 void	Channel::removeMod(const str_t &nick)
 {
 	this->operators.erase(nick);
+}
+
+bool	Channel::isOperator(const str_t &nick)
+{
+	const client_n::iterator it = this->operators.find(nick);
+	if (it != this->operators.end())
+        return (true);
+	return (false);
+}
+
+bool	Channel::isJoined(const str_t &nick)
+{
+	const client_n::iterator it = this->joinedClients.find(nick);
+	if (it != this->operators.end())
+        return (true);
+	return (false);
 }
 
 void	Channel::broadcast(const str_t &message)
