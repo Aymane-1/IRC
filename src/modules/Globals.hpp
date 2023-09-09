@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/07 20:43:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:24:02 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #pragma once
 #ifndef __GLOBALS_HPP__
@@ -45,7 +44,7 @@ enum mode_e
 };
 
 /* NUMERIC REPLIES */
-# define RPL_WELCOME(server, nick)  ":" + server + " 001 " + nick + " :Welcome to a7sn IRCserver Network" + TRAILING
+# define RPL_WELCOME(server, nick)  ":" + server + " 001 " + nick + " :Welcome to ‘LKHEDMAOUI SERVER’ !" + TRAILING
 # define RPL_JOIN(nick, user, clientHost, channel) ":" + nick + "!" + user + "@" +  clientHost  + " JOIN " + channel + TRAILING
 # define RPL_JOIN_WATCH(nick, user, host, channel) ":" + nick + "!" + user + "@" +  host + " JOIN " + channel + TRAILING
 # define RPL_MODE(nickname, channel, mode) ":" + nickname + " MODE " + channel + " " + mode + TRAILING;
@@ -69,8 +68,22 @@ enum mode_e
 # define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (+" + MODE_K + ") - Bad key" + TRAILING
 # define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
-# define ERR_CHANOPRIVSNEEDED(server, user) ":" + server + " 482 " + user + " :You're not channel operator" + TRAILING
+# define ERR_CHANOPRIVSNEEDED(server, user, channel) ":" + server + " 482 " + user + " " +  channel + " :You're not channel operator" + TRAILING
 
+/* BOT REPLIES */
+# define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
+# define RPL_INFO(server) ":" + server + " 371 val "
+# define RPL_MYINFO(server) ":" + server + " 004 "
+# define RPL_ENDOFINFO(server) ":" + server + " 374 val "
+# define RPL_HELPSTART(server ) ":" + server + " 704 val "
+# define RPL_HELPTXT(server ) ":" + server + " 705 val "
+# define RPL_ENDOFHELP(server ) ":" + server + " 706 val "
+# define RPL_QUOTE(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
+# define RPL_INSULT(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
+# define RPL_JOKE(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
+# define ERR_SUGGCOMMAND_BOT(server, nickname) ":" + server  + " 461 " + nickname + ": [BOT SUGGEST] Command takes one of these parameters: [QUOTE | INSULT | JOKE]!" + TRAILING
+# define ERR_UNKNOWNCOMMAND_BOT(server, command) ":" + server + " 421 " + command + ": Unknown command, use ‘BOT HELP’ command to see the available bot commands." + TRAILING
+# define ERR_NEEDMOREPARAMS_BOT(server, nickname) ":" + server  + " 461 " + nickname + ": Invalid number of arguments!" + TRAILING
 
 namespace Helpers
 {
