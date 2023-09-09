@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/09 16:42:01 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:19:02 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,16 @@ const char		&Channel::getMode(const int &mode) const
 void			Channel::setMode(const char &mode, const int &index)
 {
 	this->mods[index] = mode;
+}
+
+const size_t	&Channel::getLimit(void) const
+{
+	return (this->limit);
+}
+
+void			Channel::setLimit(const size_t &limit)
+{
+	this->limit = limit;
 }
 
 /* Class functionalities */
