@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   invite.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:13:53 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/07 01:09:36 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:24:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ str_t	CommandWorker::invite(Client &client)
 		client_n operators = channelIter->second.getoperators();
 		it =  operators.find(client.getNickname());
 		if (it == operators.end()) // && +i IS ENABELED
-			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname()));
+			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(), channel));
 		// CHECK IF TARGET IS ALREADY ON CHANNEL
 		it = joinedClients.find(nickName);
 		if (it != joinedClients.end())
