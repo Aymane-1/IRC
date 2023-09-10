@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/06 03:56:22 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/09 23:38:48 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ str_t	CommandWorker::join(Client &client)
 				response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
 				response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
 				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
-				ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())));
+				ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())), client.getNickname());
 			}
 			else
 			{
@@ -117,7 +117,7 @@ str_t	CommandWorker::join(Client &client)
 					response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
 					response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
 					response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
-					ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())));
+					ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())), client.getNickname());
 				}
 				else
 				{

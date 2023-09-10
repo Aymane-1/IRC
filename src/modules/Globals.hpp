@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/09 21:40:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:48:09 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ enum mode_e
 # define RPL_SENDINVITE(clientNickname, clientUsername, server, targetUser, channel) ":" + clientNickname + "!" + clientUsername + "@" + server + " INVITE " + targetUser + ": " + channel + TRAILING
 # define RPL_CLSLINK "ERROR :Closing link: (~"
 # define RPL_QUIT(nickname, server, reason) nickname + "@" + server + ") [Quit" + reason + "]" + TRAILING
+# define RPL_NOTOPIC(server, username, chann) ":" + server + " 331 " + username + " " + chann + " :No topic is set." + TRAILING
+# define RPL_TOPIC_SHOW(server, username, chann, topic, time) ":" + server + " 332 " + username + " " + chann + " " + topic + ":" + server + " 333 " + username + " " + chann + " " + username + " " + std::to_string(time) + TRAILING
+# define TOPIC_SUCCESS(nickName, userName, server, chann, topic) ":" + nickName + "!" + userName + "@" + server + " TOPIC " + chann + " :" + topic + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING

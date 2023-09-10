@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/10 01:30:24 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:47:36 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ public:
 	void	removeMod(const str_t &nick);
 	bool	isOperator(const str_t &nick);
 	bool	isJoined(const str_t &nick);
-	void	broadcast(const str_t &message);
+	void	broadcast(const str_t &message, str_t nick);
 };
 
 #endif

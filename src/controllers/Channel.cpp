@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/10 01:31:18 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:46:26 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,11 +180,15 @@ bool	Channel::isJoined(const str_t &nick)
 	return (false);
 }
 
-void	Channel::broadcast(const str_t &message)
+void	Channel::broadcast(const str_t &message, str_t nick)
 {
 	client_n::iterator	it;
 
 	it = this->joinedClients.begin();
 	for ( ; it != this->joinedClients.end(); it++)
+	{
+		if (it->second.getNickname() == nick)
+			continue;
 		send(it->second.getSocketFd(), message.c_str(), message.size(), 0);
+	}
 }

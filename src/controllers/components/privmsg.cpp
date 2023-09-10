@@ -6,53 +6,59 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/05 05:31:30 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/10 03:47:17 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../modules/CommandWorker.hpp"
-#include <sstream>
 
 str_t	CommandWorker::privmsg(Client &client)
 {
-    // size_t pos1 = req.find('#');
-    // size_t pos2 = req.find('&');
-    std::vector<std::string> v;
-    std::string nick;
-    std::string message;
-    std::string req = getRequest();
-    size_t cmd = req.find("PRIVMSG");
-    while(req[cmd] >= 'A' && req[cmd] <= 'Z')
-        cmd++;
-    req = req.substr(cmd, req.length());
-    std::istringstream ss(req);
-    while(std::getline(ss , nick , ','))
+    std::vector<str_t> error;
+    std::vector<str_t> chann;
+    std::vector<str_t> nick;
+    str_t req = (request.substr((request.find("PRIVMSG") + 7) , (request.length() - request.find("PRIVMSG"))));
+    req = Helpers::trim(req, ' ');
+    str_t mess = req.substr(req.find(' '), req.length()) + TRAILING;
+    std::vector<str_t> tok = Helpers::split(req.substr(0, req.find(' ')), ',');
+    std::vector<str_t>::iterator it = tok.begin();
+    
+    for ( ;it != tok.end(); it++)
     {
-        nick = Helpers::trim(nick, WHITESPACES);
-        if(nick.find(':') != std::string::npos)
-        {
-            message = nick.substr(nick.find(':') + 1, nick.length());
-            v.push_back(nick.substr(0 , nick.find(':')));
-        }
-        else if(nick.find(':') == std::string::npos && nick.find(' ') != std::string::npos)
-        {
-            message = nick.substr(nick.find(' ') + 1, nick.length());
-            v.push_back(nick.substr(0 , nick.find(' ')));
-        }
+        if ((*it).find('#') != std::string::npos)
+            chann.push_back(Helpers::trim((*it) , ' '));
         else
-            v.push_back(nick);
+            nick.push_back(Helpers::trim((*it) , ' '));
     }
-    message = (message + '\n');
-    client_m::iterator it_m;
-    for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); ++it) 
+    // std::cout << "PUTS : " <<   << std::endl;
+    
+    std::vector<str_t>::iterator it1 = chann.begin();
+    while(it1 != chann.end())
     {
-        (*it) = Helpers::trim((*it), WHITESPACES);
-        std::cout << (*it) << std::endl;
-        if (CommandHelper::findClientByNickName(this, (*it)) == this->server->clients.end())
-            return (ERR_NICKNAMEINUSE(this->server->getHost(), client.getNickname()));
-        it_m = CommandHelper::findClientByNickName(this, (*it));
-        send(it_m->second.getSocketFd(), message.c_str(), message.length() , 0);
+        std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find((*it1));
+        if (channelIter == this->server->channels.end())
+            return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), (*it1)));
+        client_n joinedClients = channelIter->second.getJoinedclients();
+		std::map<const str_t, Client >::iterator it = joinedClients.find(client.getNickname());
+		if (it == joinedClients.end())
+			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
+        channelIter->second.broadcast(":" + client.getNickname() + "!" + client.getUsername() + "@" + this->server->getHost() + " PRIVMSG " + (*it1) + " :" + mess + TRAILING , client.getNickname());
+        it1++;
     }
-    str_t ret = "Message from " + client.getNickname() + " to " + it_m->second.getNickname() + "." + TRAILING;
-    return (ret);
+
+    std::vector<str_t>::iterator it2 = nick.begin();
+    str_t rep;
+    while(it2 != nick.end())
+    {
+        client_m::iterator clientIter = CommandHelper::findClientByNickName(this, (*it2));
+	    if (clientIter == this->server->clients.end())
+		    return (ERR_NOSUCHNICK(this->server->getHost(), client.getNickname()));
+        // send(clientIter->second.getSocketFd(), mess.c_str(), mess.length(), 0);
+        str_t tr = (Helpers::ltrim(mess, ' ')[0] == ':') ? "" : " :";
+        rep = (":" + client.getNickname() + "!" + client.getUsername() + "@" + client.getHost() + " PRIVMSG " + (*it2) + tr  + mess + TRAILING );
+        send(clientIter->second.getSocketFd(), rep.c_str(), rep.length(), 0);
+        std::cout << rep << std::endl;
+        it2++;
+    }
+    return ("");
 }

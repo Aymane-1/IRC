@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/10 23:42:37 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:48:03 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ public:
 	str_t	topic(Client &client);
 	str_t	quit(Client &client);
 	str_t	mode(Client &client);
+	//str_t	kick(Client &client);
+
 	str_t	bot(Client &client);
 	class CommandHelper
 	{
