@@ -6,7 +6,7 @@
 #    By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/10 23:48:32 by mmeziani         ###   ########.fr        #
+#    Updated: 2023/09/10 23:51:49 by mmeziani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ MODULES := $(addprefix $(MODULES_DIR)/, $(addsuffix .hpp, $(MODULES)))
 CONTROLLERS := App Client Server Command Channel CommandWorker
 CONTROLLERS := $(addprefix $(CONTROLLERS_DIR)/, $(addsuffix .cpp, $(CONTROLLERS)))
 
-COMPONENTS	:= pass nick user privmsg join invite pong quit mode bot
+COMPONENTS	:= pass nick user privmsg join invite pong quit mode bot topic
 COMPONENTS	:= $(addprefix $(COMPONENTS_DIR)/, $(addsuffix .cpp, $(COMPONENTS)))
 
 SRC := $(CONTROLLERS) $(COMPONENTS)
