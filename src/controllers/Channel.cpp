@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/09 17:19:02 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/10 01:31:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ Channel::Channel(void)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
-	memset(this->mods, 0, 6);
+	this->setMode(MODE_DEFAULT, I_MODE);
+	this->setMode(MODE_DEFAULT, T_MODE);
+	this->setMode(MODE_DEFAULT, K_MODE);
 	this->setMode(MODE_O, O_MODE);
+	this->setMode(MODE_DEFAULT, L_MODE);
 }
 
 Channel::Channel(const str_t &name)
@@ -32,7 +35,11 @@ Channel::Channel(const str_t &name)
 	this->operators = client_n();
 	this->key = "";
 	memset(this->mods, 0, 6);
+	this->setMode(MODE_DEFAULT, I_MODE);
+	this->setMode(MODE_DEFAULT, T_MODE);
+	this->setMode(MODE_DEFAULT, K_MODE);
 	this->setMode(MODE_O, O_MODE);
+	this->setMode(MODE_DEFAULT, L_MODE);
 }
 
 Channel::Channel(const str_t &name, const str_t &key)
@@ -43,7 +50,11 @@ Channel::Channel(const str_t &name, const str_t &key)
 	this->operators = client_n();
 	this->key = key;
 	memset(this->mods, 0, 6);
+	this->setMode(MODE_DEFAULT, I_MODE);
+	this->setMode(MODE_DEFAULT, T_MODE);
+	this->setMode(MODE_DEFAULT, K_MODE);
 	this->setMode(MODE_O, O_MODE);
+	this->setMode(MODE_DEFAULT, L_MODE);
 }
 
 Channel::~Channel(void) { }
@@ -117,6 +128,19 @@ const size_t	&Channel::getLimit(void) const
 void			Channel::setLimit(const size_t &limit)
 {
 	this->limit = limit;
+}
+
+const str_t		Channel::getCurrentModes(void) const
+{
+	int		i;
+	str_t	modes;
+
+	i = -1;
+	modes = "+";
+	while (++i < 6)
+		if (this->mods[i] != '0')
+			modes += this->mods[i];
+	return (modes);
 }
 
 /* Class functionalities */

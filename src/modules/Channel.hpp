@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/09 17:38:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/10 01:30:24 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ public:
 	void			setMode(const char &mode, const int &index);
 	const size_t	&getLimit(void) const;
 	void			setLimit(const size_t &limit);
+	const str_t		getCurrentModes(void) const;
 
 	/* Class functionalities */
 	void	addClient(const Client &client);
