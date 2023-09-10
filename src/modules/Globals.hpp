@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/10 23:48:09 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/11 00:37:36 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ enum mode_e
 # define RPL_CHANNELMODEIS(server, user, channel, modestring, modeparams) ":" + server + " 324 " + user + " " + channel + " " + modestring + " " + modeparams + TRAILING
 # define ERR_USERNOTINCHANNEL(server, nickname, target, channel) ":" + server + " 441 " + nickname + " " + target + " " + channel + " :this user is not on the channel." + TRAILING
 # define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " " + message + TRAILING
-
+# define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
+# define RPL_NOWAWAY(server, nick) ":" + server + " 305 " + nick + ":You have been marked as being away" + TRAILING
 /* BOT REPLIES */
 # define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
 # define RPL_INFO(server) ":" + server + " 371 val "
@@ -87,9 +88,37 @@ enum mode_e
 # define RPL_QUOTE(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
 # define RPL_INSULT(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
 # define RPL_JOKE(server, vec) RPL_MYINFO(server) + TRAILING + RPL_MYINFO(server) + vec + TRAILING + RPL_MYINFO(server) + TRAILING
-# define ERR_SUGGCOMMAND_BOT(server, nickname) ":" + server  + " 461 " + nickname + ": [BOT SUGGEST] Command takes one of these parameters: [QUOTE | INSULT | JOKE]!" + TRAILING
+# define ERR_SUGGCOMMAND_BOT(server, nickname) ":" + server  + " 461 " + nickname + ": <BOT SUGGEST> Command takes one of these parameters: [QUOTE | INSULT | JOKE]!" + TRAILING
 # define ERR_UNKNOWNCOMMAND_BOT(server, command) ":" + server + " 421 " + command + ": Unknown command, use ‘BOT HELP’ command to see the available bot commands." + TRAILING
 # define ERR_NEEDMOREPARAMS_BOT(server, nickname) ":" + server  + " 461 " + nickname + ": Invalid number of arguments!" + TRAILING
+# define RPL_INFO_BOT(server) RPL_MYINFO(server) + TRAILING \
+	+ RPL_INFO(server) + "*************************************  LKHEDMAOUI SERVER  *******************************************" + TRAILING \
+	+ RPL_INFO(server) +  "*** --------------------------------- CORE DEVELOPERS ---------------------------------------------" + TRAILING \
+	+ RPL_INFO(server) +  "***      -     Soufiane Khamlichi  :: <https://github.com/MGS15>                                 " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     Aeymne Echafii      :: <https://github.com/Aymane-1>                               " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     Mahmoud Meziani    :: <https://github.com/7ach7ouch101>                         " + TRAILING \
+	+ RPL_INFO(server) +  "*** --------------------------------- GENERAL SERVER COMMANDS -------------------------------------" + TRAILING \
+	+ RPL_INFO(server) +  "***      -     PASS  :: Set a ‘connection password’.                                             " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     NICK  :: Set client's nickname or change the previous one.                        " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     USER  :: Specify the username and realname of a new user at the beginning of a connection.  " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     JOIN  :: Join a given channel.                                      " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     PRIVMSG :: Send private messages between users/channels.           " + TRAILING \
+	+ RPL_INFO(server) +  "*** --------------------------------- CHANNEL OP COMMANDS -----------------------------------------" + TRAILING \
+	+ RPL_INFO(server) +  "***      -     KICK    :: Eject a client from the channel .                        " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     INVITE  :: Invite a client to a channel.                            " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     TOPIC   :: Change or view the channel topic.                        " + TRAILING \
+	+ RPL_INFO(server) +  "***      -     MODE    :: Change the channel’s mode.                               " + TRAILING \
+	+ RPL_ENDOFINFO(server) + "***************************************************************************************************" + TRAILING \
+	+ RPL_MYINFO(server) + TRAILING
+	
+# define RPL_HELP_BOT(server) RPL_MYINFO(server) + TRAILING \
+	+ RPL_HELPSTART(server) + "**********************************         BOT COMMANDS        ********************************" + TRAILING \
+	+ RPL_HELPTXT(server) + "********************************************************************************" + TRAILING \
+	+ RPL_HELPTXT(server) + "***             • BOT TIME    [    NO parameters    ]:    :DISPLAY THE CURRENT TIME AND DATE.         ***" + TRAILING \
+	+ RPL_HELPTXT(server) + "***             • BOT INFO    [    NO parameters    ]:    :DISPLAY SERVER INFO.                       ***" + TRAILING \
+	+ RPL_HELPTXT(server) + "***             • BOT SUGGEST [QUOTE | INSULT | JOKE]:    :SUGGEST REQUESTED PARAMETER.      ***" + TRAILING \
+	+ RPL_ENDOFHELP(server) + "********************************************************************************" + TRAILING \
+	+ RPL_MYINFO(server) + TRAILING
 
 namespace Helpers
 {

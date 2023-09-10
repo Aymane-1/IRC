@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/10 23:48:03 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/11 00:37:44 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ public:
 	//str_t	kick(Client &client);
 
 	str_t	bot(Client &client);
+	str_t	away(Client &client);
 	class CommandHelper
 	{
 	private:

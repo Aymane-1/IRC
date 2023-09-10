@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:36:00 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 01:33:37 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/11 00:29:59 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ Client::Client(const int &fd)
 	this->nickname = str_t("");
 	this->username = str_t("");
 	this->vAuth = 0;
+	this->awayReason = str_t("");
+	this->awayState = false;
 }
 
 Client::~Client(void) { }
@@ -112,4 +114,24 @@ const str_t	&Client::getRealName(void) const
 void		Client::setRealName(const str_t &realName)
 {
 	this->realName = realName;
+}
+
+const str_t	&Client::getawayReason(void) const
+{
+	return (this->awayReason);
+}
+
+void		Client::setawayReason(const str_t &awayReason)
+{
+	this->awayReason = awayReason;
+}
+
+const bool	&Client::getawayState(void) const
+{
+	return (this->awayState);
+}
+
+void		Client::setawayState(const bool &awayState)
+{
+	this->awayState = awayState;
 }
