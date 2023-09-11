@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 02:07:32 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/11 00:12:08 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:44:05 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ str_t	CommandWorker::bot(Client &client)
 {
 	str_t				command;
 	std::vector<str_t>	tokenizer;
+	if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	if (this->request.find_first_of(' ') == str_t::npos)
 		return (ERR_UNKNOWNCOMMAND_BOT(this->server->getHost(), "."));
 	tokenizer = Helpers::split(this->request, ' ');
