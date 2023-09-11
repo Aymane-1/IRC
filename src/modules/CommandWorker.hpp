@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 00:37:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 00:42:52 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ public:
 	str_t	topic(Client &client);
 	str_t	quit(Client &client);
 	str_t	mode(Client &client);
-	//str_t	kick(Client &client);
+	str_t	kick(Client &client);
 
 	str_t	bot(Client &client);
 	str_t	away(Client &client);
