@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2023/09/11 02:04:09 by aechafii         ###   ########.fr       */
 =======
 /*   Updated: 2023/09/11 00:42:52 by mmeziani         ###   ########.fr       */
 >>>>>>> <ADD:> kick functionality
+=======
+/*   Updated: 2023/09/11 00:42:52 by mmeziani         ###   ########.fr       */
+>>>>>>> d6a0293663a747ac72933af119de511a8fabbcd2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +54,12 @@ public:
 	str_t	quit(Client &client);
 	str_t	mode(Client &client);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//str_t	kick(Client &client);
 	str_t	pong(Client &client);
 =======
+=======
+>>>>>>> d6a0293663a747ac72933af119de511a8fabbcd2
 	str_t	kick(Client &client);
 
 >>>>>>> <ADD:> kick functionality
