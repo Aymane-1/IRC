@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:35:03 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/10 22:17:09 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:44:22 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ str_t	CommandWorker::away(Client &client)
 {
 	size_t				index;
 	index = this->request.find_first_of(' ');
+	if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	if (index != str_t::npos)
 	{
 		client.setawayState(true);	
