@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:13:53 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/11 01:33:36 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:42:28 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ str_t	CommandWorker::invite(Client &client)
 	str_t				channel;
 	str_t				nickName;
 	str_t				serverResponse;
-
+	
+	if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	tokenizer = Helpers::split(this->request, ' ');
 	if (tokenizer.size() != 3)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
