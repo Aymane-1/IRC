@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/10 23:46:26 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:48:53 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Channel::Channel(void)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
+	invitedTo = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);
@@ -34,7 +35,7 @@ Channel::Channel(const str_t &name)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
-	memset(this->mods, 0, 6);
+	invitedTo = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);
@@ -49,7 +50,7 @@ Channel::Channel(const str_t &name, const str_t &key)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = key;
-	memset(this->mods, 0, 6);
+	invitedTo = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);

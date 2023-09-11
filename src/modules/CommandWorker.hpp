@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 00:37:44 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:51:13 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ public:
 	public:
 		static client_m::iterator	findClientByNickName(CommandWorker *worker, const str_t &nick);
 	};
+};
+
+struct t_need // hady zadtha ana youlam
+{
+	std::vector<str_t>	tokenizer;
+	str_t				channel;
+	str_t				modes;
+	str_t				response;
+	size_t				j;
+	channel_m::iterator	it;
+	str_t				clientNick;
+	str_t				serverHost;
+	size_t				tokLen;
+	char				sign;
 };
 
 #endif

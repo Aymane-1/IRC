@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Channel.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/10 23:47:36 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:47:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ typedef std::map<const str_t, Client > client_n;
 class Channel
 {
 private:
-	str_t		name;
-	str_t		topic;
-	str_t		key;
-	char		mods[6];
-	size_t		limit;
+	str_t				name;
+	str_t				topic;
+	str_t				key;
+	char				mods[6];
+	size_t				limit;
+	std::vector<str_t>	invitedTo;
 public:
 	client_n	joinedClients;
 	client_n	operators;
