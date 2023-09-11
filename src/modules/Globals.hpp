@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/11 02:07:37 by aechafii         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/11 03:39:30 by mmeziani         ###   ########.fr       */
+>>>>>>> <ADD:> kick functionality
 /*                                                                            */
 /* ************************************************************************** */
 

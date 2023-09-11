@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/09/11 02:04:09 by aechafii         ###   ########.fr       */
+=======
+/*   Updated: 2023/09/11 00:42:52 by mmeziani         ###   ########.fr       */
+>>>>>>> <ADD:> kick functionality
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +49,13 @@ public:
 	str_t	topic(Client &client);
 	str_t	quit(Client &client);
 	str_t	mode(Client &client);
+<<<<<<< HEAD
 	//str_t	kick(Client &client);
 	str_t	pong(Client &client);
+=======
+	str_t	kick(Client &client);
+
+>>>>>>> <ADD:> kick functionality
 	str_t	bot(Client &client);
 	str_t	away(Client &client);
 	class CommandHelper
