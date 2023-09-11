@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 02:24:20 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 03:07:36 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ str_t	CommandWorker::invite(Client &client)
 		it = joinedClients.find(nickName);
 		if (it != joinedClients.end()) // CHECK IF TARGET IS ALREADY ON CHANNEL
 			return (ERR_USERONCHANNEL(this->server->getHost(), client.getNickname()));
-		if (!channelIter->second.isInvited(nickname))
-			channelIter->second.addToInvitedClients(nickname);
+		if (!channelIter->second.isInvited(nickName))
+			channelIter->second.addToInvitedClients(nickName);
 		std::string invitation = RPL_SENDINVITE(client.getNickname(), client.getUsername(), this->server->getHost(), nickName, channel);
 		send(clientIter->second.getSocketFd(), invitation.c_str(), invitation.length(), 0);
 		return (RPL_INVITING(this->server->getHost(), client.getNickname(), client.getHost(), client.getUsername(), nickName, channel));
