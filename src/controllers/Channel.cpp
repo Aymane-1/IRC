@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 01:48:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/11 02:12:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Channel::Channel(void)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
-	invitedTo = std::vector<str_t>();
+	invitedClients = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);
@@ -35,7 +35,7 @@ Channel::Channel(const str_t &name)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = "";
-	invitedTo = std::vector<str_t>();
+	invitedClients = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);
@@ -50,7 +50,7 @@ Channel::Channel(const str_t &name, const str_t &key)
 	this->joinedClients = client_n();
 	this->operators = client_n();
 	this->key = key;
-	invitedTo = std::vector<str_t>();
+	invitedClients = std::vector<str_t>();
 	this->setMode(MODE_DEFAULT, I_MODE);
 	this->setMode(MODE_DEFAULT, T_MODE);
 	this->setMode(MODE_DEFAULT, K_MODE);
@@ -144,6 +144,16 @@ const str_t		Channel::getCurrentModes(void) const
 	return (modes);
 }
 
+const std::vector<str_t>	&Channel::getInvitedTo(void)
+{
+	return (this->invitedClients);
+}
+
+void			Channel::setInvitedTo(const std::vector<str_t> &invitedTo)
+{
+	this->invitedClients = invitedTo;
+}
+
 /* Class functionalities */
 void	Channel::addClient(const Client &client)
 {
@@ -192,4 +202,28 @@ void	Channel::broadcast(const str_t &message, str_t nick)
 			continue;
 		send(it->second.getSocketFd(), message.c_str(), message.size(), 0);
 	}
+}
+
+void	Channel::addToInvitedClients(const str_t &channel)
+{
+	this->invitedClients.push_back(channel);
+}
+
+bool	Channel::isInvited(const str_t &client)
+{
+	std::vector<str_t>::iterator	it;
+
+	it = std::find(this->invitedClients.begin(), this->invitedClients.end(), client);
+	if (it!= this->invitedClients.end())
+		return (true);
+	return (false);
+}
+
+void    Channel::removeFromInvitedClient(const str_t &client)
+{
+	std::vector<str_t>::iterator	it;
+
+	it = std::find(this->invitedClients.begin(), this->invitedClients.end(), client);
+	if (it!= this->invitedClients.end())
+		this->invitedClients.erase(it);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 01:47:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/11 02:11:02 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ private:
 	str_t				key;
 	char				mods[6];
 	size_t				limit;
-	std::vector<str_t>	invitedTo;
+	std::vector<str_t>	invitedClients;
 public:
 	client_n	joinedClients;
 	client_n	operators;
@@ -56,6 +56,8 @@ public:
 	const size_t	&getLimit(void) const;
 	void			setLimit(const size_t &limit);
 	const str_t		getCurrentModes(void) const;
+	const std::vector<str_t>	&getInvitedTo(void);
+	void			setInvitedTo(const std::vector<str_t> &invitedTo);
 
 	/* Class functionalities */
 	void	addClient(const Client &client);
@@ -65,6 +67,9 @@ public:
 	bool	isOperator(const str_t &nick);
 	bool	isJoined(const str_t &nick);
 	void	broadcast(const str_t &message, str_t nick);
+	void	addToInvitedClients(const str_t &client);
+	void    removeFromInvitedClient(const str_t &client);
+	bool	isInvited(const str_t &client);
 };
 
 #endif
