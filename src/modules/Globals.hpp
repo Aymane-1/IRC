@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 00:37:36 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 02:07:37 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ enum mode_e
 # define ERR_USERNOTINCHANNEL(server, nickname, target, channel) ":" + server + " 441 " + nickname + " " + target + " " + channel + " :this user is not on the channel." + TRAILING
 # define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " " + message + TRAILING
 # define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
-# define RPL_NOWAWAY(server, nick) ":" + server + " 305 " + nick + ":You have been marked as being away" + TRAILING
+# define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
 /* BOT REPLIES */
 # define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
 # define RPL_INFO(server) ":" + server + " 371 val "
