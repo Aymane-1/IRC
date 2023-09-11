@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:13:53 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/11 01:42:28 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 01:54:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,17 @@ str_t	CommandWorker::invite(Client &client)
 		std::map<const str_t, Client >::iterator it = joinedClients.find(client.getNickname());
 		if (it == joinedClients.end()) // CHECK IF USER IS ON CHANNEL
 			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
-		// CHECK IF USER IS OPERATOR + invite-only MODE
 		client_n operators = channelIter->second.getoperators();
 		it =  operators.find(client.getNickname());
-		if (it == operators.end() && channelIter->second.getMode(I_MODE) == MODE_I) // && +i IS ENABELED
+		if (it == operators.end() && channelIter->second.getMode(I_MODE) == MODE_I) // // CHECK IF USER IS OPERATOR + invite-only MODE
 			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(), channel));
-		// CHECK IF TARGET IS ALREADY ON CHANNEL
 		it = joinedClients.find(nickName);
-		if (it != joinedClients.end())
+		if (it != joinedClients.end()) // CHECK IF TARGET IS ALREADY ON CHANNEL
 			return (ERR_USERONCHANNEL(this->server->getHost(), client.getNickname()));
+		
 		std::string invitation = RPL_SENDINVITE(client.getNickname(), client.getUsername(), this->server->getHost(), nickName, channel);
 		send(clientIter->second.getSocketFd(), invitation.c_str(), invitation.length(), 0);
 		return (RPL_INVITING(this->server->getHost(), client.getNickname(), client.getHost(), client.getUsername(), nickName, channel));
 	}
-	else
-		return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), channel));
-	return ("");
+	return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), channel));
 }
