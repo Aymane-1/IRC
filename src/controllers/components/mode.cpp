@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 00:55:03 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 05:16:57 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@
 // }
 
 
-bool mode_i(char &oldMode, t_need c)
+bool mode_i(char &oldMode, t_need &c)
 {
 	oldMode = c.it->second.getMode(I_MODE);
 	if (oldMode == MODE_DEFAULT && c.sign == '-')
@@ -169,7 +169,7 @@ bool mode_i(char &oldMode, t_need c)
 	return false;	
 }
 
-bool t_mode_t(char &oldMode, t_need c)
+bool t_mode_t(char &oldMode, t_need &c)
 {
 	oldMode = c.it->second.getMode(T_MODE);
 	if (oldMode == MODE_DEFAULT && c.sign == '-')
@@ -183,7 +183,7 @@ bool t_mode_t(char &oldMode, t_need c)
 	return(false);
 }
 
-bool mode_k(char &oldMode, t_need c)
+bool mode_k(char &oldMode, t_need &c)
 {
 	oldMode = c.it->second.getMode(K_MODE);
 	if (oldMode == MODE_DEFAULT && c.sign == '-')
@@ -206,7 +206,7 @@ bool mode_k(char &oldMode, t_need c)
 	return false;
 }
 
-bool mode_o(char &oldMode, t_need c)
+bool mode_o(char &oldMode, t_need &c)
 {
 	oldMode = c.it->second.getMode(O_MODE);
 	if (c.j >= c.tokLen)
@@ -235,7 +235,7 @@ bool mode_o(char &oldMode, t_need c)
 	return false;
 }
 
-bool mode_l(char &oldMode, t_need c)
+bool mode_l(char &oldMode, t_need &c)
 {
 	oldMode = c.it->second.getMode(L_MODE);
 	if (oldMode == MODE_DEFAULT && c.sign == '-')
@@ -276,7 +276,7 @@ str_t	CommandWorker::mode(Client &client)
 	c.serverHost = this->server->getHost();
 	c.sign = 0;
 
-	memset(&c, 0, sizeof(t_need));
+	// memset(&c, 0, sizeof(t_need));
 	c.tokenizer = Helpers::split(this->request, ' ');
 	if (c.tokenizer.size() < 2)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
@@ -324,7 +324,8 @@ str_t	CommandWorker::mode(Client &client)
 						continue;
 					break;
 				default:
-					continue;
+					response += ERR_UNKNOWNMODE(c.serverHost, c.clientNick, c.channel, mode[i], "Invalid channel user limit (non-numeric characters)");
+					continue ;
 			}
 		}
 		c.j++;
