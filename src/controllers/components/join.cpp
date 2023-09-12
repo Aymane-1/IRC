@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/09 23:38:48 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/12 04:11:37 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ str_t	CommandWorker::join(Client &client)
 	i = this->request.find_first_of(" ");
 	if (i == str_t::npos)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
-	params = this->request.substr(i, this->request.size() - 1);
+	params = this->request.substr(i, this->request.size());
 	params = Helpers::trim(params, " \n\r");
 	if (params.empty() || params.size() < 2)
 		return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
@@ -77,7 +77,6 @@ str_t	CommandWorker::join(Client &client)
 	response = "";
 	for (std::vector<Channel>::iterator it = channelsList.begin(); it != channelsList.end(); it++)
 	{
-		channel_m::iterator	ch_it;
 		client_m::iterator	c_it;
 		str_t				name;
 
@@ -88,7 +87,7 @@ str_t	CommandWorker::join(Client &client)
 			response += ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), name);
 			continue ;
 		}
-		ch_it = allChannels.find(it->getName());
+		channel_m::iterator	ch_it = allChannels.find(it->getName());
 		if (ch_it == allChannels.end())
 		{
 			name = it->getName();
@@ -96,34 +95,38 @@ str_t	CommandWorker::join(Client &client)
 			it->addClient(client);
 			allChannels.insert(std::pair<const str_t, Channel>(name, *it));
 			response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), name);
-			response += RPL_MODE(client.getNickname(), name, "+nk");
+			// response += RPL_MODE(client.getNickname(), name, it->getCurrentModes());
+			response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
+			response += RPL_NAMREPLY(this->server->getHost(), client.getNickname(), it->getName(), it->getAllUsers());
+			response += RPL_ENDOFNAMES(this->server->getHost(), client.getNickname(), it->getName());
 		}
 		else
 		{
+			const char	isI = ch_it->second.getMode(I_MODE);
+			if (isI == MODE_I)
+			{
+				if (ch_it->second.isInvited(client.getNickname()))
+				{
+					response += ERR_INVITEONLYCHAN(this->server->getHost(), client.getNickname(), ch_it->second.getName());
+					continue ;
+				}
+			}
 			str_t	ch_key = ch_it->second.getKey();
-			if (ch_key.empty())
+			if (ch_key == it->getKey())
 			{
 				ch_it->second.addClient(client);
 				response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
-				response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
-				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
-				ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())), client.getNickname());
+				response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
+				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getTopic());
+				response += RPL_NAMREPLY(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getAllUsers());
+				response += RPL_ENDOFNAMES(this->server->getHost(), client.getNickname(), ch_it->second.getName());
+				ch_it->second.broadcast(
+					str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())) + 
+					RPL_NAMREPLY(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getAllUsers()) + 
+					RPL_ENDOFNAMES(this->server->getHost(), client.getNickname(), ch_it->second.getName()), client.getNickname());
 			}
 			else
-			{
-				if (ch_key == it->getKey())
-				{
-					ch_it->second.addClient(client);
-					response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
-					response += RPL_MODE(client.getNickname(), ch_it->second.getName(), "+n");
-					response += RPL_TOPIC(this->server->getHost(), client.getNickname(), it->getName(), ch_it->second.getTopic());
-					ch_it->second.broadcast(str_t(RPL_JOIN_WATCH(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName())), client.getNickname());
-				}
-				else
-				{
-					response += ERR_BADCHANNELKEY(this->server->getHost(), client.getNickname(), ch_it->second.getName());
-				}
-			}
+				response += ERR_BADCHANNELKEY(this->server->getHost(), client.getNickname(), ch_it->second.getName());
 		}
 	}
     return (response);
