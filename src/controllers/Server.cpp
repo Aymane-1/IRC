@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/09 03:36:38 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/12 03:02:47 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,18 @@ void		Server::integrateNewConnect(Client &client)
 
 void		Server::clean(const int &index)
 {
+	client_m::iterator	it = this->clients.find(index);
+	str_t	nickname = "";
+
+	if (it != this->clients.end())
+	{
+		nickname = it->second.getNickname();
+		for (channel_m::iterator it2 = this->channels.begin(); it2 != this->channels.end(); it2++)
+		{
+			it2->second.removeClient(nickname);
+			it2->second.removeMod(nickname);
+		}
+	}
 	close(this->pfds[index].fd);
 	this->clients.erase(this->pfds[index].fd);
 	this->pfds.erase(pfds.begin() + index, pfds.begin() + index);
