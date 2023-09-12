@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 05:16:57 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 05:50:03 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,9 +281,9 @@ str_t	CommandWorker::mode(Client &client)
 	if (c.tokenizer.size() < 2)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
 	c.channel = c.tokenizer[1];
+	c.it = this->server->channels.find(c.channel);
 	if (c.tokenizer.size() == 2)
 		return (RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "")); //TODO: LIST CHANNEL c.MODES
-	c.it = this->server->channels.find(c.channel);
 	if (c.it == this->server->channels.end())
 		return (ERR_NOSUCHCHANNEL(c.serverHost, c.clientNick, c.channel));
 	if (!c.it->second.isOperator(c.clientNick))
