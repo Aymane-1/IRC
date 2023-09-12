@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 02:04:09 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:56:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ public:
 	static std::map<const str_t, CommandWorker::functionallity> allCommands;
 	static void	storeCommands(void);
 	str_t	(CommandWorker::*routing(void)) (Client &client);
-	str_t	execute(Client &client); // TODO: update the return type to match the error massges to client
+	str_t	execute(Client &client);
 	str_t	pass(Client &client);
 	str_t	nick(Client &client);
 	str_t	user(Client &client);

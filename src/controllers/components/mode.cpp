@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 22:04:28 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:57:09 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // 		return (ERR_NEEDMOREPARAMS(serverHost, clientNick));
 // 	channel = tokenizer[1];
 // 	if (tokenizer.size() == 2)
-// 		return (RPL_CHANNELMODEIS(serverHost, clientNick, channel, it->second.getCurrentModes(), "")); //TODO: LIST CHANNEL MODES
+// 		return (RPL_CHANNELMODEIS(serverHost, clientNick, channel, it->second.getCurrentModes(), ""));
 // 	it = this->server->channels.find(channel);
 // 	if (it == this->server->channels.end())
 // 		return (ERR_NOSUCHCHANNEL(serverHost, clientNick, channel));
@@ -276,14 +276,13 @@ str_t	CommandWorker::mode(Client &client)
 	c.serverHost = this->server->getHost();
 	c.sign = 0;
 
-	// memset(&c, 0, sizeof(t_need));
 	c.tokenizer = Helpers::split(this->request, ' ');
 	if (c.tokenizer.size() < 2)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
 	c.channel = c.tokenizer[1];
 	c.it = this->server->channels.find(c.channel);
 	if (c.tokenizer.size() == 2)
-		return (RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "")); //TODO: LIST CHANNEL c.MODES
+		return (RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), ""));
 	if (c.it == this->server->channels.end())
 		return (ERR_NOSUCHCHANNEL(c.serverHost, c.clientNick, c.channel));
 	if (!c.it->second.isOperator(c.clientNick))

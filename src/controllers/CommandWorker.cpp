@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 02:04:21 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:57:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	CommandWorker::storeCommands(void)
 }
 
 
-str_t	(CommandWorker::*CommandWorker::routing(void)) (Client &client) // TODO: Update the function arguments later so it matches the type
+str_t	(CommandWorker::*CommandWorker::routing(void)) (Client &client)
 {
-	str_t	(CommandWorker::*fulfill) (Client &client);  // TODO: Update the function arguments later so it matches the type
+	str_t	(CommandWorker::*fulfill) (Client &client);
 	std::map<const str_t, functionallity>::iterator	it;
 
-	it = CommandWorker::allCommands.find(this->command); // TODO: need access to this element
+	it = CommandWorker::allCommands.find(this->command);
 	fulfill = NULL;
 	if (it != CommandWorker::allCommands.end())
 		fulfill = it->second;
@@ -55,7 +55,7 @@ str_t	CommandWorker::execute(Client &client)
 
 	fulfill = this->routing();
 	if (!fulfill)
-		return (ERR_UNKNOWNCOMMAND(this->server->getHost(), this->getRequest())); // TODO: update the return type to match the error massges to client
+		return (ERR_UNKNOWNCOMMAND(this->server->getHost(), this->getRequest()));
 	return ((this->*fulfill)(client));
 }
 
