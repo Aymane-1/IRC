@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 05:50:03 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/12 22:04:28 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -330,7 +330,7 @@ str_t	CommandWorker::mode(Client &client)
 		}
 		c.j++;
 	}
-	c.response += RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "zapi");
+	c.response += RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "");
 	return (c.response);
 }
 	
