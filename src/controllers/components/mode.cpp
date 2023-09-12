@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/10 23:56:50 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 00:55:03 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,7 @@ str_t	CommandWorker::mode(Client &client)
 	c.serverHost = this->server->getHost();
 	c.sign = 0;
 
+	memset(&c, 0, sizeof(t_need));
 	c.tokenizer = Helpers::split(this->request, ' ');
 	if (c.tokenizer.size() < 2)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
@@ -322,11 +323,13 @@ str_t	CommandWorker::mode(Client &client)
 					if(mode_l(oldMode, c))
 						continue;
 					break;
+				default:
+					continue;
 			}
 		}
 		c.j++;
 	}
-	c.response += RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "tmp 1");
+	c.response += RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "zapi");
 	return (c.response);
 }
 	
