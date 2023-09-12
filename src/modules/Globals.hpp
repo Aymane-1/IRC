@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 03:49:18 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 05:37:38 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ enum mode_e
 # define ERR_CHANOPRIVSNEEDED(server, user, channel) ":" + server + " 482 " + user + " " +  channel + " :You're not channel operator" + TRAILING
 # define RPL_CHANNELMODEIS(server, user, channel, modestring, modeparams) ":" + server + " 324 " + user + " " + channel + " " + modestring + " " + modeparams + TRAILING
 # define ERR_USERNOTINCHANNEL(server, nickname, target, channel) ":" + server + " 441 " + nickname + " " + target + " " + channel + " :this user is not on the channel." + TRAILING
-# define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " " + message + TRAILING
+# define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " :" + message + TRAILING
 # define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
 # define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
 # define ERR_INVITEONLYCHAN(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + " :Cannot join channel (+i)" + TRAILING
