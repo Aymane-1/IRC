@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   join.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/12 05:13:53 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 05:59:07 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ str_t	CommandWorker::join(Client &client)
 			allChannels.insert(std::pair<const str_t, Channel>(name, *it));
 			response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), name);
 			response += RPL_MODE(client.getNickname(), name, it->getCurrentModes());
-			response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
+			// response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
 			response += RPL_NAMREPLY(this->server->getHost(), client.getNickname(), it->getName(), it->getAllUsers());
 			response += RPL_ENDOFNAMES(this->server->getHost(), client.getNickname(), it->getName());
 		}
@@ -116,7 +116,7 @@ str_t	CommandWorker::join(Client &client)
 			{
 				ch_it->second.addClient(client);
 				response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
-				// response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
+				response += RPL_CHANNELMODEIS(this->server->getHost(), client.getNickname(), it->getName(), it->getCurrentModes(), "");
 				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getTopic());
 				response += RPL_NAMREPLY(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getAllUsers());
 				response += RPL_ENDOFNAMES(this->server->getHost(), client.getNickname(), ch_it->second.getName());
