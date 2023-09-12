@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 02:12:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/12 02:04:15 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ const str_t		Channel::getCurrentModes(void) const
 
 	i = -1;
 	modes = "+";
-	while (++i < 6)
-		if (this->mods[i] != '0')
+	while (++i < 5)
+		if (this->mods[i] != MODE_DEFAULT)
 			modes += this->mods[i];
 	return (modes);
 }
@@ -186,7 +186,7 @@ bool	Channel::isOperator(const str_t &nick)
 bool	Channel::isJoined(const str_t &nick)
 {
 	const client_n::iterator it = this->joinedClients.find(nick);
-	if (it != this->operators.end())
+	if (it != this->joinedClients.end())
         return (true);
 	return (false);
 }
@@ -226,4 +226,21 @@ void    Channel::removeFromInvitedClient(const str_t &client)
 	it = std::find(this->invitedClients.begin(), this->invitedClients.end(), client);
 	if (it!= this->invitedClients.end())
 		this->invitedClients.erase(it);
+}
+
+const str_t	Channel::getAllUsers(void)
+{
+	str_t	users;
+
+	users = "";
+	for (client_n::iterator it = this->joinedClients.begin(); it != this->joinedClients.end(); it++)
+	{
+		if (this->operators.find(it->second.getNickname()) != this->operators.end())
+			users += "@" + it->second.getNickname();
+		else
+			users += it->second.getNickname();
+		users += " ";
+	}
+	users = users.substr(0, users.size() - 1);
+	return (users);
 }
