@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/11 02:07:37 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/11 03:49:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ enum mode_e
 # define RPL_NOTOPIC(server, username, chann) ":" + server + " 331 " + username + " " + chann + " :No topic is set." + TRAILING
 # define RPL_TOPIC_SHOW(server, username, chann, topic, time) ":" + server + " 332 " + username + " " + chann + " " + topic + ":" + server + " 333 " + username + " " + chann + " " + username + " " + std::to_string(time) + TRAILING
 # define TOPIC_SUCCESS(nickName, userName, server, chann, topic) ":" + nickName + "!" + userName + "@" + server + " TOPIC " + chann + " :" + topic + TRAILING
+# define RPL_TOPICWHOTIME(server, nickname, channel, time) ":" + server + " 333 " + nickname + " " + channel + " " + nickname + " " + std::to_string(time) + TRAILING
+# define RPL_NAMREPLY(server, nickname, channel, members) ":" + server + " 353 " + nickname + " = " + channel + " :" + members + TRAILING
+# define RPL_ENDOFNAMES(server, nickname, channel) ":" + server + " 366 " + nickname + " " + channel + " ::End of /NAMES list." + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
@@ -77,6 +80,7 @@ enum mode_e
 # define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " " + message + TRAILING
 # define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
 # define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
+# define ERR_INVITEONLYCHAN(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + " :Cannot join channel (+i)" + TRAILING
 /* BOT REPLIES */
 # define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
 # define RPL_INFO(server) ":" + server + " 371 val "
