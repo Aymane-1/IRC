@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/13 02:14:13 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/13 03:24:08 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ str_t	CommandWorker::privmsg(Client &client)
         std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find((*it1));
         if (channelIter == this->server->channels.end())
             return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), (*it1)));
-		if (channelIter->second.isJoined(client.getNickname()))
+		if (!channelIter->second.isJoined(client.getNickname()))
 			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
         channelIter->second.broadcast(":" + client.getNickname() + "!" + client.getUsername() + "@" + this->server->getHost() + " PRIVMSG " + (*it1) + " :" + mess + TRAILING , client.getNickname());
         it1++;
