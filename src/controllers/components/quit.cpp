@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 20:32:15 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/07 20:21:30 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/13 06:03:35 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ str_t	CommandWorker::quit(Client &client)
 		reason = this->request.substr(index, this->request.length());
 	str_t	serverResponse = RPL_CLSLINK;
 	send(client.getSocketFd(), serverResponse.c_str(), serverResponse.length(), 0);
-	this->server->clean(client.getSocketFd());
+	// this->server->clean(client.getSocketFd());
 	return (RPL_QUIT(client.getNickname(), this->server->getHost(), reason));
 }
