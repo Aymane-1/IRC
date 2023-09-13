@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 20:32:15 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/14 00:34:58 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:35:25 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ str_t	CommandWorker::quit(Client &client)
 	else
 		serverResponse = RPL_QUIT(RPL_CLSLINK, client.getNickname(), this->server->getHost(), "Quit: " + reason);
 	send(client.getSocketFd(), serverResponse.c_str(), serverResponse.length(), 0);
-	this->server->clean(client.getSocketFd());
-	return ("");
+	return ("QUIT");
 }
