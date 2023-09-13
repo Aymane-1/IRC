@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/13 23:51:32 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:33:22 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ enum mode_e
 # define RPL_INVITING(server, nick , user, clientHost, targetClient, channel)  ":" + server + " 341 " + nick + "!" + user + "@" + clientHost + " " + targetClient + " " + channel + TRAILING
 # define RPL_SENDINVITE(clientNickname, clientUsername, server, targetUser, channel) ":" + clientNickname + "!" + clientUsername + "@" + server + " INVITE " + targetUser + ": " + channel + TRAILING
 # define RPL_CLSLINK "ERROR :Closing link: (~"
-# define RPL_QUIT(nickname, server, reason) nickname + "@" + server + ") [Quit" + reason + "]" + TRAILING
+# define RPL_QUIT(serverRes, nickname, server, reason) serverRes + nickname + "@" + server + ") [" + reason + "]" + TRAILING
 # define RPL_NOTOPIC(server, username, chann) ":" + server + " 331 " + username + " " + chann + " :No topic is set." + TRAILING
 # define RPL_TOPIC_SHOW(server, username, chann, topic, time) ":" + server + " 332 " + username + " " + chann + " " + topic + ":" + server + " 333 " + username + " " + chann + " " + username + " " + std::to_string(time) + TRAILING
 # define TOPIC_SUCCESS(nickName, userName, server, chann, topic) ":" + nickName + "!" + userName + "@" + server + " TOPIC " + chann + " :" + topic + TRAILING
