@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 06:09:11 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:26:33 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,11 @@ int			Server::readRequest(Client &client)
 		cw.setRequest(client.getMessage());
 		cw.extractCommand();
 		response = cw.execute(client);
+		if (response == "QUIT")
+		{
+			client.setMessage("");
+			return (-1000);
+		}
 		send(client.getSocketFd(), response.c_str(), response.size(), 0);
 		client.setMessage("");
 	}
