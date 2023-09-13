@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/04 01:17:27 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 05:58:58 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,15 @@ void	App::run(void)
 		if (res < 0)
 			throw std::runtime_error("poll() failed");
 		if (this->server.pfds[0].revents & POLLIN)
-		{
-			res = this->server.acceptConnections();
-			if (res < 0)
-				continue ;
-		}
-		for (size_t i = 1; i < this->server.pfds.size(); i++)
+			this->server.acceptConnections();
+		for (size_t i = 1; i < this->server.pfds.size() && res; i++)
 		{
 			if (this->server.pfds[i].revents & POLLIN)
 			{
 				res = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
 				if (res <= 0)
-					this->server.clean(i);
+					this->server.clean(i, this->server.pfds[i].fd);
+				res--;
 			}
 		}
 	}
