@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 02:04:15 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:05:21 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,4 +243,10 @@ const str_t	Channel::getAllUsers(void)
 	}
 	users = users.substr(0, users.size() - 1);
 	return (users);
+}
+
+client_n::iterator	Channel::getClientByNickname(const str_t &nickname)
+{
+	const client_n::iterator it = this->joinedClients.find(nickname);
+	return (it);
 }

@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:11 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 04:02:12 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:05:17 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ public:
 	void	addToInvitedClients(const str_t &client);
 	void    removeFromInvitedClient(const str_t &client);
 	bool	isInvited(const str_t &client);
+	client_n::iterator	getClientByNickname(const str_t &nickname);
 	const str_t	getAllUsers(void);
 };
 
