@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 01:45:02 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/11 05:26:03 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/13 00:32:19 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,16 @@ str_t	CommandWorker::kick(Client &client)
     if (channelIter == this->server->channels.end())
         return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), (chann)));
     
-    client_n joinedClients = channelIter->second.getJoinedclients();
-    std::map<const str_t, Client >::iterator it = joinedClients.find(client.getNickname());
-    if (it == joinedClients.end())
+    if (!channelIter->second.isJoined(client.getNickname()))
         return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
+
     for (; itok != tok.end() ; itok++)
     {
-        std::map<const str_t, Client >::iterator it = joinedClients.find((*itok));
-        if (it == joinedClients.end())
+        if (!channelIter->second.isJoined((*itok)))
             channelIter->second.broadcast(ERR_USERNOTINCHANNEL(this->server->getHost(), client.getNickname(), (*itok), chann), "");
         else
         {
-            client_n operators = channelIter->second.getoperators();
-            it =  operators.find(client.getNickname());
-            if (it == operators.end())
+            if (!channelIter->second.isOperator((*itok)))
                 channelIter->second.broadcast(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(), ""), "");
             else
             {

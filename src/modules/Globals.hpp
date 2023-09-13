@@ -5,16 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2023/09/11 02:07:37 by aechafii         ###   ########.fr       */
-=======
-/*   Updated: 2023/09/11 03:39:30 by mmeziani         ###   ########.fr       */
->>>>>>> <ADD:> kick functionality
-=======
-/*   Updated: 2023/09/11 03:39:30 by mmeziani         ###   ########.fr       */
->>>>>>> d6a0293663a747ac72933af119de511a8fabbcd2
+/*   Created: 2023/09/13 00:44:47 by mmeziani          #+#    #+#             */
+/*   Updated: 2023/09/13 00:44:52 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
