@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 05:58:58 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:24:45 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ void	App::run(void)
 		{
 			if (this->server.pfds[i].revents & POLLIN)
 			{
-				res = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
-				if (res <= 0)
+				int	requestResult = 0;
+				requestResult = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
+				if (requestResult <= 0)
 					this->server.clean(i, this->server.pfds[i].fd);
 				res--;
 			}
