@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/12 22:24:47 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:28:19 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ str_t	CommandWorker::join(Client &client)
 		}
 		else
 		{
-			const char	isI = ch_it->second.getMode(I_MODE);
+			char	isI = ch_it->second.getMode(I_MODE);
 			if (isI == MODE_I)
 			{
 				if (!ch_it->second.isInvited(client.getNickname()))
@@ -110,6 +110,15 @@ str_t	CommandWorker::join(Client &client)
 					continue ;
 				}
 				ch_it->second.removeFromInvitedClient(client.getNickname());
+			}
+			isI = ch_it->second.getMode(L_MODE);
+			if (isI == MODE_L)
+			{
+				if (ch_it->second.getJoinedclients().size() >= ch_it->second.getLimit())
+				{
+					response += ERR_CHANNELISFULL(this->server->getHost(), client.getNickname(), ch_it->second.getName());
+					continue ;
+				}
 			}
 			str_t	ch_key = ch_it->second.getKey();
 			if (ch_key == it->getKey())

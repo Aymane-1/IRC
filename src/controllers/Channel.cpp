@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 22:17:08 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 22:05:21 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:37:18 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,10 @@ const size_t	&Channel::getLimit(void) const
 
 void			Channel::setLimit(const size_t &limit)
 {
-	this->limit = limit;
+	if (limit < 1)
+		this->limit = 1;
+	else
+		this->limit = limit;
 }
 
 const str_t		Channel::getCurrentModes(void) const

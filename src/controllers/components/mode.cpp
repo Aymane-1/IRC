@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 22:06:14 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:37:56 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ bool mode_i(char &oldMode, t_need &c)
 		c.it->second.setMode(MODE_DEFAULT, I_MODE);
 	else
 		c.it->second.setMode(MODE_I, I_MODE);
-	return false;	
+	return true;
 }
 
 bool t_mode_t(char &oldMode, t_need &c)
@@ -253,6 +253,7 @@ bool mode_l(char &oldMode, t_need &c)
 	{
 		c.it->second.setLimit(-1);
 		c.it->second.setMode(MODE_DEFAULT, L_MODE);
+		return true;
 	}
 	else
 	{
@@ -263,7 +264,7 @@ bool mode_l(char &oldMode, t_need &c)
 		}
 		if (c.tokenizer[c.j].find_first_not_of("0123456789") != str_t::npos)
 		{
-			c.response += ERR_UNKNOWNMODE(c.serverHost, c.clientNick, c.channel, MODE_L, "Invalid channel user limit (non-numeric characters)");
+			c.response += ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick);
 			return true;
 		}
 		std::stringstream sstream(c.tokenizer[c.j]);
@@ -332,13 +333,13 @@ str_t	CommandWorker::mode(Client &client)
 						continue;
 					break;
 				default:
-					response += ERR_UNKNOWNMODE(c.serverHost, c.clientNick, c.channel, mode[i], "Invalid channel user limit (non-numeric characters)");
+					response += ERR_UNKNOWNMODE(c.serverHost, c.clientNick, c.channel, c.sign + c.modes[i], "Invalid channel mode.");
 					continue ;
 			}
 		}
 		c.j++;
 	}
-	c.response += RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), "");
+	c.it->second.broadcast(RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), ""), "");
 	return (c.response);
 }
 	
