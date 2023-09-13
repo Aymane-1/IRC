@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 20:32:15 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/13 06:03:35 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:08:55 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 str_t	CommandWorker::quit(Client &client)
 {
 	str_t	reason = "";
+	str_t	serverResponse = "";
 	size_t	index = 0;
 	index = this->request.find_first_of(" ");
 	if (index != str_t::npos)
-		reason = this->request.substr(index, this->request.length());
-	str_t	serverResponse = RPL_CLSLINK;
+		reason = this->request.substr(index + 1, this->request.length());
+	if (reason.empty())
+		serverResponse = RPL_QUIT(RPL_CLSLINK, client.getNickname(), this->server->getHost(), "Client exited");
+	else
+		serverResponse = RPL_QUIT(RPL_CLSLINK, client.getNickname(), this->server->getHost(), "Quit: " + reason);
 	send(client.getSocketFd(), serverResponse.c_str(), serverResponse.length(), 0);
 	// this->server->clean(client.getSocketFd());
 	return (RPL_QUIT(client.getNickname(), this->server->getHost(), reason));
