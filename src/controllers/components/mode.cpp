@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 22:57:09 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:06:14 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,8 @@ bool mode_k(char &oldMode, t_need &c)
 
 bool mode_o(char &oldMode, t_need &c)
 {
+	int	fd;
+	str_t	tmpResponse;
 	oldMode = c.it->second.getMode(O_MODE);
 	if (c.j >= c.tokLen)
 	{
@@ -231,7 +233,14 @@ bool mode_o(char &oldMode, t_need &c)
 		}
 		c.it->second.addMod(c.it->second.joinedClients.find(c.tokenizer[c.j])->second);
 		c.it->second.setMode(MODE_O, O_MODE);
+		tmpResponse = RPL_YOUREOPER(c.serverHost, c.clientNick, c.tokenizer[c.j], c.channel);
+		fd = c.it->second.getClientByNickname(c.tokenizer[c.j])->second.getSocketFd();
+		send(fd, tmpResponse.c_str(), tmpResponse.size(), 0);
 	}
+	c.it->second.broadcast(
+		RPL_NAMREPLY(c.serverHost, c.clientNick, c.channel, c.it->second.getAllUsers()) +
+		RPL_ENDOFNAMES(c.serverHost, c.clientNick, c.channel), ""
+	);
 	return false;
 }
 
@@ -315,7 +324,7 @@ str_t	CommandWorker::mode(Client &client)
 						continue;
 					break;
 				case (MODE_O):
-					if(mode_k(oldMode, c))
+					if(mode_o(oldMode, c))
 						continue;
 					break;
 				case(MODE_L):

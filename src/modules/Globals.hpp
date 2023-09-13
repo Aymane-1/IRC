@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/12 05:37:38 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:56:21 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ enum mode_e
 # define RPL_TOPICWHOTIME(server, nickname, channel, time) ":" + server + " 333 " + nickname + " " + channel + " " + nickname + " " + std::to_string(time) + TRAILING
 # define RPL_NAMREPLY(server, nickname, channel, members) ":" + server + " 353 " + nickname + " = " + channel + " :" + members + TRAILING
 # define RPL_ENDOFNAMES(server, nickname, channel) ":" + server + " 366 " + nickname + " " + channel + " ::End of /NAMES list." + TRAILING
+# define RPL_YOUREOPER(server, nickname, targetNick, channel) ":" + server + " 381 " + nickname + " " + targetNick + " " + channel + " :You are now the channel operator." + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
@@ -81,6 +82,7 @@ enum mode_e
 # define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
 # define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
 # define ERR_INVITEONLYCHAN(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + " :Cannot join channel (+i)" + TRAILING
+# define ERR_NOPRIVILEGES(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + ":Permission Denied - You're not an operator" + TRAILING
 /* BOT REPLIES */
 # define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
 # define RPL_INFO(server) ":" + server + " 371 val "
