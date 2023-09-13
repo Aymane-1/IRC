@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/07 01:47:48 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/13 04:20:44 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ public:
 	pollfd_t	initPollFd(int fd, short event, short revent);
 	int			readRequest(Client &client);
 	void		integrateNewConnect(Client &client);
-	void		clean(const int &index);
+	void		clean(const int &index, const int &fd);
 };
 
 #endif

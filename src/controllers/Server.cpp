@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 06:02:49 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/13 06:09:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,9 +134,9 @@ void		Server::integrateNewConnect(Client &client)
 	this->clients.insert(std::pair<const int, Client>(client.getSocketFd(), client));
 }
 
-void		Server::clean(const int &index)
+void		Server::clean(const int &index, const int &fd)
 {
-	client_m::iterator	it = this->clients.find(index);
+	client_m::iterator	it = this->clients.find(fd);
 	str_t	nickname = "";
 
 	if (it != this->clients.end())
@@ -148,28 +148,31 @@ void		Server::clean(const int &index)
 			it2->second.removeMod(nickname);
 		}
 	}
-	close(this->pfds[index].fd);
-	this->clients.erase(this->pfds[index].fd);
+	close(fd);
+	this->clients.erase(fd);
 	this->pfds.erase(pfds.begin() + index, pfds.begin() + index);
 }
 
 int			Server::readRequest(Client &client)
 {
-	char	tmpbuff[1024];
 	CommandWorker	cw = CommandWorker(this);
-	int	res;
+	int	res = 0;
 	str_t	response;
-	size_t	response_len;
+	char	tmpbuff[1024];
 
 	memset(tmpbuff, 0, sizeof(tmpbuff));
 	res = recv(client.getSocketFd(), tmpbuff, sizeof(tmpbuff), 0);
+	client.appendToMessage(tmpbuff);
 	if (res <= 0)
 		return (res);
 	tmpbuff[res] = 0;
-	cw.setRequest(tmpbuff);
-	cw.extractCommand();
-	response = cw.execute(client);
-	response_len = strlen(response.c_str());
-	send(client.getSocketFd(), response.c_str(), response_len, 0);
+	if (client.getMessage().find(TRAILING) != str_t::npos)
+	{	
+		cw.setRequest(client.getMessage());
+		cw.extractCommand();
+		response = cw.execute(client);
+		send(client.getSocketFd(), response.c_str(), response.size(), 0);
+		client.setMessage("");
+	}
 	return (res);
 }
