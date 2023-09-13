@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Client.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 03:36:00 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 00:29:59 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/13 06:02:50 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../modules/Client.hpp"
 
 /* Constructors & Destructors */
-Client::Client(const int &fd)
+Client::Client(const int &fd) : message("")
 {
 	this->socketFd = fd;
 	this->nickname = str_t("");
@@ -134,4 +134,19 @@ const bool	&Client::getawayState(void) const
 void		Client::setawayState(const bool &awayState)
 {
 	this->awayState = awayState;
+}
+
+const str_t	&Client::getMessage(void)
+{
+	return (this->message);
+}
+
+void		Client::setMessage(const str_t &message)
+{
+	this->message = message;
+}
+
+void		Client::appendToMessage(const str_t &message)
+{
+	this->message += message;
 }

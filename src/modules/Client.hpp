@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:32:56 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 00:26:11 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/13 06:00:42 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ private:
 	str_t	realName;
 	str_t	host;
 	str_t	awayReason;
+	str_t	message;
 	bool	awayState;
 	int		port;
 	short	vAuth;
@@ -59,6 +60,9 @@ public:
 	void		setawayReason(const str_t &awayReason);
 	const bool	&getawayState(void) const;
 	void		setawayState(const bool &awayState);
+	const str_t	&getMessage(void);
+	void		setMessage(const str_t &message);
+	void		appendToMessage(const str_t &message);
 
 	/* Class functionnallities */
 };
