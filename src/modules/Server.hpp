@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 04:20:44 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 08:17:00 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ public:
 	const str_t	&getPassword(void) const;
 	void		setPassword(const str_t &pass);
 	const str_t	&getHost(void) const;
+	client_m::iterator    getClientByNickname(const str_t &nickname);
 
 	/* External Class functionalities */
 	void		initSocketMaster(void);
