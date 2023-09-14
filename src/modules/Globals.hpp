@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/14 00:34:49 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/14 08:15:26 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ enum mode_e
 # define RPL_NAMREPLY(server, nickname, channel, members) ":" + server + " 353 " + nickname + " = " + channel + " :" + members + TRAILING
 # define RPL_ENDOFNAMES(server, nickname, channel) ":" + server + " 366 " + nickname + " " + channel + " ::End of /NAMES list." + TRAILING
 # define RPL_YOUREOPER(server, nickname, targetNick, channel) ":" + server + " 381 " + nickname + " " + targetNick + " " + channel + " :You are now the channel operator." + TRAILING
+# define RPL_AWAY(server, nickname, target, reason) ":" + server + " 301 " + nickname + " " + target + " :" + target + " is away (Reason: " + reason + ")" + TRAILING
 
 /* ERROR REPLIES */
 # define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
@@ -72,6 +73,9 @@ enum mode_e
 # define ERR_UNKNOWNCOMMAND(server, request) ":" + server + " 421 " + request + " :Unknown command" + TRAILING
 # define ERR_NOSUCHCHANNEL(server, nick, channel) ":" + server + " 403 " + nick + " " + channel + " :No such channel" + TRAILING
 # define ERR_NOSUCHNICK(server, nickname) ":" + server + " 401 " + nickname + " :No such nick/channel" + TRAILING
+# define PRIVMSG_TO_USER(nickname, username, host, target, message) ":" + nickname + "!" + username + "@" + host + " PRIVMSG " + target + message + TRAILING
+# define PRIVMSG_TO_CHANNEL(nickname, username, host, target, message) ":" + nickname + "!" + username + "@" + host + " PRIVMSG " + target + " :" + message + TRAILING
+# define ERR_NOSUCHNICK_PRIVMSG(server, nickname, target) ":" + server + " 401 " + nickname + " " + target + " :No such nick/channel" + TRAILING
 # define ERR_BADCHANNELKEY(server, nickname, channel) ":" + server + " 475 " + nickname + " " + channel + " :Cannot join channel (+" + MODE_K + ") - Bad key" + TRAILING
 # define ERR_NOTONCHANNEL(server, user) ":" + server + " 442 " + user + " :You're not on that channel" + TRAILING
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
@@ -84,6 +88,8 @@ enum mode_e
 # define ERR_INVITEONLYCHAN(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + " :Cannot join channel (+i)" + TRAILING
 # define ERR_NOPRIVILEGES(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + ":Permission Denied - You're not an operator" + TRAILING
 # define ERR_CHANNELISFULL(server, nickname, channel) ":" + server + " 471 " + nickname + " " + channel + " :Cannot join channel (+l) - Channel is full" + TRAILING
+# define ERR_NOTEXTTOSEND(server, nickname) ":" + server + " 412 " + nickname + " :No text to send" + TRAILING
+# define ERR_NORECIPIENT(server, nickname) ":" + server + " 411 " + nickname + " :No recipient given" + TRAILING
 /* BOT REPLIES */
 # define RPL_TIME(server, user, time) ":" + server + " 391 " + user + " :Current date and time: " + time + TRAILING
 # define RPL_INFO(server) ":" + server + " 371 val "
