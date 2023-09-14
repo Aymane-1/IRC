@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/13 23:37:56 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:14:17 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,10 +291,10 @@ str_t	CommandWorker::mode(Client &client)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
 	c.channel = c.tokenizer[1];
 	c.it = this->server->channels.find(c.channel);
-	if (c.tokenizer.size() == 2)
-		return (RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), ""));
 	if (c.it == this->server->channels.end())
 		return (ERR_NOSUCHCHANNEL(c.serverHost, c.clientNick, c.channel));
+	if (c.tokenizer.size() == 2)
+		return (RPL_CHANNELMODEIS(c.serverHost, c.clientNick, c.channel, c.it->second.getCurrentModes(), ""));
 	if (!c.it->second.isOperator(c.clientNick))
 		return (ERR_CHANOPRIVSNEEDED(c.serverHost, c.clientNick, c.channel));
 	c.tokLen = c.tokenizer.size();
