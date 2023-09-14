@@ -6,7 +6,7 @@
 /*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/12 02:16:07 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/14 00:46:30 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ str_t	CommandWorker::invite(Client &client)
 	std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find(channel); // SAVE TARGET CHANNEL
 	if (channelIter->first == channel)
 	{
-		if (channelIter->second.isJoined(client.getNickname())) // CHECK IF USER IS ON CHANNEL
+		if (!channelIter->second.isJoined(client.getNickname())) // CHECK IF USER IS ON CHANNEL
 			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
 		if (!channelIter->second.isOperator(client.getNickname()) && channelIter->second.getMode(I_MODE) == MODE_I) // // CHECK IF USER IS OPERATOR + invite-only MODE
 			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(), channel));
