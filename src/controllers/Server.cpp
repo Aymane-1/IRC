@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/14 00:26:33 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/14 08:17:22 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,15 @@ void		Server::setPassword(const str_t &pass)
 const str_t	&Server::getHost(void) const
 {
 	return (this->host);
+}
+
+client_m::iterator    Server::getClientByNickname(const str_t &nickname)
+{
+    client_m::iterator    it = this->clients.begin();
+    for (; it != this->clients.end(); it++)
+        if (it->second.getNickname() == nickname)
+            return (it);
+    return (it);
 }
 
 void		Server::initSocketMaster(void)
