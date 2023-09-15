@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   away.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:35:03 by aechafii          #+#    #+#             */
-/*   Updated: 2023/09/11 01:44:22 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:37:10 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../modules/CommandWorker.hpp"
+#include "../modules/CommandWorker.hpp"
 
 str_t	CommandWorker::away(Client &client)
 {
