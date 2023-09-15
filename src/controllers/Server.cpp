@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/14 08:17:22 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 04:13:46 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void		Server::integrateNewConnect(Client &client)
 	this->clients.insert(std::pair<const int, Client>(client.getSocketFd(), client));
 }
 
-void		Server::clean(const int &index, const int &fd)
+void		Server::clean(const int &fd)
 {
 	client_m::iterator	it = this->clients.find(fd);
 	str_t	nickname = "";
@@ -153,13 +153,22 @@ void		Server::clean(const int &index, const int &fd)
 		nickname = it->second.getNickname();
 		for (channel_m::iterator it2 = this->channels.begin(); it2 != this->channels.end(); it2++)
 		{
-			it2->second.removeClient(nickname);
-			it2->second.removeMod(nickname);
+			if(it2->second.isJoined(nickname))
+				it2->second.removeClient(nickname);
+			if(it2->second.isOperator(nickname))
+				it2->second.removeMod(nickname);
 		}
 	}
 	close(fd);
 	this->clients.erase(fd);
-	this->pfds.erase(pfds.begin() + index, pfds.begin() + index);
+	for (pollfd_v::iterator it = this->pfds.begin(); it != this->pfds.end(); it++)
+	{
+		if (it->fd == fd)
+		{
+			this->pfds.erase(it);
+			break ;
+		}
+	}
 }
 
 int			Server::readRequest(Client &client)
@@ -180,13 +189,24 @@ int			Server::readRequest(Client &client)
 		cw.setRequest(client.getMessage());
 		cw.extractCommand();
 		response = cw.execute(client);
-		if (response == "QUIT")
-		{
-			client.setMessage("");
-			return (-1000);
-		}
 		send(client.getSocketFd(), response.c_str(), response.size(), 0);
 		client.setMessage("");
+		// std::cerr << "<-- BEGIN SERVER -->" << std::endl;
+		// for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); it++)
+		// 	std::cerr << "-> Key: " << it->first << " Value: " << it->second.getNickname() << std::endl;
+		// std::cerr << "<-- END SERVER -->" << std::endl;
+		// std::cerr << "<--------------------------->" << std::endl;
+		// std::cerr << "<-- BEGIN CHANNELS -->" << std::endl;
+		// for (channel_m::iterator it1 = this->channels.begin(); it1 != this->channels.end(); ++it1)
+		// {
+		// 	std::cerr << "-> Channel: {" << it1->first << std::endl;
+		// 	for (client_n::iterator it2 = it1->second.joinedClients.begin(); it2 != it1->second.joinedClients.end(); it2++)
+		// 		std::cerr << "----> USER: " << it2->first << " Nick: " << it2->second.getNickname() << std::endl;
+		// 	for (client_n::iterator it2 = it1->second.operators.begin(); it2 != it1->second.operators.end(); it2++)
+		// 		std::cerr << "----> MODE: " << it2->first << " Nick: " << it2->second.getNickname() << std::endl;
+		// 	std::cerr << "}" << std::endl;
+		// }
+		// std::cerr << "<-- END CHANNELS -->" << std::endl;
 	}
 	return (res);
 }

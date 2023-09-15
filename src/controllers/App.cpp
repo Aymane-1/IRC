@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/14 00:24:45 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/15 03:54:07 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	App::run(void)
 				int	requestResult = 0;
 				requestResult = this->server.readRequest(this->server.clients.at(this->server.pfds[i].fd));
 				if (requestResult <= 0)
-					this->server.clean(i, this->server.pfds[i].fd);
+					this->server.clean(this->server.pfds[i].fd);
 				res--;
 			}
 		}
