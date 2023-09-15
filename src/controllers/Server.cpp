@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 05:50:35 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:12:13 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void		Server::initSocketMaster(void)
 		throw std::runtime_error("Couldn't initialize server's socket");
 	if (setsockopt(this->masterSocketFd, SOL_SOCKET, SO_REUSEADDR,  (char *) &optval, sizeof(optval)) < 0)
 		throw std::runtime_error("Error while setting socket options");
-	if (fcntl(this->masterSocketFd, F_SETFL, fcntl(this->masterSocketFd, F_GETFL, 0) | O_NONBLOCK) < 0)
+	if (fcntl(this->masterSocketFd, F_SETFL, O_NONBLOCK) < 0)
 		throw std::runtime_error("Error while setting server's file socket to non-blocking");
 }
 
@@ -191,22 +191,6 @@ int			Server::readRequest(Client &client)
 		response = cw.execute(client);
 		send(client.getSocketFd(), response.c_str(), response.size(), 0);
 		client.setMessage("");
-		// std::cerr << "<-- BEGIN SERVER -->" << std::endl;
-		// for (client_m::iterator it = this->clients.begin(); it != this->clients.end(); it++)
-		// 	std::cerr << "-> Key: " << it->first << " Value: " << it->second.getNickname() << std::endl;
-		// std::cerr << "<-- END SERVER -->" << std::endl;
-		// std::cerr << "<--------------------------->" << std::endl;
-		// std::cerr << "<-- BEGIN CHANNELS -->" << std::endl;
-		// for (channel_m::iterator it1 = this->channels.begin(); it1 != this->channels.end(); ++it1)
-		// {
-		// 	std::cerr << "-> Channel: {" << it1->first << std::endl;
-		// 	for (client_n::iterator it2 = it1->second.joinedClients.begin(); it2 != it1->second.joinedClients.end(); it2++)
-		// 		std::cerr << "----> USER: " << it2->first << " Nick: " << it2->second.getNickname() << std::endl;
-		// 	for (client_n::iterator it2 = it1->second.operators.begin(); it2 != it1->second.operators.end(); it2++)
-		// 		std::cerr << "----> MODE: " << it2->first << " Nick: " << it2->second.getNickname() << std::endl;
-		// 	std::cerr << "}" << std::endl;
-		// }
-		// std::cerr << "<-- END CHANNELS -->" << std::endl;
 	}
 	return (res);
 }

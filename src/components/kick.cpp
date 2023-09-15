@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   kick.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/15 12:07:07 by mmeziani          #+#    #+#             */
+/*   Updated: 2023/09/15 12:07:08 by mmeziani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../modules/CommandWorker.hpp"
 
 str_t	CommandWorker::kick(Client &client)
 {
-	std::cout << this->request << std::endl;
 	std::vector<str_t>	args, target;
 	str_t				channel, targets, comment, response;
 	if (client.getVAuth() != FULL_AUTH)
