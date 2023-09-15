@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 01:34:29 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 08:43:00 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ str_t	CommandWorker::nick(Client &client)
                 ch_it->second.addMod(tmp);
             }
         }
+		if (ch_it->second.isInvited(cl_it->second.getNickname()))
+		{
+			ch_it->second.removeFromInvitedClient(cl_it->second.getNickname());
+			ch_it->second.addToInvitedClients(tokenizer[1]);
+		}
     }
 	vAuth |= NICK_AUTH;
 	client.setVAuth(vAuth);
