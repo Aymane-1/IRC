@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:34:15 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 03:45:23 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 05:51:14 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ public:
 	int			readRequest(Client &client);
 	void		integrateNewConnect(Client &client);
 	void		clean(const int &fd);
+	void		removeChannel(str_t channel);
 };
 
 #endif
