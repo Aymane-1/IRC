@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nick.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 23:18:53 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/03 23:56:37 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 01:34:29 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,22 @@ str_t	CommandWorker::nick(Client &client)
 			return (ERR_ERRONEUSNICKNAME(this->server->getHost(), client.getNickname()));
 	if (CommandHelper::findClientByNickName(this, tokenizer[1]) != this->server->clients.end())
 		return (ERR_NICKNAMEINUSE(this->server->getHost(), client.getNickname()));
+	for (channel_m::iterator ch_it = this->server->channels.begin(); ch_it != this->server->channels.end(); ch_it++)
+    {
+        client_n::iterator cl_it = ch_it->second.getClientByNickname(oldNick);
+        if (cl_it != ch_it->second.joinedClients.end())
+        {
+            Client tmp = cl_it->second;
+            tmp.setNickname(tokenizer[1]);
+            ch_it->second.removeClient(cl_it->second.getNickname());
+            ch_it->second.addClient(tmp);
+            if (ch_it->second.isOperator(cl_it->second.getNickname()))
+            {
+                ch_it->second.removeMod(cl_it->second.getNickname());
+                ch_it->second.addMod(tmp);
+            }
+        }
+    }
 	vAuth |= NICK_AUTH;
 	client.setVAuth(vAuth);
 	client.setNickname(tokenizer[1]);
