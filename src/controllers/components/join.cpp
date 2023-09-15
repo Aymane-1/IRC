@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/14 00:28:19 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 06:32:59 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ str_t	CommandWorker::join(Client &client)
 		else
 		{
 			char	isI = ch_it->second.getMode(I_MODE);
+			if (ch_it->second.isJoined(client.getNickname()))
+			{
+				response += ERR_USERONCHANNEL(this->server->getHost(), client.getNickname());
+				continue ;
+			}
 			if (isI == MODE_I)
 			{
 				if (!ch_it->second.isInvited(client.getNickname()))
@@ -109,7 +114,6 @@ str_t	CommandWorker::join(Client &client)
 					response += ERR_INVITEONLYCHAN(this->server->getHost(), client.getNickname(), ch_it->second.getName());
 					continue ;
 				}
-				ch_it->second.removeFromInvitedClient(client.getNickname());
 			}
 			isI = ch_it->second.getMode(L_MODE);
 			if (isI == MODE_L)
@@ -124,6 +128,7 @@ str_t	CommandWorker::join(Client &client)
 			if (ch_key == it->getKey())
 			{
 				ch_it->second.addClient(client);
+				ch_it->second.removeFromInvitedClient(client.getNickname());
 				response += RPL_JOIN(client.getNickname(), client.getUsername(), client.getHost(), ch_it->second.getName());
 				response += RPL_TOPIC(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getTopic());
 				response += RPL_NAMREPLY(this->server->getHost(), client.getNickname(), ch_it->second.getName(), ch_it->second.getAllUsers());
