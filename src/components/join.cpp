@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/03 22:14:01 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/15 10:38:51 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:50:58 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ str_t	CommandWorker::join(Client &client)
 		name = it->getName();
 		if (name[0] != '#' && name[0] != '&')
 		{
-			std::cout << name << std::endl;
 			response += ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), name);
 			continue ;
 		}

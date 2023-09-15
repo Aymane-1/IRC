@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   App.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:37:35 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 03:54:07 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:44:19 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void		App::setPort(const char *port)
 void		App::setPassword(const char *password)
 {
 	if (!password)
+		throw std::runtime_error("Password is required.");
+	if (str_t(password).size() < 4)
 		throw std::runtime_error("Password is required.");
 	this->password = str_t(password);
 }
