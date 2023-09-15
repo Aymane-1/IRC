@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   privmsg.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/14 08:12:28 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 04:40:11 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ str_t	CommandWorker::privmsg(Client &client)
 	std::vector<str_t>	tokenizer;
 	str_t	response = "";
 
+	if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	params = this->getRequest();
 	pos = params.find_first_of(" ");
 	if (pos == str_t::npos)

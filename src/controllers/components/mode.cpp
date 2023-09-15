@@ -6,7 +6,7 @@
 /*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/14 02:14:17 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 04:39:58 by sel-kham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,8 @@ str_t	CommandWorker::mode(Client &client)
 	c.serverHost = this->server->getHost();
 	c.sign = 0;
 
+	if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 	c.tokenizer = Helpers::split(this->request, ' ');
 	if (c.tokenizer.size() < 2)
 		return (ERR_NEEDMOREPARAMS(c.serverHost, c.clientNick));
