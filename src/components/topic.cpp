@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:31:19 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/15 10:37:28 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:26:15 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ str_t	CommandWorker::topic(Client &client)
     str_t chann , args, cmd;
     size_t pos;
     channel_m::iterator ch_it;
+
+    if (client.getVAuth() != FULL_AUTH)
+        return (ERR_NOTREGISTERED(this->server->getHost(), client.getNickname()));
 
     cmd = Helpers::trim(this->request , ' ');
     pos = this->request.find_first_of(' ');   
