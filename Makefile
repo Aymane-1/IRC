@@ -6,7 +6,7 @@
 #    By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/15 10:58:13 by mmeziani         ###   ########.fr        #
+#    Updated: 2023/09/15 11:07:35 by mmeziani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,15 +59,18 @@ BUILD := $(addprefix $(BUILD_DIR)/, $(notdir $(SRC:.cpp=.o)))
 all: $(NAME) signature
 
 $(NAME): $(MAIN) $(MODULES) $(BUILD)
+	@clear
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(NAME) $(CYAN)executable file...$(WHITE)"
 	@$(CPP) $(CFLAGS) $(C98) $(MAIN) $(BUILD) -o $(NAME)
 
 $(BUILD_DIR)/%.o: $(CONTROLLERS_DIR)/%.cpp $(MODULES)
+	@clear
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
 
 $(BUILD_DIR)/%.o: $(COMPONENTS_DIR)/%.cpp $(MODULES)
+	@clear
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
@@ -77,12 +80,14 @@ clean:
 	@$(REMOVE) $(BUILD_DIR)
 
 fclean: clean
+	@clear
 	@echo "\t$(RED)Removing $(CYAN)executable file $(GREEN)$(NAME)...$(WHITE)"
 	@$(REMOVE) $(NAME)
 
 re: fclean all
 
 signature:
+	@clear
 	@echo
 	@echo
 	@echo "\t\t$(CYAN)██╗██████╗░░█████╗░  ░██████╗███████╗██████╗░██╗░░░██╗███████╗██████╗░$(WHITE)"
