@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   CommandWorker.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 22:34:30 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/12 22:57:42 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/14 02:35:52 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	CommandWorker::storeCommands(void)
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("MODE", &CommandWorker::mode));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("AWAY", &CommandWorker::away));
 	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("PONG", &CommandWorker::pong));
+	CommandWorker::allCommands.insert(std::pair<const str_t, CommandWorker::functionallity>("KICK", &CommandWorker::kick));
 }
 
 
