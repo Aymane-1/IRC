@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/09/14 02:36:13 by aechafii         ###   ########.fr        #
+#    Updated: 2023/09/15 10:58:13 by mmeziani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ BUILD_DIR := build
 MODULES_DIR := $(SRC_DIR)/modules
 HELPERS_DIR := $(SRC_DIR)/helpers
 CONTROLLERS_DIR := $(SRC_DIR)/controllers
-COMPONENTS_DIR := $(CONTROLLERS_DIR)/controllers
+COMPONENTS_DIR := $(SRC_DIR)/components
 
 # Base variables
 NAME := ircserv
@@ -67,7 +67,7 @@ $(BUILD_DIR)/%.o: $(CONTROLLERS_DIR)/%.cpp $(MODULES)
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
 
-$(BUILD_DIR)/%.o: $(CONTROLLERS_DIR)/*/%.cpp $(MODULES)
+$(BUILD_DIR)/%.o: $(COMPONENTS_DIR)/%.cpp $(MODULES)
 	@echo "\t$(YELLOW)Compiling $(GREEN)$(notdir $<) $(CYAN)object file...$(WHITE)"
 	@mkdir -p $(BUILD_DIR)
 	@$(CPP) $(CFLAGS) $(C98) -c $< -o $@
