@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 00:47:41 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 04:39:58 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:38:27 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../modules/CommandWorker.hpp"
+#include "../modules/CommandWorker.hpp"
 
 // str_t	CommandWorker::mode(Client &client)
 // {
