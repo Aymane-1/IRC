@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/15 11:58:31 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 12:31:57 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ str_t	CommandWorker::privmsg(Client &client)
                     response += RPL_AWAY(serverHost, clientNick, *it, target->second.getawayReason());
 				if (Helpers::ltrim(message, ' ')[0] != ':')
 					message = " :" + message;
-				str_t	toSend = PRIVMSG_TO_USER(clientNick, client.getUsername(), client.getHost(), *it, message);
+				str_t	toSend = PRIVMSG_TO_USER(clientNick, client.getUsername(), client.getHost(), (*it), message);
 				send(target->second.getSocketFd(), toSend.c_str(), toSend.size(), 0);
 			}
 		}
