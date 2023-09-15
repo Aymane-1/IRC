@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Globals.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/09/14 08:15:26 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 05:50:21 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,13 @@ enum mode_e
 # define RPL_NAMREPLY(server, nickname, channel, members) ":" + server + " 353 " + nickname + " = " + channel + " :" + members + TRAILING
 # define RPL_ENDOFNAMES(server, nickname, channel) ":" + server + " 366 " + nickname + " " + channel + " ::End of /NAMES list." + TRAILING
 # define RPL_YOUREOPER(server, nickname, targetNick, channel) ":" + server + " 381 " + nickname + " " + targetNick + " " + channel + " :You are now the channel operator." + TRAILING
+# define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
+# define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
+# define RPL_KICK_SUCCESS(Nickname, User, server, channel, target, reason) ":" + Nickname + "!" + User + "@" + server + " KICK " + channel + " " + target + " " + reason + TRAILING
 # define RPL_AWAY(server, nickname, target, reason) ":" + server + " 301 " + nickname + " " + target + " :" + target + " is away (Reason: " + reason + ")" + TRAILING
 
 /* ERROR REPLIES */
-# define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Need more parameters." + TRAILING
+# define ERR_NEEDMOREPARAMS(server, nickname) ":" + server  + " 461 " + nickname + ": Not enough parameters" + TRAILING
 # define ERR_PASSWDMISMATCH(server, nickname) ":" + server  + " 464 " + nickname + ": Invalid password." + TRAILING
 # define ERR_ALREADYREGISTERED(server, nickname) ":" + server  + " 462 " + nickname + ": Unauthorized command (already registered)." + TRAILING
 # define ERR_NONICKNAMEGIVEN(server, nickname) ":" + server  + " 431 " + nickname + ": No nickname provided." + TRAILING
@@ -81,10 +84,8 @@ enum mode_e
 # define ERR_USERONCHANNEL(server, user) ":" + server + " 443 " + user + " :is already on channel" + TRAILING
 # define ERR_CHANOPRIVSNEEDED(server, user, channel) ":" + server + " 482 " + user + " " +  channel + " :You're not channel operator" + TRAILING
 # define RPL_CHANNELMODEIS(server, user, channel, modestring, modeparams) ":" + server + " 324 " + user + " " + channel + " " + modestring + " " + modeparams + TRAILING
-# define ERR_USERNOTINCHANNEL(server, nickname, target, channel) ":" + server + " 441 " + nickname + " " + target + " " + channel + " :this user is not on the channel." + TRAILING
+# define ERR_USERNOTINCHANNEL(server, nickname, target, channel) ":" + server + " 441 " + nickname + " " + target + " " + channel + " :They aren't on that channel." + TRAILING
 # define ERR_UNKNOWNMODE(server, nickname, channel, mode, message) ":" + server + " 472 " + nickname + " " + channel + " " + mode + " :" + message + TRAILING
-# define RPL_UNAWAY(server, nick) ":" + server + " 305 " + nick + ":You are no longer marked as being away" + TRAILING
-# define RPL_NOWAWAY(server, nick) ":" + server + " 306 " + nick + ":You have been marked as being away" + TRAILING
 # define ERR_INVITEONLYCHAN(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + " :Cannot join channel (+i)" + TRAILING
 # define ERR_NOPRIVILEGES(server, nickname, channel) ":" + server + " 473 " + nickname + " " + channel + ":Permission Denied - You're not an operator" + TRAILING
 # define ERR_CHANNELISFULL(server, nickname, channel) ":" + server + " 471 " + nickname + " " + channel + " :Cannot join channel (+l) - Channel is full" + TRAILING
