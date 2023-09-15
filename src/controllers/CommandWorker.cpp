@@ -75,4 +75,3 @@ client_m::iterator	CommandWorker::CommandHelper::findClientByNickName(CommandWor
 	}
 	return (it);
 }
-

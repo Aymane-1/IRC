@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sel-kham <sel-kham@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 01:54:20 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/15 04:13:46 by sel-kham         ###   ########.fr       */
+/*   Updated: 2023/09/15 05:50:35 by aechafii         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,4 +209,15 @@ int			Server::readRequest(Client &client)
 		// std::cerr << "<-- END CHANNELS -->" << std::endl;
 	}
 	return (res);
+}
+
+void	Server::removeChannel(str_t channel)
+{
+	std::map<const str_t, Channel>::iterator channelIter = this->channels.find(channel);
+	if (channelIter->first == channel)
+	{
+		client_n joinedClients = channelIter->second.getJoinedclients();
+		if (!joinedClients.size())
+			this->channels.erase(channel);
+	}
 }
