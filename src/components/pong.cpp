@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pong.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aechafii <aechafii@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/05 06:17:59 by sel-kham          #+#    #+#             */
-/*   Updated: 2023/09/11 02:05:23 by aechafii         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:37:59 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../modules/CommandWorker.hpp"
+#include "../modules/CommandWorker.hpp"
 
 str_t	CommandWorker::pong(Client &client)
 {
