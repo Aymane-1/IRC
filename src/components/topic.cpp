@@ -6,11 +6,11 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:31:19 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/15 10:32:53 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:37:28 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../modules/CommandWorker.hpp"
+#include "../modules/CommandWorker.hpp"
 
 str_t	CommandWorker::topic(Client &client)
 {
