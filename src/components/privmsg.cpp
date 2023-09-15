@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 23:55:07 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/15 10:37:45 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:58:31 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ str_t	CommandWorker::privmsg(Client &client)
 			{
 				if (target->second.isJoined(clientNick))
 				{
-					str_t	toSend = PRIVMSG_TO_CHANNEL(clientNick, client.getUsername(), serverHost, *it, message);
+					str_t	toSend = PRIVMSG_TO_CHANNEL(clientNick, client.getUsername(), serverHost, (*it), message);
 					target->second.broadcast(toSend, clientNick);
 				}
 				else
@@ -76,9 +76,7 @@ str_t	CommandWorker::privmsg(Client &client)
 		{
 			client_m::iterator target = this->server->getClientByNickname(*it);
 			if (target == this->server->clients.end())
-			{
 				response += ERR_NOSUCHNICK_PRIVMSG(serverHost, clientNick, *it);
-			}
 			else
 			{
 				if (target->second.getawayState())
@@ -87,7 +85,6 @@ str_t	CommandWorker::privmsg(Client &client)
 					message = " :" + message;
 				str_t	toSend = PRIVMSG_TO_USER(clientNick, client.getUsername(), client.getHost(), *it, message);
 				send(target->second.getSocketFd(), toSend.c_str(), toSend.size(), 0);
-				std::cout  <<  toSend.c_str() << std::endl;
 			}
 		}
 	}
