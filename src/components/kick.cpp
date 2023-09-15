@@ -1,4 +1,4 @@
-#include "../../modules/CommandWorker.hpp"
+#include "../modules/CommandWorker.hpp"
 
 str_t	CommandWorker::kick(Client &client)
 {
