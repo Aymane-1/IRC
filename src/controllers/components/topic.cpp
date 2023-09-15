@@ -6,7 +6,7 @@
 /*   By: mmeziani <mmeziani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 02:31:19 by mmeziani          #+#    #+#             */
-/*   Updated: 2023/09/10 23:54:35 by mmeziani         ###   ########.fr       */
+/*   Updated: 2023/09/15 10:32:53 by mmeziani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,46 +14,56 @@
 
 str_t	CommandWorker::topic(Client &client)
 {
-    str_t topic;
-    str_t chann;
-    std::vector<str_t> tok = Helpers::split(this->request , ' ');
-    chann = tok[1];
-    topic = tok[2];
+    str_t chann , args, cmd;
+    size_t pos;
+    channel_m::iterator ch_it;
+
+    cmd = Helpers::trim(this->request , ' ');
+    pos = this->request.find_first_of(' ');   
     
-    if(tok.size() < 1)
+    if (pos == str_t::npos)
         return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
-    std::map<const str_t, Channel>::iterator channelIter = this->server->channels.find(chann);
-    if (channelIter == this->server->channels.end())
-        return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), chann));
-    topic = channelIter->second.getTopic();
-    if (tok.size() == 2)
+    cmd = cmd.substr(pos, cmd.size());
+    cmd = Helpers::trim(cmd , ' ');
+
+    if (cmd.empty())
+        return (ERR_NEEDMOREPARAMS(this->server->getHost(), client.getNickname()));
+    chann = cmd.substr(0, pos);
+    chann = Helpers::trim(chann , ' ');
+    pos = cmd.find_first_of(' ');
+    ch_it = this->server->channels.find(chann);
+    if (ch_it == this->server->channels.end())
+        return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(),  chann));
+
+    if (!(ch_it->second.isJoined(client.getNickname())))
+        return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
+
+    if (ch_it->second.getMode(T_MODE) == MODE_T)
+        if (!(ch_it->second.isOperator(client.getNickname())))
+            return (ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(),  chann));
+
+            
+    if (pos == str_t::npos)
     {
-        if (channelIter->second.getTopic() == "Costumizable channel")
+        if (ch_it->second.getTopic().empty())
             return (RPL_NOTOPIC(this->server->getHost(), client.getUsername(), chann));
-        else
-        {
-            std::time_t result = std::time(nullptr);
-            unsigned long time = result;
-            return (RPL_TOPIC_SHOW(this->server->getHost(), client.getUsername(), chann, channelIter->second.getTopic(), time));
-        }
+
+        std::time_t result = std::time(nullptr);
+        unsigned long time = result;
+        return (
+            str_t(RPL_TOPIC(this->server->getHost(), client.getUsername(), chann, ch_it->second.getTopic())) + 
+            str_t(RPL_TOPICWHOTIME(this->server->getHost(), client.getUsername(), chann, time))
+        );
     }
-    channelIter->second.getTopic();
-	if (channelIter != this->server->channels.end())
-	{
-        client_n joinedClients = channelIter->second.getJoinedclients();
-		std::map<const str_t, Client >::iterator it = joinedClients.find(client.getNickname());
-		if (it == joinedClients.end())
-			return (ERR_NOTONCHANNEL(this->server->getHost(), client.getNickname()));
-        client_n operators = channelIter->second.getoperators();
-        it =  operators.find(client.getNickname());
-		if (it == operators.end())
-			return(ERR_CHANOPRIVSNEEDED(this->server->getHost(), client.getNickname(), ""));
-        topic = request.substr( (request.find(chann) + chann.length()), request.length()) + TRAILING;
-        channelIter->second.setTopic(topic);
-        channelIter->second.broadcast(topic, client.getNickname());
-        return (TOPIC_SUCCESS(client.getNickname(), client.getUsername(), this->server->getHost(), chann, topic));
-	}
-	else
-		return (ERR_NOSUCHCHANNEL(this->server->getHost(), client.getNickname(), chann));
-    return ("");
+    else
+    {
+        args = cmd.substr(pos , cmd.size());
+        args = Helpers::trim(args, ' ');
+        if (args[0] == ':')
+            args = args.substr(1 , cmd.size());
+        ch_it->second.setTopic(args);
+        ch_it->second.broadcast(args, client.getNickname());
+        return (TOPIC_SUCCESS(client.getNickname(), client.getUsername(), this->server->getHost(), chann, args));
+
+    }
 }
